@@ -1,0 +1,463 @@
+% arara: xelatex: {shell: yes}
+% arara: biber
+% arara: xelatex: {shell: yes}
+% arara: xelatex: {shell: yes}
+
+
+
+%!TeX cleanPatterns = $OUTDIR/$JOB!($OUTEXT|.synctex.gz|.tex|.pdf), /$OUTDIR/_minted-$JOB/
+\documentclass[12pt, a4paper]{article}
+
+% utf8 is the preferred encoding
+
+ % this magick is to solve problem that appeared after update of texlive 2018 to texlive 2020
+ % https://tex.stackexchange.com/questions/511341/the-error-occurred-after-the-last-update
+\makeatletter
+\def\nobreak{\penalty\@M}
+\makeatother
+
+
+\usepackage{fontspec} % что-то про шрифты? % нужно ли загружать?
+
+\usepackage{polyglossia} % русификация xelatex
+\usepackage{csquotes}
+
+
+\setmainlanguage{english}
+\setotherlanguage{russian}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\newfontfamily\arabicfont[Script=Arabic]{Scheherazade New}
+
+
+\usepackage{etoolbox} % provides \AtEndPreamble
+% etoolbox causes wrong behavior of tocbasic
+\AtEndPreamble{ % ради арабского написания Абу ибн-Сина
+  \usepackage{arabxetex} 
+ \let\textarabic\relax 
+ \let\Arabic\relax 
+\setotherlanguages{arabic, english}
+}
+% комбо из:
+% https://tex.stackexchange.com/questions/501897
+% https://tex.stackexchange.com/questions/392175/
+
+\usepackage{imakeidx} 
+\indexsetup{level=\section}
+\makeindex[title=Hashtags]
+
+\usepackage{etex} % расширение классического tex
+% в частности позволяет подгружать гораздо больше пакетов, чем мы и займёмся далее
+
+\usepackage{verbatim} % для многострочных комментариев
+\usepackage{makeidx} % для создания предметных указателей
+
+\usepackage{setspace}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{mathrsfs} % sudo yum install texlive-rsfs
+\usepackage{dsfont} % sudo yum install texlive-doublestroke
+\usepackage{array, multicol, multirow, bigstrut} % sudo yum install texlive-multirow
+\usepackage{indentfirst} % установка отступа в первом абзаце главы
+
+
+\usepackage{bm}
+\usepackage{bbm} % шрифт с двойными буквами
+%\usepackage[perpage]{footmisc}
+
+\usepackage{dcolumn} % центрирование по разделителю для apsrtable
+
+% создание гиперссылок в pdf
+\usepackage[unicode, colorlinks=true, urlcolor=blue, hyperindex, breaklinks]{hyperref}
+
+
+\usepackage{microtype} % свешиваем пунктуацию
+% теперь знаки пунктуации могут вылезать за правую границу текста, при этом текст выглядит ровнее
+
+
+\usepackage{textcomp}  % Чтобы в формулах можно было русские буквы писать через \text{}
+
+% размер листа бумаги
+%\usepackage[paperwidth=145mm,paperheight=215mm,
+%height=182mm,width=113mm,top=20mm,includefoot]%{geometry}
+\usepackage[paper=a4paper, top=15mm, bottom=13.5mm, left=16.5mm, right=13.5mm, includefoot]{geometry}
+
+\usepackage{xcolor}
+
+
+% \usepackage{float, longtable}
+% \usepackage{soulutf8}
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+
+\usepackage{mathtools}
+\usepackage{cancel, xspace} % sudo yum install texlive-cancel
+
+
+\usepackage{numprint} % sudo yum install texlive-numprint
+\npthousandsep{,}\npthousandthpartsep{}\npdecimalsign{.}
+
+
+% \usepackage{subfigure} % для создания нескольких рисунков внутри одного
+
+\usepackage{tikz, pgfplots} % язык для рисования графики из latex'a
+\pgfplotsset{compat=1.16}
+\usetikzlibrary{trees} % tikz-прибамбас для рисовки деревьев
+\usepackage{tikz-qtree} % альтернативный tikz-прибамбас для рисовки деревьев
+\usetikzlibrary{arrows} % tikz-прибамбас для рисовки стрелочек подлиннее
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos --- печатает все поставленные \todo'шки
+
+
+
+\usepackage{booktabs} %  красивые таблицы
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+\usepackage{physics}
+% \usepackage{minted} % moved to listings to simplify development
+\usepackage{listings}
+\lstset{%
+basicstyle=\fontfamily{lmtt}\bfseries,
+keywordstyle=\fontfamily{lmtt}\bfseries
+}
+% \usepackage{julia-mono-listings}
+% TODO: установить?
+\usepackage{answers}
+
+
+
+
+\usepackage[bibencoding=auto, backend=biber, sorting=none, style=alphabetic]{biblatex}
+
+\addbibresource{stochastic_pro.bib}
+
+\setcounter{tocdepth}{1} % в оглавление оставляем уровень 1
+
+\usepackage[titles]{tocloft} % альтернатива tocbasic для настройки toc
+% если нужен subfigure, то у tocloft можно добавить опцию subfigure
+\renewcommand{\cftbeforesecskip}{0.7pt} % поправка интервала между строками для section в toc
+\renewcommand{\cftsecdotsep}{\cftdotsep} % добавляем точечки
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+% \setlist[enumerate, 1]{label=\asbuk*),ref=\asbuk*} % цифра рядом с enumerate = уровень нумерации
+\setlist[enumerate, 1]{label=\alph*),ref=\alph*} % цифра рядом с enumerate = уровень нумерации
+
+
+%%%%%%%%%%%%%%%%%%%%%%%  ПАРАМЕТРЫ  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setstretch{1}                          % Межстрочный интервал
+\flushbottom                            % Эта команда заставляет LaTeX чуть растягивать строки, чтобы получить идеально прямоугольную страницу
+\righthyphenmin=2                       % Разрешение переноса двух и более символов
+%\pagestyle{plain}                       % Нумерация страниц снизу по центру.
+\widowpenalty=300                     % Небольшое наказание за вдовствующую строку (одна строка абзаца на этой странице, остальное --- на следующей)
+\clubpenalty=3000                     % Приличное наказание за сиротствующую строку (омерзительно висящая одинокая строка в начале страницы)
+\setlength{\parindent}{1.5em}           % Красная строка.
+%\captiondelim{. }
+\setlength{\topsep}{0pt}
+\emergencystretch=2em
+
+% делаем короче интервал в списках
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+
+
+
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\sgn}{sign}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\amn}{arg\,min}
+\DeclareMathOperator*{\amx}{arg\,max}
+
+
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator{\sCorr}{sCorr}
+\DeclareMathOperator{\sCov}{sCov}
+\DeclareMathOperator{\sVar}{sVar}
+
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\cov}{Cov}
+\DeclareMathOperator{\Bin}{Bin}
+\DeclareMathOperator*{\plim}{plim}
+\DeclareMathOperator{\MSE}{MSE}
+\DeclareMathOperator{\softmax}{softmax}
+\DeclareMathOperator{\Med}{Med}
+
+
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+
+\newcommand{\e}{\varepsilon}
+
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\dNorm}{\mathcal{N}}
+\newcommand{\dN}{\mathcal{N}}
+\newcommand{\dLN}{\mathcal{LN}}
+
+\newcommand{\dBern}{\mathrm{Bern}}
+\newcommand{\dPois}{\mathrm{Pois}}
+\newcommand{\dBin}{\mathrm{Bin}}
+\newcommand{\dMult}{\mathrm{Mult}}
+\newcommand{\dGeom}{\mathrm{Geom}}
+\newcommand{\dNHGeom}{\mathrm{NHGeom}}
+\newcommand{\dHGeom}{\mathrm{HGeom}}
+\newcommand{\dDUnif}{\mathrm{DUnif}}
+\newcommand{\dFS}{\mathrm{FS}}
+\newcommand{\dNBin}{\mathrm{NBin}}
+
+\newcommand{\dTri}{\mathrm{Triangle}}
+\newcommand{\dUnif}{\mathrm{Unif}}
+\newcommand{\dCauchy}{\mathrm{Cauchy}}
+\newcommand{\dExpo}{\mathrm{Expo}}
+\newcommand{\dBeta}{\mathrm{Beta}}
+\newcommand{\dGamma}{\mathrm{Gamma}}
+\newcommand{\dWei}{\mathrm{Wei}}
+\newcommand{\dLogistic}{\mathrm{Logistic}}
+\newcommand{\dRayleigh}{\mathrm{Rayleigh}}
+\newcommand{\dPareto}{\mathrm{Pareto}}
+
+
+% вместо горизонтальной делаем косую черточку в нестрогих неравенствах
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+
+
+\newcommand{\wv}{\textrm{word2vec}}
+\newcommand \hVar{\widehat{\Var}}
+\newcommand \hCorr{\widehat{\Corr}}
+\newcommand \hCov{\widehat{\Cov}}
+
+
+\newcommand{\RR}{\mathbb{R}}
+
+\newcommand{\Lin}{\mathcal{L}in}
+\newcommand{\Linp}{\Lin^{\perp}}
+
+\title{Stochastic Processes problems}
+\author{\url{https://github.com/bdemeshev/stochastic_pro}}
+\date{\today}
+
+
+%\newtheorem{problem}{Задача}
+%\numberwithin{problem}{section}
+
+\Newassociation{sol}{solution}{solution_file}
+% sol --- имя окружения внутри задач
+% solution --- имя окружения внутри solution_file
+% solution_file --- имя файла в который будет идти запись решений
+% можно изменить далее по ходу
+\Opensolutionfile{solution_file}[all_solutions]
+% в квадратных скобках фактическое имя файла
+
+
+
+% магия для автоматических гиперссылок задача-решение
+\newlist{myenum}{enumerate}{3}
+% \newcounter{problem}[chapter] % нумерация задач внутри глав
+\newcounter{problem}[section]
+
+\newenvironment{problem}%
+{%
+\refstepcounter{problem}%
+%  hyperlink to solution
+     \hypertarget{problem:{\thesection.\theproblem}}{} % нумерация внутри глав
+     % \hypertarget{problem:{\theproblem}}{}
+     \Writetofile{solution_file}{\protect\hypertarget{soln:\thesection.\theproblem}{}}
+     %\Writetofile{solution_file}{\protect\hypertarget{soln:\theproblem}{}}
+     \begin{myenum}[label=\bfseries\protect\hyperlink{soln:\thesection.\theproblem}{\thesection.\theproblem},ref=\thesection.\theproblem]
+     % \begin{myenum}[label=\bfseries\protect\hyperlink{soln:\theproblem}{\theproblem},ref=\theproblem]
+     \item%
+    }%
+    {%
+    \end{myenum}}
+% для гиперссылок обратно надо переопределять окружение
+% это происходит непосредственно перед подключением файла с решениями
+
+
+
+
+
+\begin{document}
+
+\maketitle % ставим сюда название, автора и время создания
+
+% здесь нужна прикольная картинка
+
+\newpage
+\tableofcontents{}
+
+\newpage
+
+
+\section{First step analysis}
+
+\begin{problem}
+Biden and Trump alternately throw a fair dice infinite number of times. 
+Biden throws first. 
+The person who obtain the first $6$ wins the game. 
+
+\begin{enumerate}
+  \item What is the probability that Biden will win?
+  \item What is expected number of turns?
+  \item What is variance of turns?
+  \item What is expected number of turns given that Biden won?
+  \item Find the transition matrix of this four state Markov chain. 
+\end{enumerate}
+
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+
+
+\begin{problem}
+  Elon throws an unfair coin until ``head'' appears. 
+  The probability of ``head'' is $p \in (0;1)$. 
+  Let $N$ be the total number of throws. 
+  \begin{enumerate}
+    \item Find $\E(N)$, $\E(\exp(tN))$, $\Var(N)$, $\E(N^3)$.
+    \item What is the probability than $N$ will be even?
+  \end{enumerate}
+
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+  
+
+
+\begin{problem}
+  Alice and Bob throw a fair coin until the sequence $HTT$ or $THT$ appears.
+  Alice wins if $HTT$ appears first, Bob wins if $THT$ appears first. 
+  \begin{enumerate}
+    \item Find the probability that Alice wins.
+    \item Find the expected value and variance of the total number of throws. 
+    \item Using any open source software find the probability that Alice wins for all possible combinations 
+    of three coins sequences for Alice and Bob. 
+    \item Now Alice and Bob play the following game. 
+    Alice chooses her three coins winning sequence first. Next Bob, knowing the choice of Alice, chooses his three coins winning sequence. 
+    Than they throw a fair coin until either of their sequences appears. 
+    What is the best strategy for Alice? For Bob? What is the probability that Alice wins this game?
+  \end{enumerate}
+  
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+You throw a dice unbounded number of times. 
+If it shows $1$, $2$ or $3$ then the corresponding amount of dollars 
+is added in the pot. 
+It it shows $4$ or $5$ the game stops and you get the pot. 
+If it shows $6$ the game ends and you get nothing. 
+Initially the pot is empty. 
+
+\begin{enumerate}
+  \item What is probability that the game will end by $6$?
+  \item What is expected duration of the game?
+  \item What is your expected payoff?
+  \item What is your payoff variance?
+  \item Consider variation-A of the game. 
+  Rules are the same, but initially the pot contains $100$ dollars. 
+  How will the answers to questions (a)-(d) change?
+  \item Consider variation-B of the game. 
+  Initially the pot is empty. One rule is changed. 
+  If the dice shows $5$ the content of the pot is burned and the game continues. 
+  How will the answers to questions (a)-(d) change?
+\end{enumerate}
+
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+Boris Johnson throws a fair coin until $1$ appears or until he says ``quit''.
+His payoff is the value of the last throw. 
+Boris optimizes his expected payoff. 
+If many strategies gives the same expected payoff 
+he chooses the strategy that minimizes the expected duration of the game. 
+
+\begin{enumerate}
+  \item What is the optimal strategy and the corresponding expected payoff?
+  \item What is the expected duration?
+  \item How the answers to points (a) and (b) will change
+  if Boris should pay $0.3$ dollars for each throw?
+  \end{enumerate}
+
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
+
+
+
+% для гиперссылок на условия
+% http://tex.stackexchange.com/questions/45415
+\renewenvironment{solution}[1]{%
+         % add some glue
+         \vskip .5cm plus 2cm minus 0.1cm%
+         {\bfseries \hyperlink{problem:#1}{#1.}}%
+}%
+{%
+}%
+
+\section{Solutions}
+\input{all_solutions}
+
+
+\printindex
+
+
+\section{Sources of wisdom}
+
+\nocite{buzun2015stochastic}
+
+\printbibliography[heading=none]
+
+
+\end{document}
