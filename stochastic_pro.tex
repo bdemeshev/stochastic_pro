@@ -334,7 +334,7 @@ The person who obtain the first $6$ wins the game.
   The probability of ``head'' is $p \in (0;1)$. 
   Let $N$ be the total number of throws. 
   \begin{enumerate}
-    \item Find $\E(N)$, $\E(\exp(tN))$, $\Var(N)$, $\E(N^3)$.
+    \item Find $\E(N)$, $\Var(N)$, $\E(N^3)$, $\E(\exp(tN))$.
     \item What is the probability than $N$ will be even?
   \end{enumerate}
 
@@ -412,7 +412,16 @@ he chooses the strategy that minimizes the expected duration of the game.
 
 
 \begin{problem}
-  
+  Winnie-the-Pooh starts wandering from the point $x=1$.
+  Every minute he moves one unit left or one right with equal probabilities.
+
+  Let $T$ be the random moment of time when he reaches $x=0$.
+
+  \begin{enumerate}
+   \item Find the generating function $g(u) = \E(u^T)$.
+   \item Extract all probabilities $\P(T = k)$ from the function $g(u)$.
+  \end{enumerate}
+
   \begin{sol}
   
   \end{sol}
@@ -432,6 +441,75 @@ he chooses the strategy that minimizes the expected duration of the game.
   
   \end{sol}
 \end{problem}
+
+\section{Generating functions}
+
+\begin{problem}
+The MGF (moment generating function) of the random variable $X$ is give by $M(t) = 0.3 \exp(2t) + 0.2 \exp(3t) + 0.5 \exp(7t)$.
+
+Recover the distribution of the random variable $X$.
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+
+\begin{problem}
+The random variable $Y$ takes values $1$, $2$ or $3$ with equal probabilities.
+
+Find the MGF of the random variable $Y$.
+  \begin{sol}
+  $M(t) = (\exp(t) + \exp(2t) + \exp(3t))/3$.
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+The MGF of the random variable $W$ has a Taylor expansion that starts with $M(t) = 1 + 2t + 7t^2 + 20t^3 + \ldots$.
+
+Find $\E(W)$, $\Var(W)$, $\E(W^3)$.
+
+  \begin{sol}
+  $\E(W) = 2$, $\Var(W) = 7\cdot 2 - 2^2$, $\E(W^3) = 20 \cdot 3!$.
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+The random variable $X$ takes non-negative integer values.
+The generating function $g(u) = \E(u^X)$ has a Taylor expansion that
+starts with $g(u) = 0.1 + 0.2 u + 0.15 u^2 + \ldots$.
+
+Find probabilities $\P(X = 0)$, $\P(X = 1)$, $\P(X = 2)$.
+
+  \begin{sol}
+  $\P(X = 0) = 0.1$, $\P(X = 1) = 0.2$, $\P(X = 2) = 0.15$.
+  \end{sol}
+\end{problem}
+
+
+
+
+\begin{problem}
+  Random variables $X_i$ are mutually independent and $X_i$ has Gamma distribution $\dGamma(\alpha_i, \beta_i)$.
+
+  I sum up the random number $N$ of terms,
+  \[
+   S = X_1 + X_2 + \ldots + X_N.
+  \]
+  The number $N$ has Poisson distribution $\dPois(\lambda)$ and is independent of the sequence $(X_i)$.
+
+  \begin{enumerate}
+   \item Find the MGF of $S$. You may the MGF formula for Gamma distribution as known.
+   \item Find $\E(S)$ and $\Var(S)$.
+  \end{enumerate}
+
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
 
 
 
