@@ -7,6 +7,7 @@
 
 %!TeX cleanPatterns = $OUTDIR/$JOB!($OUTEXT|.synctex.gz|.tex|.pdf), /$OUTDIR/_minted-$JOB/
 \documentclass[12pt, a4paper]{article}
+\usepackage{libertine}
 
 % utf8 is the preferred encoding
 
@@ -28,10 +29,10 @@
 
 % download "Linux Libertine" fonts:
 % http://www.linuxlibertine.org/index.php?id=91&L=1
-\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+%\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
 % why do we need \newfontfamily:
 % http://tex.stackexchange.com/questions/91507/
-\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+%\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
 
 \newfontfamily\arabicfont[Script=Arabic]{Scheherazade New}
 
@@ -52,7 +53,7 @@
 \indexsetup{level=\section}
 \makeindex[title=Hashtags]
 
-\usepackage{etex} % расширение классического tex
+% \usepackage{etex} % расширение классического tex
 % в частности позволяет подгружать гораздо больше пакетов, чем мы и займёмся далее
 
 \usepackage{verbatim} % для многострочных комментариев
@@ -312,17 +313,31 @@ keywordstyle=\fontfamily{lmtt}\bfseries
 \begin{problem}
 Biden and Trump alternately throw a fair dice infinite number of times. 
 Biden throws first. 
-The person who obtain the first $6$ wins the game. 
+The person who obtains the first $6$ wins the game. 
 
 \begin{enumerate}
   \item What is the probability that Biden will win?
   \item What is expected number of turns?
-  \item What is variance of turns?
+  \item What is variance of the number of turns?
   \item What is expected number of turns given that Biden won?
   \item Find the transition matrix of this four state Markov chain. 
 \end{enumerate}
 
 \begin{sol}
+\begin{enumerate}
+  \item $\P(B) = 6/11$, first step equation for $p = \P(B)$ is
+  $p = 1/6 + (5/6)^2 p$ or $p = 1/6 + 5/6 \cdot (1 - p)$.
+  \item $\E(N) = 6$, first step equation for $m = \E(N)$ is $m = 1/6 + 5/6 (m + 1)$.
+  \item $\E(N^2) = 66$, $\Var(N) = 30$, first step equation is $\E(N^2) = 1/6 + 5/6 \E((N + 1)^2)$.
+  \item $\E(N \mid B) = 61/11$. Start by replacing uncoditional probabilities on the tree by conditional ones. 
+  First step equation for $\mu = \E(N \mid B)$ is $\mu = 11/36 + 25/36 (\mu + 2)$.
+  \item $\begin{pmatrix}
+    0 & 5/6 & 1/6 & 0 \\
+    5/6 & 0 & 0 & 1/6 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+  \end{pmatrix}$
+\end{enumerate}
 
 \end{sol}
 \end{problem}
