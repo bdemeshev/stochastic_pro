@@ -383,7 +383,7 @@ The person who obtains the first $6$ wins the game.
 You throw a dice unbounded number of times. 
 If it shows $1$, $2$ or $3$ then the corresponding amount of dollars 
 is added in the pot. 
-It it shows $4$ or $5$ the game stops and you get the pot. 
+It it shows $4$ or $5$ the game stops and you get the pot with money. 
 If it shows $6$ the game ends and you get nothing. 
 Initially the pot is empty. 
 
@@ -456,6 +456,146 @@ he chooses the strategy that minimizes the expected duration of the game.
   
   \end{sol}
 \end{problem}
+
+
+\section{Markov chains}
+
+\begin{problem}
+HSE student lives in two states: "sleep" and "study" and tries to change the state every 1 hour. 
+After the sleep state the student continues sleeping with probability equal to 0.25, 
+otherwise a student starts studying. 
+If the student is studying, the probabilities to continue studying and to start sleeping are equal.
+
+\begin{enumerate}
+\item Write down the transition matrix of this Markov chain.
+\item Draw the graph representation.
+\item What is the probability that a Sleeping Student will be a Studying Student after 1 hour? After 2 hours?
+\item We know that initially student is sleeping with probability $p=\frac{2}{3}$. 
+Find the probabilities of sleep and study states after 1 and 2 hours. 
+\item Find the probabilities of sleep and study states after 20 and 100 hours (do it with \textbf{matrix} operations and any soft). 
+Is there any difference and why?  
+\end{enumerate}
+
+\begin{sol}
+  
+\end{sol}
+
+\end{problem}
+
+\begin{problem}
+HSE student has three states: pre-coffee, with-coffee and over-coffee. 
+He goes to Jeffrey's each break seeking for a cup of coffee. 
+The line is usually too long, so probability to stay pre-coffee is equal to 60\% and to be over-coffee — is zero. 
+Caffeinated students can stay in lines longer, so for with-coffee student the probability to become over-coffee is 20\% and to become pre-coffee — 30\%. 
+Over-coffee student runs to coffeeshop very fast and able to stay over-coffeed with $p = 0.70$ 
+and can suddenly become pre-coffee with $p = 0.10$. 
+
+\begin{enumerate}
+\item Draw the graph representation of this Markov chain.
+\item Write the transition matrix of this Markov chain.
+\item What is the probability that morning pre-coffee student will be with-coffee after 1 break? After 3 breaks?
+\item What is the probability that morning pre-coffee student will be with-coffee after 1 break? After 3 breaks? After 200 breaks?
+\end{enumerate}
+
+\begin{sol}
+  
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+Unteachable students in NOTHSE University try to pass the exams. 
+Students cheat successfully and pass the exams with probability 10\%. 
+In the case of a failure students are allowed to infinite number of retakes. 
+All students are unteachable so the amount of knowledge is always the same and doesn't depend of the number of retakes.
+
+\begin{enumerate}
+\item Draw the graph representation of this Markov chain.
+\item What is the probability to graduate using no more than 5 retakes? 
+\item What is the probability to graduate eventually? 
+\item Use \textbf{first step analysis} to find the average number of retakes per student in this University.
+\end{enumerate}
+
+\begin{sol}
+  
+\end{sol}
+
+\end{problem}
+
+\begin{problem}
+Every month the real estate Galina agent has two options: to increase her commission and to ask an owner to increase the rent. 
+If the agent has increased the commission, on the next step she increases the commission again with probability $5/8$. 
+If she has asked the owner, she decides to increase the commission with probability equal to $3/4$ on the next step.
+
+\begin{enumerate}
+\item Write the transition matrix of this Markov chain.
+\item Draw the graph representation.
+\item Use \textbf{first step analysis} to find how many steps the agent does between asking the owner to increase the price.
+\end{enumerate}
+
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+\begin{problem}
+Alice and Bob toss a coin, writing down the results.
+ If the last 3 tosses are Head, Head and Tail, Alice wins. 
+ If the last 3 tosses are Tail, Head and Head, Bob wins.
+
+\begin{enumerate}
+\item Is it easy to work with matrix representation in this case?
+\item Draw the graph representation. Who is more likely to win the game?
+\item Use \textbf{first step analysis} to find the probability of Alice's win.
+\item Find the probability that the game ends in exactly 4 tosses.
+\item Find the expected value and variance of the total number of coin throws in the game.
+\end{enumerate}
+
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+\begin{problem}
+HSE student has an unusually caring granny who cooks one pie with probability $0.7$ every weekend. 
+Granny's pies are so tasty that HSE student can't resist and he gains 1 kilo for each pie eaten. 
+Without pies the student with more than 70 kilos weight looses 1 kilo per week, yeah, he has a lot of studies!
+At the beginning of the study year student's weight is $W_0 = 70$ kilos.
+
+Let $W_t$ be the weight of the student $t$ weeks later. 
+
+\begin{enumerate}
+\item Find the probability $\P(W_3 \geq 71)$ and expected value $\E(W_3)$.
+\item Explain whether the chain $(W_t)$ has a stationary distribution.
+\end{enumerate}
+
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+The fair price of Sborbank in discrete stock market is somewhere between 100 and 101 rubles. 
+If the price is equal to 100, then the price grows up by 1 ruble with probability $\frac{9}{10}$, 
+otherwise it goes down by 1 ruble. 
+If the price is greater then 100, it grows by 1 ruble with probability $\frac{1}{3}$ or declines by 1 ruble. 
+If the price is lower than 100, it grows by 1 ruble with probability $\frac{2}{3}$ or declines by 1 ruble. 
+
+\begin{enumerate}
+\item Draw the graph representation of the corresponding Markov chain.
+\item Do you think this chain has some stationary distribution?
+\item Find the average time for the stock price to fall from 102 rubles to 98 rubles. 
+
+Hint: you may to decompose the long path into smaller ones and to use the first step analysis.
+\end{enumerate}
+
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+
 
 \section{Generating functions}
 
