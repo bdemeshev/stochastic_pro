@@ -248,6 +248,8 @@ keywordstyle=\fontfamily{lmtt}\bfseries
 
 
 \newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\NN}{\mathbb{N}}
 
 \newcommand{\Lin}{\mathcal{L}in}
 \newcommand{\Linp}{\Lin^{\perp}}
@@ -354,7 +356,11 @@ The person who obtains the first $6$ wins the game.
   \end{enumerate}
 
   \begin{sol}
-  
+    \begin{enumerate}
+      \item $\E(N) = 1/p$, $\Var(N) = $, $\E(N^3) = $, $\E(\exp(tN)) = $
+      \item $a = \P(N \in 2 \cdot \NN)$, $a = (1-p)(1-a)$, $a = (1 - p) / (2 - p)$.
+    \end{enumerate}
+    
   \end{sol}
 \end{problem}
   
@@ -402,6 +408,24 @@ Initially the pot is empty.
 \end{enumerate}
 
   \begin{sol}
+  Let's denote the throws by $(X_t)$ and the number of throws by $T$.
+  Thus the last throw is $X_T$. 
+    \begin{enumerate}
+      \item $\P(X_T = 6) = 1/3$ as we have three possible endings. 
+      One may also sum the probability geometric serie or use first step analysis.
+      \item $\E(T) = 0.5 + 0.5 (\E(T) + 1)$;
+      \item Let $\mu = \E(S)$ and $\gamma = \P(X_T \in \{4, 5\})$.
+      \[
+      \mu = \frac{3}{6}\cdot 0 + \frac{1}{6}(\mu + 1\cdot \gamma) + \frac{1}{6}(\mu + 2\cdot \gamma) + \frac{1}{6}(\mu + 3\cdot \gamma)
+      \]
+      \item 
+      \item 
+      \item 
+      \[
+      \mu_B = \frac{2}{6}\cdot 0 + \frac{1}{6}\mu_B + \frac{1}{6}(\mu + 1\cdot \beta) + \frac{1}{6}(\mu + 2\cdot \beta) + \frac{1}{6}(\mu + 3\cdot \beta),
+      \]
+      with $\beta = 1/3$.
+    \end{enumerate}
   \end{sol}
 \end{problem}
 
@@ -602,6 +626,119 @@ Hint: you may to decompose the long path into smaller ones and to use the first 
 \end{sol}
 \end{problem}
 
+
+\section{Classification of states}
+
+\begin{problem}
+We randomly wander on the graph choosing at each moment of time one of the possible directions.
+If probabilities are not given we choose equiprobably.   
+
+\begin{tikzpicture}[->,>= stealth', shorten >=2pt , line width=0.5pt, node distance=2cm]
+  \node [circle, draw] (A) {$a$};
+  \node [circle, draw] (B) [right of=A] {$b$};
+  \node [circle, draw] (C) [right of=B] {$c$};
+  \node [circle, draw] (D) [below of=A] {$d$};
+  \node [circle, draw] (E) [right of=D] {$e$};
+  \node [circle, draw] (F) [right of=E] {$f$};
+
+  \path (A) edge (D);
+  \path (B) edge (A);
+  \path (B) edge (C);
+  \path (D) edge (B);
+  \path (C) edge (F);
+  \path (B) edge (F);
+  \path (E) edge [bend left] (F);
+  \path (F) edge [bend left] (E);
+
+
+
+  % \path (one) edge [bend left] node [above] {$0.1$} (two);
+  %\path (two) edge [bend left] node [below]{$0.2$} (one);
+  %\path (two) edge [loop right] node {} (two);
+  %\path (one) edge [loop left] node {} (one);
+\end{tikzpicture}
+
+
+\begin{tikzpicture}[->,>= stealth', shorten >=2pt , line width=0.5pt, node distance=2cm]
+  \node [circle, draw] (A) {$a$};
+  \node [circle, draw] (B) [right of=A] {$b$};
+  \node [circle, draw] (C) [below of=B] {$c$};
+  \node [circle, draw] (D) [below of=A] {$d$};
+  \node [circle, draw] (E) [right of=B] {$e$};
+
+  \path (A) edge [bend left] (B);
+  \path (B) edge [bend left] (A);
+  \path (B) edge [bend left] (C);
+  %\path (A) edge (C);
+  \path (C) edge [bend left] (B);
+  \path (C) edge [bend left] (D);
+  \path (D) edge [bend left] (C);
+  \path (D) edge [bend left] (A);
+  \path (A) edge [bend left] (D);
+
+  \path (B) edge (E);
+  \path (E) edge [loop right] (E);
+\end{tikzpicture}
+
+
+\begin{tikzpicture}[->,>= stealth', shorten >=2pt , line width=0.5pt, node distance=2cm]
+  \node [circle, draw] (A) {$a$};
+  \node [circle, draw] (B) [right of=A] {$b$};
+  \node [circle, draw] (C) [right of=B] {$c$};
+  \node [circle, draw] (D) [below of=A] {$d$};
+  \node [circle, draw] (E) [right of=D] {$e$};
+  \node [circle, draw] (F) [right of=E] {$f$};
+  \node [circle, draw] (G) [right of=C] {$g$};
+
+
+  \path (A) edge (D);
+  \path (D) edge (E);
+  \path (E) edge (A);
+  \path (B) edge (E);
+  \path (B) edge (C);
+  \path (C) edge (F);
+  \path (C) edge (G);
+  \path (F) edge (B);
+
+
+  \path (D) edge [loop left] (D);
+  \path (E) edge [loop right] (E);
+  \path (B) edge [loop left] (B);
+  \path (G) edge [loop below] (G);
+\end{tikzpicture}
+
+
+\begin{tikzpicture}[->,>= stealth', shorten >=2pt , line width=0.5pt, node distance=2cm]
+  \node (A) {\dots};
+  \node [circle, draw] (B) [right of=A] {$-1$};
+  \node [circle, draw] (C) [right of=B] {$0$};
+  \node [circle, draw] (D) [right of=C] {$1$};
+  \node (E) [right of=D] {\dots};
+
+  \path (A) edge [bend left] node [above] {$0.1$} (B);
+  \path (B) edge [bend left] node [below] {$0.9$} (A);
+  \path (B) edge [bend left] node [above] {$0.1$} (C);
+  \path (C) edge [bend left] node [below] {$0.9$} (B);
+  \path (C) edge [bend left] node [above] {$0.1$} (D);
+  \path (D) edge [bend left] node [below] {$0.9$} (C);
+  \path (D) edge [bend left] node [above] {$0.1$} (E);
+  \path (E) edge [bend left] node [below] {$0.9$} (D);
+\end{tikzpicture}
+
+
+
+\begin{enumerate}
+  \item Split each Markov chain into communicating classes. 
+  \item Find the period of every state. 
+  \item Classify each state as transient, null-recurrent and positive recurrent.
+  \item For positive recurrent states find the expected return time.
+\end{enumerate}
+
+
+  \begin{sol}
+    
+  \end{sol}
+\end{problem}
 
 
 \section{Generating functions}
