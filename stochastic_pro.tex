@@ -846,6 +846,103 @@ Find probabilities $\P(X = 0)$, $\P(X = 1)$, $\P(X = 2)$.
   \end{sol}
 \end{problem}
 
+\section{Limits}
+
+\begin{problem}
+Polina loves sweet chestnuts. 
+She has infinite sequence of baskets before her.
+In the basket number~$n$ there are $n$~chestnuts in total.
+Unfortunately only one chestnut in every basket is a sweet one. 
+
+She picks chestnuts one by one at random from all the buskets sequentially. 
+First she picks the unique chestnut from the basket number one, 
+than she picks in a random order two chestnuts from the basket number two and so on. 
+
+The random variable $S_t$ indicates whether the chestnut number $t$ was a sweet one. 
+
+\begin{enumerate}
+  \item Find $\lim S_t$ or prove that the limit does not exist.
+  \item Find $\plim S_t$ or prove that the limit does not exist.
+\end{enumerate}
+
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+Let $(X_n)$ be independent, each variable $X_n$ has exponential distribution with rate $\lambda_n = n$.
+\begin{enumerate}
+  \item Find the probability limit $\plim X_n$ or prove that it does not exist.
+\end{enumerate}
+Let $(Y_n)$ be independent, each variable $Y_n$ has exponential distribution with rate $\lambda_n = n / (n + 1)$.
+\begin{enumerate}[resume]
+  \item Find the probability limit $\plim Y_n$ or prove that it does not exist.
+\end{enumerate}
+
+\begin{sol}
+\begin{enumerate}
+  \item $\plim X_n = 0$;
+  \item $\plim Y_n$ does not exist.
+\end{enumerate}
+
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+Let $(X_n)$ be independent normally distributed $\cN(5; 10)$.
+
+\begin{enumerate}
+  \item Find the probability limit 
+  \[
+  \plim \frac{X_1 + X_2 + \dots + X_n}{7n}.
+  \]
+  \item Find the probability limit 
+  \[
+  \plim \frac{X_1^2 + X_2^2 + \dots + X_n^2}{7n}.
+  \]
+  \item Find the probability limit 
+  \[
+  \plim \ln(X_1^2 + X_2^2 + \dots + X_n^2) - \ln n.
+  \]
+\end{enumerate}
+
+\begin{sol}
+\begin{enumerate}
+  \item $\plim \frac{X_1 + X_2 + \dots + X_n}{7n} = 5/7$;
+  \item $\plim \frac{X_1^2 + X_2^2 + \dots + X_n^2}{7n} = 5$;
+  \item $\plim \ln(X_1^2 + X_2^2 + \dots + X_n^2) - \ln n = \ln 35$.
+\end{enumerate}
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+  Let $(X_n)$ be independent uniform on $[0; 1]$.
+  Let $Y_n = X_n^2 + X_n^3$.
+
+  
+  \begin{enumerate}
+    \item Find the probability limit $\plim V_n$ for 
+    \[
+    V_n = \max\{Y_1, Y_2, \dots, Y_n\}.
+    \]
+    \item Find the probability limit $\plim W_n$ for 
+    \[
+    W_n = \max\{X_1 + Y_1, X_1 + Y_2, \dots, X_1 + Y_n\}.
+    \]
+  \end{enumerate}
+  \begin{sol}
+  \begin{enumerate}
+    \item $\plim \max\{Y_1, Y_2, \dots, Y_n\} = 2$;
+    \item $\plim \max\{X_1 + Y_1, X_1 + Y_2, \dots, X_1 + Y_n\} = X_1 + 2$.
+  \end{enumerate}
+  \end{sol}
+  \end{problem}
+  
+
 
 
 \Closesolutionfile{solution_file}
