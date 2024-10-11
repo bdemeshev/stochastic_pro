@@ -980,6 +980,95 @@ Let $W_n = X + Y_n$.
 \end{problem}
 
 
+\begin{problem}
+Let $X$ and $Y$ be independent and uniformly distributed on $[0; 1]$.
+Let $V_n = n^2 Y \cdot I(X \leq 1/n)$ and $W_n = Y \cdot I(X > 1/n)$. 
+  \begin{enumerate}
+        \item Find $\plim V_n$ and $\plim W_n$.
+        \item Does $(V_n)$ converge in mean squared?
+        \item Does $(W_n)$ converge in mean squared?
+  \end{enumerate}
+\begin{sol}
+  \begin{enumerate}
+    \item $\plim V_n = 0$, $\plim W_n = Y$;
+    \item The sequence $V_n$ does not converge in mean squared;
+    \item  $W_n$ converges to $Y$ in mean squared.
+\end{enumerate}
+\end{sol}
+
+\end{problem}
+
+
+\section{Conditional expected value without sigma-algebras}
+
+\begin{problem}
+We randomly uniformly select a point inside triangle $A = (6, 0)$, $B = (0, 2)$ and $O = (0, 0)$.
+Let $(X, Y)$ be coordinates of this random point.
+
+\begin{enumerate}
+  \item Find conditional expected values $\E(Y \mid X)$ and $\E(X \mid Y)$.
+  \item Find conditional variances $\Var(Y \mid X)$ and $\Var(X \mid Y)$.
+\end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+      \item $\E(Y \mid X) = 1 - X/6$ and $\E(X \mid Y) = 3 - 1.5 X$.
+      \item $\Var(Y \mid X) = $, $\Var(X \mid Y) = $.
+    \end{enumerate}        
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+The pair of random variables $X$ and $Y$ has joint probability density
+\[
+f(x, y) = \begin{cases}
+  x + y, \text{ if } x\in [0;1], y\in [0;1]; \\
+  0, \text{ otherwise.}
+\end{cases}
+\]  
+
+\begin{enumerate}
+  \item Find the marginal densities $f_X(x)$ and $f_Y(y)$.
+  \item Find the conditional densities $f(x \mid y)$ and $f(y \mid x)$.
+  \item Find the conditional expected values $\E(Y \mid X)$ and $\E(X \mid Y)$.
+  \item Find the conditional variances $\Var(Y \mid X)$ and $\Var(X \mid Y)$.
+\end{enumerate}
+
+  \begin{sol}
+\begin{enumerate}
+  \item 
+  \[
+  f(x) = \begin{cases}
+    x + 0.5, \text{ if } x\in [0;1]; \\
+    0, \text{ otherwise.}
+  \end{cases}
+  \]
+  \item 
+\[
+f(x, y) = \begin{cases}
+  (x + y) / (x + 0.5), \text{ if } x\in [0;1], y\in [0;1]; \\
+  0, \text{ otherwise.}
+\end{cases}
+\]  
+\item 
+\[
+\E(Y \mid X) = \frac{0.5X + 1/3}{X + 0.5}.
+\]  
+\item 
+
+\end{enumerate}
+  \end{sol}
+\end{problem}
+
+
+
+
+
+\section{....}
+
+
+
+
 
 
 \Closesolutionfile{solution_file}
