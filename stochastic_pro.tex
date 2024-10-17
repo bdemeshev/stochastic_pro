@@ -1061,7 +1061,65 @@ f(x, y) = \begin{cases}
 \end{problem}
 
 
+\begin{problem}
+The random variables $X$ and $Y$ are independend with Poisson distribution with rate $\lambda = 1$.
+Let $S = X + Y$.
 
+\begin{enumerate}
+  \item Find conditional probabilities $\P(X = x \mid S = s)$ and $\P(Y = y \mid S = s)$.
+  \item Find conditional expected values $\E(X \mid S)$ and $\E(Y \mid S)$.
+  \item Find conditional variances $\Var(X \mid S)$ and $\Var(Y \mid S)$.
+  \item How the answers will change if $X \sim \dPois(\lambda_x)$ and $Y \sim \dPois(\lambda_y)$?
+\end{enumerate}
+
+  \begin{sol}
+    \begin{enumerate}
+      \item 
+      \item $\E(X \mid S) = \E(Y \mid S) = S/2$;
+      \item 
+      \item  
+    \end{enumerate}
+    
+  \end{sol}
+\end{problem}
+  
+
+
+
+\begin{problem}
+Let $X$ and $Y$ be independent and exponentially distributed with rate $\lambda = 1$ and $S = X + Y$.
+
+\begin{enumerate}
+  \item Find conditional densities $f(x \mid s)$ and $f(y \mid s)$.
+  \item Find conditional expected values $\E(X \mid S)$ and $\E(Y \mid S)$.
+  \item Find conditional variances $\Var(X \mid S)$ and $\Var(Y \mid S)$.
+  \item Find $\Cov(X, Y \mid S)$ and $\Corr(X, Y \mid S)$.
+  \item How the answers will change if $X \sim \dExpo(\lambda_x)$ and $Y \sim \dExpo(\lambda_y)$?
+\end{enumerate}
+
+  \begin{sol}
+    \begin{enumerate}
+      \item $X \mid S \sim dUnif[0; S]$, $Y \mid S \sim dUnif[0; S]$.
+      \item $\E(X \mid S) = \E(Y \mid S) = S/2$;
+      \item $\Var(X \mid S) = \Var(Y \mid S) = S^2 / 12$;
+      \item  
+    \end{enumerate}
+    
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+The random variable $X$ has Poisson distribution with rate $\lambda = 1$.
+The random variable $Y$ has uniform distribution on $[1; 2]$. 
+Random variables $X$ and $Y$ are independent. 
+
+Find $\E(XY \mid X)$, $\Var(XY + X^3 \mid X)$, $\Cov(X, Y \mid X)$, $\Cov(XY, X^2Y \mid X)$.
+
+\begin{sol}
+    $\E(XY \mid X) = X\E(Y) = X/2$, $\Var(XY  + X^3\mid X) = X^2 \Var(Y) = X^2 /12$, $\Cov(X, Y \mid X) = 0$, $\Cov(XY, X^2Y \mid X) = X^3 \Var(Y) = X^3 / 12$
+\end{sol}
+\end{problem}
 
 
 \section{....}
@@ -1092,6 +1150,8 @@ f(x, y) = \begin{cases}
 
 
 \section{Sources of wisdom}
+
+\nocite{buzun2015stochastic}
 
 \nocite{buzun2015stochastic}
 
