@@ -1486,6 +1486,40 @@ $\cF=\{\emptyset, \Omega, \{\text{дождь}\}, \{\text{солнечно}, \tex
 \section{Sigma-algebras and conditional expected value}
 
 
+\begin{problem}
+At time moment $t = 0$ in the casiono there are countably many players with perfect memory.
+Let's number them as Miss First, Mister Second, etc. 
+
+
+Time is discrete. 
+Random variables $X_t$ are independent and take values $+1$ or $-1$ with equal probabilities.
+At each moment of time $t > 0$ everybode gets $X_t$ roubles and than the player number $t$ leaves the casiono.
+
+The cumulative sum $S_t = X_1 + \dots + X_t$ reaches its first local maximum at the random time $T$.
+At time $T+1$ the dealer calls his friend Black Jack and says «It's time!»
+They have agreed beforehand on the call time. 
+
+Black Jack chases the player number $T$ and steals all his information before the police can intervent.  
+Let's describe the information of Black Jack by sigma-algebra $\cF_{J}$ and the information of every player $t$ at the last moment in casino by $\cF_t$.
+
+\begin{enumerate}
+  \item Which sigma-algebras contain the event $\{T = 10\}$?
+  \item Provide an example of two events from $\cF_J$ that do not enter in neither $\cF_t$.
+  \item Find conditional expected values $\E(T \mid \cF_J)$, $\E(X_{T-1} \mid \cF_J)$, $\E(X_{T+1} \mid \cF_J)$.
+  \item Find conditional expected values $\E(S_T \mid \cF_J)$, $\E(S_{T+1} \mid \cF_J)$, $\E(S_{T+2} \mid \cF_J)$.
+\end{enumerate}
+
+\begin{sol}
+  \begin{enumerate}
+    \item $\cF_J$, $\cF_{11}$, $\cF_{12}$, \dots
+    \item $\{T \text{ is divisible by } 2\}$, $\{T \geq 3, X_{T-2} = 1\}$.
+    \item $\E(T \mid \cF_J) = T$, $\E(X_{T-1} \mid \cF_J) = X_{T-1}$, $\E(X_{T+1} \mid \cF_J) = -1$.
+    \item $\E(S_T \mid \cF_J) = S_T$, $\E(S_{T+1} \mid \cF_J) = S_T - 1$, $\E(S_{T+2} \mid \cF_J) = S_T - 1/2$.
+  \end{enumerate}
+    
+\end{sol}
+\end{problem}
+
 
 
 
