@@ -1240,7 +1240,7 @@ In general $\sigma(f(X)) \subseteq \sigma(X)$; If $f$ is a bijection then $\sigm
 How many different $\sigma$-algebras can be created using the set of outcomes $\Omega$ has three elements? And if $\Omega$ has four elements?
 
 \begin{sol}
-In the finite case sigma-algebra corresponds to разбиение 
+In the finite case sigma-algebra corresponds to partitions.
 We get five sigma-algebras on a set of three elements and $15$ sigma-algebras on a set of four elements. 
 These numbers are known as Bell numbers.
 \end{sol}
@@ -1281,7 +1281,7 @@ Prove a statement or provide a counter-example:
 \begin{problem}
 Пусть $\cF$ — $\sigma$-алгебра подмножеств $\Omega$, и
 $B\subseteq\Omega$. Верно ли, что набор множеств
-$\mathcal{H}=\{A:A\subseteq B$ или $B^{c}\subseteq A\}$ является
+$\cH=\{A:A\subseteq B$ или $B^{c}\subseteq A\}$ является
 $\sigma$-алгеброй на $\Omega$?
 
 \begin{sol}
@@ -1309,7 +1309,7 @@ $\sigma$-алгеброй на $\Omega$?
 хотя бы одна единица, есть доля? Если да, то чему она равна?
 \item Верно ли, что у натуральных чисел, в записи которых присутствует
 ровно одна единица, есть доля? Если да, то чему она равна?
-\item Верно ли, что $\mathcal{H}$ — алгебра? Сигма-алгебра?
+\item Верно ли, что $\cH$ — алгебра? Сигма-алгебра?
 \end{enumerate}
 
 
@@ -1348,26 +1348,29 @@ Let $Y$ be the indicator of a even score and $Z$ be the indicator of score bigge
 
 
 \begin{problem}
-Монетка подкидывается бесконечное количество раз: $X_{n}$ равно 1, если при $n$-ом подбрасывании выпадает орел и $0$, если решка.
-Определим кучу $ \sigma$-алгебр: $\cF_{n}:=\sigma(X_1, X_2, \ldots, X_n)$, $\cH_{n}:=\sigma(X_{n}, X_{n+1}, X_{n+2}, \ldots)$.
+We throw a coin infinitely many times. 
+Let $X_{n}$ be the indicator that the coin landed on Head at toss number $n$.
+Consider a pack of $ \sigma$-algebras: $\cF_{n}:=\sigma(X_1, X_2, \ldots, X_n)$, $\cH_{n}:=\sigma(X_{n}, X_{n+1}, X_{n+2}, \ldots)$.
 
 \begin{enumerate}
-  \item Приведите по два нетривиальных, отличных от $\Omega$ и $\emptyset$, примера такого события $A$, что:
+\item For each case provide two examples of $\sigma$-algebras that contain the corresponding event
+\begin{enumerate}
+\item $\{X_{37}>0 \}$;
+\item $\{X_{37}>X_{2024} \}$;
+\item $\{ X_{37}>X_{2024}>X_{12} \}$;
+\end{enumerate}
+  
+\item Simplify experessions: $\cF_{11}\cap \cF_{25}$, $\cF_{11}\cup \cF_{25}$, $\cH_{11}\cap \cH_{25} $, $\cH_{11}\cup \cH_{25}$.
+
+\item For each case provide two non-trivial examples (different from $\Omega$ and $\emptyset$) of an event $A$ such that
 
 \begin{enumerate}
-\item $A\in \cF_{2010}$
-\item $A\notin \cF_{2010}$
-\item $A$ лежит в каждой $\mathcal{H}_{n}$
+\item $A\in \cF_{2024}$;
+\item $A\notin \cF_{2025}$;
+\item $A \in \cH_{n}$ for all possible $n$;
 \end{enumerate}
 
-\item В какие из упомянутых $\sigma$-алгебр входят события:
-\begin{enumerate}
-\item $ X_{37}>0$
-\item $ X_{37}>X_{2010}$
-\item $ X_{37}>X_{2010}>X_{12}$
-\end{enumerate}
 
-\item Упростите выражения: $ \cF_{11}\cap \cF_{25} $, $ \cF_{11}\cup \cF_{25} $, $ \mathcal{H}_{11}\cap \mathcal{H}_{25} $, $ \mathcal{H}_{11}\cup \mathcal{H}_{25}$.
 \end{enumerate}
 
 
