@@ -1505,7 +1505,7 @@ Let's describe the information of Black Jack by sigma-algebra $\cF_{J}$ and the 
 \begin{enumerate}
   \item Which sigma-algebras contain the event $\{T = 10\}$?
   \item Provide an example of two events from $\cF_J$ that do not enter in neither $\cF_t$.
-  \item Find conditional expected values $\E(T \mid \cF_J)$, $\E(X_{T-1} \mid \cF_J)$, $\E(X_{T+1} \mid \cF_J)$.
+  \item Find conditional expected values $\E(T \mid \cF_J)$, $\E(X_T \mid \cF_J)$, $\E(X_{T+1} \mid \cF_J)$.
   \item Find conditional expected values $\E(S_T \mid \cF_J)$, $\E(S_{T+1} \mid \cF_J)$, $\E(S_{T+2} \mid \cF_J)$.
 \end{enumerate}
 
@@ -1513,8 +1513,8 @@ Let's describe the information of Black Jack by sigma-algebra $\cF_{J}$ and the 
   \begin{enumerate}
     \item $\cF_J$, $\cF_{11}$, $\cF_{12}$, \dots
     \item $\{T \text{ is divisible by } 2\}$, $\{T \geq 3, X_{T-2} = 1\}$.
-    \item $\E(T \mid \cF_J) = T$, $\E(X_{T-1} \mid \cF_J) = X_{T-1}$, $\E(X_{T+1} \mid \cF_J) = -1$.
-    \item $\E(S_T \mid \cF_J) = S_T$, $\E(S_{T+1} \mid \cF_J) = S_T - 1$, $\E(S_{T+2} \mid \cF_J) = S_T - 1/2$.
+    \item $\E(T \mid \cF_J) = T$, $\E(X_{T} \mid \cF_J) = 1$, $\E(X_{T+1} \mid \cF_J) = -1$.
+    \item $\E(S_T \mid \cF_J) = S_T$, $\E(S_{T+1} \mid \cF_J) = S_T - 1$, $\E(S_{T+2} \mid \cF_J) = S_T - 1$.
   \end{enumerate}
     
 \end{sol}
