@@ -1506,7 +1506,19 @@ Let's describe the information of Black Jack by sigma-algebra $\cF_{J}$ and the 
   \item Which sigma-algebras contain the event $\{T = 10\}$?
   \item Provide an example of two events from $\cF_J$ that do not enter in neither $\cF_t$.
   \item Find conditional expected values $\E(T \mid \cF_J)$, $\E(X_T \mid \cF_J)$, $\E(X_{T+1} \mid \cF_J)$.
-  \item Find conditional expected values $\E(S_T \mid \cF_J)$, $\E(S_{T+1} \mid \cF_J)$, $\E(S_{T+2} \mid \cF_J)$.
+  \item Find conditional expected values $\E(S_{T - 1} \mid \cF_J)$, $\E(S_T \mid \cF_J)$, $\E(S_{T+1} \mid \cF_J)$, $\E(S_{T+2} \mid \cF_J)$.
+\end{enumerate}
+Let's define $Y_{T - k}$ as 
+\[
+Y_{T - k} = \begin{cases}
+  X_{T - k}, \text{ if } T - k > 0; \\
+  0, \text{ otherwise.} 
+\end{cases}
+\]
+\begin{enumerate}[resume]
+  \item Find $\E(Y_{T - 10} \mid \cF_J)$.
+  \item Find conditional expected values $\E(X_T \mid \cF_{10})$, $\E(X_{T+1} \mid \cF_{10})$.
+  \item Find $\E(T \mid \cF_{10})$ and $\E(S_T \mid \cF_{10})$.
 \end{enumerate}
 
 \begin{sol}
@@ -1515,7 +1527,10 @@ Let's describe the information of Black Jack by sigma-algebra $\cF_{J}$ and the 
     \item $\{T \text{ is divisible by } 2\}$, $\{T \geq 3, X_{T-2} = 1\}$.
     \item $\E(T \mid \cF_J) = T$, $\E(X_{T} \mid \cF_J) = 1$, $\E(X_{T+1} \mid \cF_J) = -1$.
     \item $\E(S_T \mid \cF_J) = S_T$, $\E(S_{T+1} \mid \cF_J) = S_T - 1$, $\E(S_{T+2} \mid \cF_J) = S_T - 1$.
-  \end{enumerate}
+    \item $\E(Y_{T - k} \mid \cF_J) = Y_{T- k }$.
+    \item $\E(X_T \mid \cF_{10}) = 1$, $\E(X_{T+1} \mid \cF_{10}) = -1$.
+    \item $\E(T \mid \cF_{10}) = ... $, $\E(S_T \mid \cF_{10}) = ...$.  
+\end{enumerate}
     
 \end{sol}
 \end{problem}
