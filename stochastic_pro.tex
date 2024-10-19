@@ -1107,7 +1107,7 @@ Let $X$ and $Y$ be independent and exponentially distributed with rate $\lambda 
 
   \begin{sol}
     \begin{enumerate}
-      \item $X \mid S \sim dUnif[0; S]$, $Y \mid S \sim dUnif[0; S]$.
+      \item $X \mid S \sim \dUnif[0; S]$, $Y \mid S \sim \dUnif[0; S]$.
       \item $\E(X \mid S) = \E(Y \mid S) = S/2$;
       \item $\Var(X \mid S) = \Var(Y \mid S) = S^2 / 12$;
       \item  
@@ -1249,7 +1249,7 @@ These numbers are known as Bell numbers.
 
 
 \begin{problem}
-Provide an example of algebra that is not a $\sigma$-алгеброй.
+Provide an example of algebra that is not a $\sigma$-algebra.
 
 \begin{sol}
 Let $\Omega = \NN$, $\cA$ contains all finite sets and sets with finite complement.
@@ -1279,13 +1279,13 @@ Prove a statement or provide a counter-example:
 
 
 \begin{problem}
-Пусть $\cF$ — $\sigma$-алгебра подмножеств $\Omega$, и
-$B\subseteq\Omega$. Верно ли, что набор множеств
-$\cH=\{A:A\subseteq B$ или $B^{c}\subseteq A\}$ является
-$\sigma$-алгеброй на $\Omega$?
+Let $\cF$ be some $\sigma$-algebra of subsets of $\Omega$ and $B\subseteq\Omega$. 
+Consider the collection of sets $\cH=\{A: A\subseteq B \text{ or } B^{c}\subseteq A\}$.
+
+Is $\cH$ a $\sigma$-algebra?
 
 \begin{sol}
-Да, удобно изобразить $\Omega$ отрезком, «пескари» $A\subseteq B$ и «акулы» $A \supseteq B^{c}$.
+Yes. This is convinient do draw $\Omega$ as a segment. With «пескари» $A\subseteq B$ and «sharks» $A \supseteq B^{c}$.
 \end{sol}
 \end{problem}
 
