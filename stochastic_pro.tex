@@ -1578,7 +1578,7 @@ Find the $\sigma$-algebras that model the following situations:
 
 \begin{leftbar}
 \begin{itemize}
-  \item \emph{Natural filtration} of a process $(X_n)$, $\cF_n = \sigma(X_1, X_2, \dots, X_n)$.
+  \item \emph{Natural filtration} of a process $(X_n)$ is given by $\cF_n = \sigma(X_1, X_2, \dots, X_n)$.
   \item A process $(X_n)$ is a \emph{martingale} if $\E(X_{n + k} \mid X_n, X_{n-1}, \dots, X_1) = X_{n}$ for all $k \geq 1$.
   \item A process $(X_n)$ is \emph{adapted} to filtration $(\cF_n)$ if every random variable $X_n$ is measurable wrt to sigma-algebra $\cF_n$.
   \item A process $(X_n)$ is a \emph{martingale wrt to filtration} $(\cF_n)$ if $\E(X_{n + k} \mid \cF_n) = X_{n}$.
@@ -1828,7 +1828,182 @@ Let $T$ be the number of keypresses required to write the word «ABRACADABRA» f
 
 \section{Poisson process}
 
+\begin{leftbar}
+  The process $(N_t)$ is called \emph{Poisson process} with intensity $\lambda$ if 
+  \begin{itemize}
+    \item $N_0 = 0$;
+    \item Increments are independent:
+    If $t_1 < t_2 < t_3 < \dots < t_k$ then random increments $N(t_2) - N(t_1)$, $N(t_3) - N(t-2)$, \dots{ } are independent.
+    \item Increments have Poisson distribution:
+    \[
+    N_b - N_a \sim \dPois(\lambda (b-a));
+    \]
+  \end{itemize}
+  The process $(N_t)$ is called \emph{Poisson process} with intensity $\lambda$ if 
+  \begin{itemize}
+    \item $N_0 = 0$;
+    \item Increments are independent;
+    \item Increments are stationary:
+    
+    The distribution of $N_b - N_a$ depends only on $(b - a)$.
+    \item Probability of observing two or more points in a small interval is negligible:
+    \[
+    \P(N_{t + \Delta} - N_t > 1) = o(\Delta).
+    \]
+  \end{itemize}
+\end{leftbar}
 
+
+\begin{problem}
+Two cashiers Alice and Bob simulteneously started to service their clients.
+The service times $X_a$ and $X_b$ are independent and exponentially distributed with rates $\lambda_a = 1$ and $\lambda_b = 2$.
+
+\begin{enumerate}
+  \item Find the probability $\P(X_a < X_b)$.
+  \item Find the density of $S = X_a + X_b$.
+  \item Find the density of $L = \min\{X_a, X_b\}$.
+  \item Find the density of $R = \max\{X_a, X_b\}$.
+  \item Solve all the previous points for general rates $\lambda_a$ and $\lambda_b$.
+\end{enumerate}
+
+\begin{sol}
+  \begin{enumerate}
+    \item $\P(X_a < X_b) = \lambda_a/(\lambda_a + \lambda_b)$.
+    There are two possible solutions: double integral and first step analysis.
+    \item 
+    \item 
+    \item 
+  \end{enumerate}  
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+Let $X_t$ and $Y_t$ be two independent Poisson processes. 
+Is it true that $S_t = X_t + Y_t$ is also a Poisson process?
+\begin{sol}
+Yes. 
+\end{sol}
+\end{problem}
+
+\begin{problem}
+Hedgehogs are scattered in a big forest according Poisson process with rate $\lambda = 1$ per $100$ squared meters. 
+
+What should be the edge of a square such that the probability of finding a hedgehog there is $0.7$?
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+Let $N_t$ be a Poisson process with rate $\lambda$.
+\begin{enumerate}
+  \item Is the process $A_t = N_t - \lambda t$ a martingale?
+  \item Is the process $B_t = A_t^2 - \lambda t$ a martingale?
+\end{enumerate}
+\begin{sol}
+  \begin{enumerate}
+    \item $A_t = N_t - \lambda t$ is a martingale;
+    \item $B_t = A_t^2 - \lambda t$ is a martingale;
+  \end{enumerate}  
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+
+\begin{sol}
+
+\end{sol}
+\end{problem}
+  
+
+
+\begin{problem}
+
+\begin{sol}
+
+\end{sol}
+\end{problem}
+  
+  
+
+
+\begin{problem}
+Customers order coffee according to Poisson process with rate $1$ cup per minute.
+The owner will close the shop if no one orders a coffee in $7$ minutes.
+
+Let $X$ be the closure time. 
+
+Find $\E(X)$ and $\Var(X)$.
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+\begin{problem}
+The arrival of buses at a given stop follows Poisson process with rate $3$. 
+The arrival of taxis at same stop follows independent Poisson process with rate $5$. 
+
+\begin{enumerate}
+  \item What is the probability that two or more taxis will arrive before next bus?
+  \item What is the probability that exactly two taxis will arrive before next bus?
+\end{enumerate} 
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+Customers order coffee according to Poisson process with rate $1$ cup per minute.
+Let $N_t$ be the number of orders up to time $t$.
+
+Find the probability $\P(N_t \text{ is even})$.
+\begin{sol}
+Let's denote $a(t) = \P(N_t \text{ is even})$.
+\[
+a(t+\Delta)=a(t)(1-\Delta)+(1-a(t))\Delta + o(\Delta) 
+\]
+Hence we get a differential equation  $a'(t)=1-2a(t)$ with $a(0)=1$.
+The solution is $a(t)=(1+\exp(-2t))/2$.
+\end{sol}
+\end{problem}
+  
+
+
+\begin{problem}
+Prove that two definitions of Poisson process are equivalent.
+
+Definition A. The process $(N_t)$ is called \emph{Poisson process} with intensity $\lambda$ if 
+  \begin{itemize}
+    \item $N_0 = 0$;
+    \item Increments are independent:
+    If $t_1 < t_2 < t_3 < \dots < t_k$ then random increments $N(t_2) - N(t_1)$, $N(t_3) - N(t-2)$, \dots{ } are independent.
+    \item Increments have Poisson distribution:
+    \[
+    N_b - N_a \sim \dPois(\lambda (b-a));
+    \]
+  \end{itemize}
+
+  Definition B. The process $(N_t)$ is called \emph{Poisson process} with intensity $\lambda$ if 
+  \begin{itemize}
+    \item $N_0 = 0$;
+    \item Increments are independent;
+    \item Increments are stationary:
+    
+    The distribution of $N_b - N_a$ depends only on $(b - a)$.
+    \item Probability of observing two or more points in a small interval is negligible:
+    \[
+    \P(N_{t + \Delta} - N_t > 1) = o(\Delta).
+    \]
+  \end{itemize}
+\begin{sol}
+
+\end{sol}
+\end{problem}
+  
 
 
 \Closesolutionfile{solution_file}
