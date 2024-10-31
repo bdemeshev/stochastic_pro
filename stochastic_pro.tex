@@ -1574,6 +1574,260 @@ Find the $\sigma$-algebras that model the following situations:
 \end{sol}
 \end{problem}
 
+\section{Martinales}
+
+\begin{leftbar}
+\begin{itemize}
+  \item \emph{Natural filtration} of a process $(X_n)$, $\cF_n = \sigma(X_1, X_2, \dots, X_n)$.
+  \item A process $(X_n)$ is a \emph{martingale} if $\E(X_{n + k} \mid X_n, X_{n-1}, \dots, X_1) = X_{n}$ for all $k \geq 1$.
+  \item A process $(X_n)$ is \emph{adapted} to filtration $(\cF_n)$ if every random variable $X_n$ is measurable wrt to sigma-algebra $\cF_n$.
+  \item A process $(X_n)$ is a \emph{martingale wrt to filtration} $(\cF_n)$ if $\E(X_{n + k} \mid \cF_n) = X_{n}$.
+\end{itemize}
+\end{leftbar}
+
+
+\begin{problem}
+Consider the sequence $(X_t)$ of independent identically distributed random variables with mean $\E(X_t) = 2$ and variance $\Var(X_t) = 3$.
+Let's work with natural filtration $\cF_t = \sigma(X_1, X_2, \dots, X_t)$.
+
+On the base of $(X_t)$ let's create more sequences: $S_t = X_1 + X_2 + \dots + X_t$, $W_t = S_t - 2t$ and $Y_t = W_t^2 - 3t$.
+
+\begin{enumerate}
+  \item Is $(X_t)$ a martingale with respect to $(\cF_t)$?
+  \item Is $(S_t)$ a martingale with respect to $(\cF_t)$?
+  \item Is $(W_t)$ a martingale with respect to $(\cF_t)$?
+  \item Is $(Y_t)$ a martingale with respect to $(\cF_t)$?
+  \item Is $(W_t)$ a martingale with respect to $(\cF_{t-1})$?
+  \item Is $(W_t)$ a martingale with respect to $(\cF_{t+1})$?
+\end{enumerate}
+\begin{sol}
+  \begin{enumerate}
+    \item $(X_t)$ is not a martingale with respect to $(\cF_t)$;
+    \item $(S_t)$ is not a martingale with respect to $(\cF_t)$;
+    \item $(W_t)$ is a martingale with respect to $(\cF_t)$;
+    \item $(Y_t)$ is a martingale with respect to $(\cF_t)$;
+    \item $(W_t)$ is not a martingale with respect to $(\cF_{t-1})$;
+    \item $(W_t)$ is not a martingale with respect to $(\cF_{t+1})$;
+  \end{enumerate}  
+\end{sol}
+\end{problem}
+
+\begin{problem}
+Vasiliy has found three non-random infinite sequences in his garage: $a_n = n$, $b_n = -n$ and $c_n = 0$.
+He randomly selects one of these sequences with equal probabilities and hence obtain a sequence of random variables $(X_n)$.
+\begin{enumerate}
+  \item What is the distribution of $X_7$?
+  \item Find $\E(X_n)$ and $\Var(X_n)$.
+  \item Is $(X_n)$ a Markov chain?
+  \item Is $(X_n)$ a martingale?
+  \item Explicitely find the $\sigma$-algebra $\sigma(X_1, X_2, X_3, \dots, X_{1000})$.
+  \item Find the probability that limit of $(X_n)$ exists.
+  \item Does $\plim X_n$ exist?
+\end{enumerate}
+
+\begin{sol}
+  \begin{enumerate}
+    \item What is the distribution of $X_7$?
+    \item $\E(X_n) = 0$ and $\Var(X_n) = $.
+    \item The process $(X_n)$ is a Markov chain!
+    \item The process $(X_n)$ is not a martingale.
+    \item $\sigma(X_1, X_2, X_3, \dots, X_{1000}) = \sigma(X_1)$
+    \item $\P(\lim X_n \text{ exists}) = 1/3$.
+    \item $\plim X_n$ does not exist.
+  \end{enumerate}  
+\end{sol}
+\end{problem}
+
+\begin{problem}
+Consider the sequence $(X_t)$ of independent identically distributed random variables
+that take values $0$ or $1$ with equal probabilities.
+Let's work with natural filtration $\cF_t = \sigma(X_1, X_2, \dots, X_t)$.
+
+On the base of $(X_t)$ let's create more sequences: $S_t = X_1 + X_2 + \dots + X_t$, $W_t = S_t - at$, $M_t = \exp(bS_t)$.
+
+\begin{enumerate}
+  \item Is $(X_t)$ a martingale?
+  \item Is $(S_t)$ a martingale?
+  \item For which values of $a$ the process $(W_t)$ is a martingale?
+  \item For which values of $b$ the process $(M_t)$ is a martingale?
+\end{enumerate}
+\begin{sol}
+  \begin{enumerate}
+    \item $(X_t)$ is not a martingale;
+    \item $(S_t)$ is not a martingale;
+    \item $a = 0.5$;
+    \item $b = 0$ and $b = ...$
+  \end{enumerate}  
+\end{sol}
+\end{problem}
+  
+
+
+\begin{problem}
+Consider a well-mixed standard deck of $52$ cards. 
+James Bond in an elegant outfit\footnote{Sponsors are wellcome to contact us for product placement!} 
+opens cards one by one. 
+Let the sigma-algebra $(\cF_n)$ model his information 
+and $(X_n)$ be the proportion of Queens in the closed part of the deck after opening $n$ cards.
+
+\begin{enumerate}
+  \item Find the marginal distribution of $X_0$, $X_1$ and $X_{51}$.
+  \item Find the joint distribution of $X_{50}$ and $X_{51}$.
+  \item Is $(X_n)$ a martingale with respect to $(\cF_n)$?
+\end{enumerate}
+
+\begin{sol}
+  \begin{enumerate}
+    \item $X_0 = 4/52$; $X_1$ is $4/51$ with probability $48/52$ or $3/51$ with probability $4/52$;
+     $X_{51}$ is $1$ with probability $4/52$ and $0$ with probability $48/52$.
+    \item 
+    \item The process $(X_n)$ is a martingale with respect to $(\cF_n)$.
+  \end{enumerate}
+  
+\end{sol}
+\end{problem}
+
+\begin{problem}
+If possible create a martingale $(X_n)$ such that simulteneously $\P(X_n = 0 \text{ infinitely often}) = 1$ and
+$\P(X_n = 1 \text{ infinitely often}) = 1$.
+\begin{sol}
+It is possible. 
+\end{sol}
+\end{problem}
+
+\begin{problem}
+At time $t=0$ there is one black and one white ball in the vase. 
+At each moment of time we take out randomly one ball from the vase and put back two balls of the same color. 
+Let $(W_t)$ be the proportion of white balls in the vase after $t$ extractions and $(Q_t)$ be the number of times when white ball was extracted.
+\begin{enumerate}
+  \item What is the distribution of $W_1$? Of $W_2$?
+  \item Is $(W_t)$ a martingale?
+  \item Consider a fixed parameter $p \in (0;1)$ and the process $M_t = (t + 1) C_t^{Q_t} p^{Q_t}(1-p)^{t - Q_t}$.
+  Is $(M_t)$ a martingale?
+  \item What is the limiting distribution of $(W_t)$?
+  % \item What is the limiting distribution of $(Q_t / t)$? (need to think)
+\end{enumerate}
+
+\begin{sol}
+  \begin{enumerate}
+    \item $W_1$ is equal to $1/3$ or $2/3$ with equal probabilities; $W_2$ is equal to $1/4$, $2/4$, $3/4$
+    \item $(W_t)$ is a martingale;
+    \item $(M_t)$ is a martingale;
+    \item The limiting distribution of $(W_t)$ is uniform on $[0;1]$;
+    % \item What is the limiting distribution of $(Q_t / t)$? (need to think)
+  \end{enumerate}
+  
+\end{sol}
+\end{problem}
+  
+
+
+
+\begin{problem}
+Consider non-random sequence of numbers $(a_n)$. 
+How can this sequence be a martingale?
+\begin{sol}
+Only constant non-random sequences are martingales.
+\end{sol}
+\end{problem}
+
+
+
+\begin{problem}
+Let $(M_n)$ be a martingale and $a<b<c<d$. 
+\begin{enumerate}
+  \item Find covariance $\Cov(M_d - M_c, M_b - M_a)$.
+  \item Are $(M_d - M_c)$ and $(M_b - M_a)$ independent?
+\end{enumerate}
+\begin{sol}
+$\Cov(M_d - M_c, M_b - M_a) = 0$;
+\end{sol}
+\end{problem}
+
+\begin{problem}
+Let $(M_t)$ be a process adapted to filtration $(\cF_t)$.
+
+Is it true that in discrete time conditions 
+\[
+  \E(M_{t+1} \mid \cF_t) = M_t
+\]
+and
+\[
+\E(M_{t+k} \mid \cF_t) = M_t \text{ for all } k\geq 1
+\]
+are equivalent?
+\begin{sol}
+Yes. 
+\end{sol}
+\end{problem}
+
+\begin{problem}
+Initial wealth of a player is equal to $W_0 = 1$.
+At each moment of time she can bet any proportion of her wellfare on the toss of a coin. 
+If she guesses wrong she loses her bet. 
+If she guesses right she gets profit equal to hear bet. 
+The coin is not fair lands on head with probability $0.8$. 
+
+\begin{enumerate}
+  \item Find the bet that maximises one period log interest rate $\E(\ln (W_{t+1} / W_t) \mid \cF_t)$.
+  \item Assume that the player maximises one period log interest rate every time. 
+  Find a constant $a$ such that $\ln W_n - an$ is a martingale. 
+\end{enumerate}
+
+
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+For each case provide an example of a process.
+\begin{enumerate}
+  \item $(X_n)$ is a Markov chain and a martingale.
+  \item $(X_n)$ is a Markov chain but not a martingale.
+  \item $(X_n)$ is a martingale but not a Markov chain.
+  \item $(X_n)$ is neither a Markov chain nor a martingale.
+\end{enumerate}
+
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+\subsection{Stopping time}
+
+\begin{problem}
+Famous «ABRACADABRA» problem. 
+
+A monkey types randomly letters on a typewriter choosing each time one of the $26$ letters with equal probabilities.  
+Let $T$ be the number of keypresses required to write the word «ABRACADABRA» for the first time. 
+
+\begin{enumerate}
+  \item Organise a casino to calculate $\E(T)$.
+  \item Organise a casino to calculate $\E(T^2)$ and hence $\Var(T)$.
+\end{enumerate}
+\begin{sol}
+  \begin{enumerate}
+    \item $\E(T) = 26^{11} + 26^4 + 26$.
+    \item 
+  \end{enumerate}  
+\end{sol}
+\end{problem}
+
+
+  
+
+\section{Poisson process}
+
 
 
 
