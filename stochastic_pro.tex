@@ -1681,7 +1681,13 @@ and $(X_n)$ be the proportion of Queens in the closed part of the deck after ope
     \item $X_0 = 4/52$; $X_1$ is $4/51$ with probability $48/52$ or $3/51$ with probability $4/52$;
      $X_{51}$ is $1$ with probability $4/52$ and $0$ with probability $48/52$.
     \item 
-    \item The process $(X_n)$ is a martingale with respect to $(\cF_n)$.
+    \item 
+    With probability $X_n$ James Bond will pick up a Queen and the current number of closed Queens $X_n(52 - n)$ will decrease by $1$.
+    With probability $(1 - X_n)$ James Bond will pick up a card different from Queen and the number of closed Queens $X_n(52 - n)$ will stay the same. 
+    \[
+    \E(X_{n+1} \mid \cF_n) = X_n \left( \frac{X_n(52 - n) - 1}{52 - n  - 1} \right) + (1 - X_n) \left( \frac{X_n(52 - n)}{52 - n - 1} \right) = \dots = X_n.
+    \]
+    Hence the process $(X_n)$ is a martingale with respect to $(\cF_n)$.
   \end{enumerate}
   
 \end{sol}
