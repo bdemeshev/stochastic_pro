@@ -1958,10 +1958,16 @@ Let $Y_t$ be the number of taxis that will arrive between 0 and $t$ minutes.
 
 
 \begin{problem}
-A company gets fines for non-removal of law violating content according to Poisson process with rate $1$ fine per day. 
-Each fine has the size $10^{33}$ roubles. 
+A company gets fines for non-removal of quadrobics video content.
+What is the probability that the total amount will exceed two undecillion roubles in 1000 days for each case?
 
-What is the probability that the total amount of fines will exceed two undecillion roubles in 1000 days?
+\begin{enumerate}
+  \item Fines arrive according to Poisson process with rate $1$ fine per day and each fine has the size $10^{33}$ roubles. 
+  Fines are summing up without additional penalties.
+
+  \item Initial fine is $10^5$ roubles but it doubles according to Poisson process with rate $1$ doubling per $10$ days. 
+\end{enumerate}
+
 \begin{sol}
 Here we may approximate Poisson distribution by normal distribution, $\cN(\lambda t, \lambda t)$.
 \end{sol}
