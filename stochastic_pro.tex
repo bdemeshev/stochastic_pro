@@ -1797,13 +1797,99 @@ For each case provide an example of a process.
 
 
 \begin{problem}
+Let $(X_n)$ be a simple symmetric random walk and $(\cF_n)$ its natural filtration. 
+
+Find a deterministic (non-random) sequence $a_n$ such that $M_n = X_n^3 + a_n X_n$ is a martingale with respect to $(\cF_n)$.
+\begin{sol}
+For example, $a_n = -3n$, but one may add any constant. 
+\end{sol}
+\end{problem}
+
+\begin{problem}
 
 \begin{sol}
 
 \end{sol}
 \end{problem}
+  
+
 
 \subsection{Stopping time}
+
+\begin{leftbar}
+Doob's optional stopping time theorem. 
+If $(M_t)$ is a martingale and $\tau$ is a stopping time then $\E(M_\tau) = \E(M_0)$ provided at least one of the following conditions hold:
+\begin{itemize}
+  \item $\P(\tau < \infty) = 1$, the stopped process $X_t = M_{t\wedge \tau}$ is bounded by some constant.
+  \item $\E(\tau) < \infty$, the process $D_t = \E(M_{(t+1) \wedge \tau} - M_{t\wedge\tau} \mid \cF_t)$ is bounded by some constant.
+  \item $\P(\tau < \infty) = 1$, the process $M_t$ is uniformly integrable, ie 
+  \[
+  \lim_{a \to \infty }\sup_t \E(M_t \cdot I(M_t > a)) = 0.
+  \]
+\end{itemize}
+\end{leftbar}
+
+
+
+
+\begin{problem}
+A gambler wins or looses one rouble in each round in the casino 
+with equal probabilities and independently.
+Let's denote the result of the $n$-th round by $X_n$.
+
+The gambler starts with initial fortune $S_0 = 0$. 
+Let $S_n = X_1 + X_2 +\dots + X_n$ be the wealth at time $n$.
+She can have negative balance up to $-a$ roubles. 
+
+She quits the casino when she either reaches the target of $+b$ roubles or the credit limit of $-a$ roubles.
+
+\begin{enumerate}
+  \item Is $(S_n)$ a martingale?
+  \item Use optional-stopping theorem to find probabilities of reaching $+b$ or $-a$.
+  \item Is $M_n = S_n^2 - n$ a martingale?
+  \item Find the expected number of rounds before she will stop gambling.
+\end{enumerate}
+
+\begin{sol}
+\begin{enumerate}
+  \item $(S_n)$ is a martingale;
+  \item $\P(S_{\tau} = b) = a/(a + b)$;
+  \item $M_n = S_n^2 - n$ is a martingale;
+  \item $\E(\tau) = ab$;
+\end{enumerate}
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+A gambler wins or looses one rouble in each round in the casino 
+with unequal probabilities and independently.
+Let's denote the result of the $n$-th round by $X_n$, $\P(X_n = 1) = p$, $\P(X_n = -1) = q = 1-p$.
+
+The gambler starts with initial fortune $S_0 = 0$. 
+Let $S_n = X_1 + X_2 +\dots + X_n$ be the wealth at time $n$.
+She can have negative balance up to $-a$ roubles. 
+
+She quits the casino when she either reaches the target of $+b$ roubles or the credit limit of $-a$ roubles.
+
+\begin{enumerate}
+  \item Is $(S_n)$ a martingale?
+  \item Is $K_n = (q / p)^{S_t}$ a martingale?
+  \item Use optional-stopping theorem to find probabilities of reaching $+b$ or $-a$.
+  \item Is $M_n = S_n - (p-q)n$ a martingale?
+  \item Find the expected number of rounds before she will stop gambling.
+\end{enumerate}  
+\begin{sol}
+  \begin{enumerate}
+    \item $(S_n)$ is not a martingale;
+    \item $K_n = (q / p)^{S_t}$ is a martingale;
+    \item $\P(S_{\tau} = b) = ...$
+    \item $M_n = S_n - (p-q)n$ is a martingale;
+    \item $\E(\tau) = ...$
+  \end{enumerate}
+\end{sol}
+\end{problem}
+    
 
 \begin{problem}
 Famous «ABRACADABRA» problem. 
