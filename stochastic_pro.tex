@@ -1007,6 +1007,90 @@ Let $V_n = n^2 Y \cdot I(X \leq 1/n)$ and $W_n = Y \cdot I(X > 1/n)$.
 \end{problem}
 
 
+\begin{problem}
+  \begin{enumerate}
+    \item As a warm-up find the limit
+    \[
+    \lim_{n\to\infty} \frac{2n^2 + 3n + 6}{5n^2 + 2n + 9}.
+    \]
+  \end{enumerate}
+  Now consider the sequence with parameters:
+  \[
+  X_n = \frac{L n^2 + 3n + 6}{R n^2 + 2n + 9}
+  \]
+  \begin{enumerate}[resume]
+    \item For each value of parameters $L$ and $R$ find the limit $\lim X_n$.
+    \item Find the almost surely limit of $X_n$ if $L$ and $R$ are independent and $\dUnif[0;1]$.
+    Does the pointwise limit exist?
+    \item Random variables $L$ and $Q$ be independent and take values $0$ or $1$ with equal probabilities.
+    Let $R = L + Q$. Find the almost surely limit of $X_n$ in terms of $L$ and $R$.
+    Does the pointwise limit exist?
+  \end{enumerate}
+\begin{sol}
+  \begin{enumerate}
+    \item $2/5$;
+    \item $L/R$ or $+\infty$ or $-\infty$ or $3/2$.
+    \item Almost surely limit is $L/R$, pointwise limit does not exist.
+    \item Pointwise and almost surely limits are $\frac{2}{5} I(R>0) + \frac{3}{2} I(R=0)$.
+  \end{enumerate}
+\end{sol}
+\end{problem}
+
+\begin{problem}
+Consider the sequence $Y_n = U^n$ with parameter $U$.
+
+\begin{enumerate}
+  \item Find the ordinary limit of $Y_n$ for all values of $U$ for which the sequence converges.
+  \item Find the almost surely limit of $Y_n$ if $U\sim \dUnif[0;1]$.
+  \item What is the probability that $Y_n$ converges if $U \sim \dUnif[0;2]$?
+  \item What is the probability that $Y_n$ converges if $U$ takes values $+1$ or $-1$ with equal probabilities?
+  \item Does $Y_n$ converges in distribution if $U$ takes values $+1$ or $-1$ with equal probabilities?
+\end{enumerate}
+\begin{sol}
+\begin{enumerate}
+  \item $0$, $1$, $+\infty$ or does not exist. 
+  \item Almost surely limit is $0$;
+  \item $1/2$;
+  \item $\P(Y_n \text{ converges }) = 0$;
+  \item Yes, as every $Y_n$ has the same distribution. 
+\end{enumerate}
+\end{sol}
+\end{problem}
+
+\begin{problem}
+The random variables $X_i$ are independend and uniformly distributed on $[0;2]$.
+Find the probability limit
+\[
+\plim_{n\to\infty}  \max \left\{ \frac{\sum_{i=1}^{10} X_i}{n}, \frac{\sum_{i=1}^n X^3_i}{n+1} \right\}.
+\]
+\begin{sol}
+\end{sol}
+\end{problem}
+
+\begin{problem}
+The random variables $X_i$ are independend and uniformly distributed on $[0;1]$.
+Find the probability limit
+\[
+\plim_{n\to\infty}  \max \left\{ \frac{\sum_{i=1}^n X_i}{n}, \frac{2\sum_{i=1}^n X^2_i}{n} \right\}.
+\]
+\begin{sol}
+\end{sol}
+\end{problem}
+
+\begin{problem}
+The random variables $X_i$ are independend and uniformly distributed on $[0;2]$.
+Find 
+\[
+  \plim_{n\to\infty}  \frac{(X_1 - \bar X)^3 + (X_2 - \bar X)^3 + \ldots + (X_n - \bar X)^3}{n + 2022}.
+\]
+\begin{sol}
+\end{sol}
+\end{problem}
+  
+
+
+
+
 \section{Conditional expected value without sigma-algebras}
 
 \begin{problem}
