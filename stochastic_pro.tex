@@ -476,18 +476,50 @@ he chooses the strategy that minimizes the expected duration of the game.
 
 
 \begin{problem}
-  
+Gleb Zheglov catches one criminal every day. 
+With probability $0.2$ the catched criminal is replaced by $w$ new criminals. 
+Initially there are $n$ criminals in the town. 
+
+What is the expected time to the ultimate crime eradication in the town?
+
+\begin{enumerate}
+  \item (4 points) Solve the problem for $w=1$ and $n=1$.
+  \item (6 points) Solve the problem for arbitrary $w$ and $n$.
+\end{enumerate}
   \begin{sol}
   
   \end{sol}
 \end{problem}
 
 \begin{problem}
+  Consider infinite ladder with steps numbered from $0$ to infinity. 
+  I start at step $0$. Every day with probability $u$ I go one step up.
+  With probability $d$ I go one step down. With probability $1-u-d$ I stay on the same step.
+
+  If I am at step $0$ then I stay there with probability $1-u$ because it's impossible to go down. 
+
+  Consider the case $d>u$. 
   
+  What is the probability that I will be at step $0$ after $10^{1000}$ days?
   \begin{sol}
   
   \end{sol}
 \end{problem}
+
+\begin{problem}
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
+
 
 
 \section{Markov chains}
@@ -635,6 +667,83 @@ Hint: you may to decompose the long path into smaller ones and to use the first 
 \end{problem}
 
 
+\begin{problem}
+The hedgehog Melissa starts at the vertex $A$ of a triangle $\Delta ABC$.
+Each minute she randomly moves to an adjacent vertex with probabilities $\P(A \to B) = 0.7$, 
+$\P(A \to C) = 0.3$, $\P(B \to C) = \P(B \to A) = 0.5$,  $\P(C \to B) = \P(C \to A) = 0.5$.
+
+\begin{enumerate}
+  \item What is the probability that she will be in vertex $B$ after 3 steps?
+  \item Write down the transition matrix of this Markov chain. 
+  \item What proportion of time Melissa will spend in each state in the long run?
+\end{enumerate}
+\begin{sol}
+
+\end{sol}
+\end{problem}
+  
+
+
+\begin{problem}
+A Hedgehog starts at the point $x=2$ on the real line. 
+Every minute he moves one step left with probability $0.3$ or one step right with probability $0.7$.
+There are two exceptions from this rule: the absorbing point $x=0$ and the reflecting barrier at $x=3$.
+
+If the Hedgehog reaches the absorbing point $x=0$ then he stops moving and stays there. 
+If the Hedgehog reaches the reflecting barrier $x=3$ then his next move will be one step left with probability $1$.
+
+\begin{enumerate}
+\item {[2]} Write the transition matrix of this Markov chain. 
+\item {[3]} What is the probability that Hedgehog will be at $x=1$ after exactly 3 steps?
+\item {[5]} What is the expected time to reach the absorbing state?
+\end{enumerate}
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+Vampire Petr drinks blood of a new victim every day. 
+Unfortunately 20\% of the population are vaccinated against vampires. 
+If more than one victim of the last three victims are vaccinated then Petr will be instantaneously cured and will return to the normal life. 
+
+For simplicity let's assume that the last three victims were not vaccinated. 
+
+\begin{enumerate}
+    \item What is the probability that vampire Petr will be cured in the next three days?
+    \item How many victims will be bitten by vampire Petr on average?
+\end{enumerate}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+  
+
+
+\begin{problem}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+
 
 \section{Classification of states}
 
@@ -766,6 +875,71 @@ If probabilities are not given we choose equiprobably.
 \end{sol}
 \end{problem}
   
+\begin{problem}
+Consider the Markov chain with the transition matrix
+\[
+  P = \begin{pmatrix}
+    0.2 & 0.2 & 0 & 0.6 \\
+    0.3 & 0.3 & 0.4 & 0 \\
+    0 & 0 & 0.1 & 0.9 \\
+    0 & 0 & 0.8 & 0.2 \\
+  \end{pmatrix}.
+\]
+
+\begin{enumerate}
+  \item (3 points) Split the chain in classes and classify them into closed or not closed.
+  \item (2 points) Classify the states into recurrent or transient.
+  \item (5 points) A Hedgehog starts in the state one and moves 
+  randomly between states according to the transition matrix.
+
+  What is the approximate probability that the Hedgehog will be in the 
+  state four after $10^{2021}$ moves?
+\end{enumerate}
+
+\begin{sol}
+      
+\end{sol}
+\end{problem}
+
+
+
+\begin{problem}
+  Consider the Markov chain with the transition matrix
+\[
+  P = \begin{pmatrix}
+    0.2 & 0.2 & 0 & 0.6 & 0 \\
+    0.3 & 0.3 & 0.4 & 0 & 0\\
+    0 & 0 & 0.3 & 0.7 & 0 \\
+    0 & 0 & 0.8 & 0.2 & 0 \\
+    0 & 0 & 0 & 0 & 1 \\
+  \end{pmatrix}.
+\]
+
+\begin{enumerate}
+  \item (3 points) Split the chain in classes and classify them into closed or not closed.
+  \item (2 points) Classify the states into recurrent or transient.
+  \item (5 points) A Hedgehog starts in the state one and moves 
+  randomly between states according to the transition matrix.
+
+  What is the approximate probability that the Hedgehog will be in the 
+  state four after $10^{2021}$ moves?
+\end{enumerate}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  \begin{sol}
+      
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+      
+  \end{sol}
+\end{problem}
 
 
 
@@ -853,6 +1027,66 @@ Find probabilities $\P(X = 0)$, $\P(X = 1)$, $\P(X = 2)$.
       $g(u) = g(\exp(t)) = \E(\exp(tX)) = M(t)$
   \end{sol}
 \end{problem}
+
+
+\begin{problem}
+The number of players $N$ who will win the lottery
+is a random variable with probability mass function $\P(N = k) = 7\cdot 0.3^k / 3$ for $k\geq 1$.
+Each player will get a random prize $X_i \sim U[0;1]$.
+All random variables are independent. 
+Let $S$ be the sum of all the prizes. 
+
+\begin{enumerate}
+  \item Find $\E(S \mid N)$ and conditional moment generating function $M_{S\mid N}(u)$.
+  \item Find the unconditional moment generating function $M_S(u)$.
+  \item What is the probabilistic meaning of $M_S''(0) - (M_S'(0))^2$? 
+\end{enumerate}
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+\begin{problem}
+Prince Myshkin throws a fair coin until two consecutive heads appear. 
+Let $N$ be the number of throws. 
+  
+Find the moment generating function of $N$. 
+  \begin{sol}
+    
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  The moment generating function of a random variable $X$ is $1/(1-2t)$.
+  \begin{enumerate}
+      \item Find the moment generating function of $2X$.
+      \item Find the moment generating function of $X + Y$ where $X$ and $Y$ are independent and identically distributed.
+      \item Do you remember the sum of geometric progression? Find $\E(X^{2021})$.
+  \end{enumerate}
+  \begin{sol}
+    
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  \begin{sol}
+    
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  \begin{sol}
+    
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+    
+  \end{sol}
+\end{problem}
+
 
 \section{Limits}
 
@@ -1087,7 +1321,28 @@ Find
 \end{sol}
 \end{problem}
   
+\begin{problem}
+Consider the stochastic process $(X_n)$, where $X_0$ is uniform on $[0;2]$ and
+$X_n = (1 + X_{n-1}) / 2$.
 
+\begin{enumerate}
+  \item Find $\E(X_n)$ and $\Var(X_n)$.
+  \item Find the probability limit $\plim X_n$.
+\end{enumerate}
+\begin{sol}
+\end{sol}
+\end{problem}
+  
+\begin{problem}
+\begin{sol}
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+\begin{sol}
+\end{sol}
+\end{problem}
 
 
 
@@ -1212,6 +1467,62 @@ Find $\E(XY \mid X)$, $\Var(XY + X^3 \mid X)$, $\Cov(X, Y \mid X)$, $\Cov(XY, X^
     $\E(XY \mid X) = X\E(Y) = X/2$, $\Var(XY  + X^3\mid X) = X^2 \Var(Y) = X^2 /12$, $\Cov(X, Y \mid X) = 0$, $\Cov(XY, X^2Y \mid X) = X^3 \Var(Y) = X^3 / 12$
 \end{sol}
 \end{problem}
+
+
+\begin{problem}
+The random variables $X_1$ and $X_2$ are independent and normally distributed, 
+$X_1 \sim \cN(1;1)$, $X_2 \sim \cN(2;2)$. 
+I choose $X_1$ with probability $0.3$ and $X_2$ with probability $0.7$ without knowing their values.
+
+Casino pays me the value $Y$ that is equal to the chosen random variable. 
+
+Let the indicator $I$ be equal to $1$ if I choose $X_1$ and $0$ otherwise. 
+
+\begin{enumerate}
+  \item Express $Y$ in terms of $X_1$, $X_2$ and $I$.
+  \item Find $\E(Y \mid I)$, $\Var(Y \mid I)$.
+  \item Find $\E(Y)$ and $\Var(Y)$. 
+\end{enumerate}
+\begin{sol}
+\end{sol}
+\end{problem}
+
+\begin{problem}
+A Hedgehog in the fog starts in $(0, 0)$ at $t=0$ and moves randomly with equal probabilities in four directions (north, south, east, west) by one unit every minute. 
+
+Let $X_t$ and $Y_t$ be his coordinates after $t$ minutes and $S_t = X_t + Y_t$.
+
+\begin{enumerate}
+    \item Find $\E(X_2 \mid S_2)$;
+    \item Find $\Var(X_2 \mid S_2)$.
+\end{enumerate}
+\begin{sol}
+\end{sol}
+\end{problem}
+
+\begin{problem}
+\begin{sol}
+\end{sol}
+\end{problem}
+
+\begin{problem}
+\begin{sol}
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+\begin{sol}
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+\begin{sol}
+\end{sol}
+\end{problem}
+      
+
 
 
 \section{Sigma-algebras and measurability}
@@ -1560,14 +1871,78 @@ $ 2^{101} $, $2^{101\cdot 51}$,
 \item Как выглядит минимальная $\sigma$-алгебра, содержащая событие $A=\{\text{не видно солнце}\}$?
 \item Сколько различных $\sigma$-алгебр можно придумать для данного $\Omega$?
 \end{enumerate}
-
-
 \begin{sol}
 $\cF=\{\emptyset, \Omega, \{\text{дождь}\}, \{\text{солнечно}, \text{пасмурно}\}$. Всего есть $1+1+3=5$ $\sigma$-алгебр.
 \end{sol}
 \end{problem}
 
   
+
+\begin{problem}
+The random variables $X_i$ are independent and they take values $+1$ or $-1$ with equal probability. 
+\begin{enumerate}
+\item {[3]} Explicitely list all the events in sigma-algebra $\sigma(X_1 \cdot X_2)$.
+\item {[3]} Pavel says that he knows only whether $X_1$ and $X_3$ are equal. 
+How will you describe his knowledge with sigma-algebra?
+\item {[4]} How many events are in the sigma-algebra $\sigma(X_1, X_1 + X_2, X_1 + X_2 + X_3)$?
+\end{enumerate}
+\begin{sol}
+\end{sol}
+\end{problem}
+  
+
+\begin{problem}
+Vincenzo Peruggia makes attempts to steal the Mona Lisa painting until the first 
+success. 
+Each attempt is successful with probability $0.1$.
+
+Let $X$ be the number of attempts and $Z = \min\{X, 5\}$.
+
+\begin{enumerate}
+  \item (5 points) How many events are in sigma-algebras $\sigma(Z)$ and $\sigma(X)$?
+  \item (5 points) If possible provide an example of events $A$ and $B$ such that: $A\in \sigma(Z)$ but $A\not\in\sigma(X)$; $B\in \sigma(X)$ but $B\not\in\sigma(Z)$.
+  \item (10 points) Find $\E(Z \mid X)$ and $\E(X \mid Z)$.
+\end{enumerate}
+\begin{sol}
+\end{sol}
+\end{problem}
+  
+
+\begin{problem}
+  Variables $X_1$, $X_2$, \ldots $X_{100}$ are independent and identically distributed
+with mean $1$ and variance $2$. Each $X_i$ has only three possible values: 0, 1, and 2. 
+
+\begin{enumerate}
+  \item (5 points) How many events are in sigma-algebras $\sigma(X_1, X_2)$ and $\sigma(X_1 - X_2)$?
+  \item (5 points) If possible provide an example of events $A$ and $B$ such that: $A\in \sigma(X_1, X_2)$ but $A\not\in\sigma(X_1 - X_2)$; $B\in \sigma(X_1 - X_2)$ but $B\not\in\sigma(X_1, X_2)$.
+  \item (10 points) Find $\E(X_1 + \ldots + X_{100} \mid X_1 + \ldots + X_{50})$ and $\E(X_1 + \ldots + X_{50} \mid X_1 + \ldots + X_{100})$.
+\end{enumerate}
+\begin{sol}
+\end{sol}
+\end{problem}
+  
+\begin{problem}
+\begin{sol}
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+\begin{sol}
+\end{sol}
+\end{problem}
+
+\begin{problem}
+\begin{sol}
+\end{sol}
+\end{problem}
+
+\begin{problem}
+\begin{sol}
+\end{sol}
+\end{problem}
+      
+
 
 
 \section{Sigma-algebras and conditional expected value}
@@ -1896,7 +2271,61 @@ For example, $a_n = -3n$, but one may add any constant.
 \end{problem}
 
 \begin{problem}
+The random variables $X_i$ are independent and they take values $+1$ or $-1$ with equal probability. 
 
+\begin{enumerate}
+\item {[3]} Find $\E(X_3 \mid X_1, X_2)$, $\E(X_3 \mid X_1 + X_3)$.
+\item {[3]} Find $\Var(X_3 \mid X_1, X_2, X_3)$, $\Var(X_3 \mid X_1 + X_3)$.
+\item {[4]} Let $Y_n$ be equal to $\E(X_1 + \ldots +  X_{2022} \mid X_1, X_2, \ldots, X_n)$. 
+
+Is the process $Y_1$, $Y_2$, \ldots, $Y_{2022}$ a martingale?
+\end{enumerate}
+\begin{sol}
+
+\end{sol}
+\end{problem}
+  
+
+\begin{problem}
+  Let $S_0 = 0$, $S_t = X_1 + X_2 + \ldots + X_t$. The increments $X_t$ are independent and identically distributed: 
+
+\begin{tabular}{cccc}
+\toprule
+$x$ & $-1$ & $0$ & $1$ \\
+$\P(X_t = x)$ & $0.2$ & $0.2$ & $0.6$ \\
+\bottomrule
+\end{tabular}
+
+\begin{enumerate}
+    \item If possible find all constants $a$ such that $M_t = S_t + at$ is a martingale.
+  \item If possible find all constants $b$ such that $R_t = b^{S_t}$ is a martingale.
+\end{enumerate}
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+\begin{problem}
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+\begin{problem}
 \begin{sol}
 
 \end{sol}
@@ -1999,6 +2428,54 @@ Let $T$ be the number of keypresses required to write the word «ABRACADABRA» f
 \end{sol}
 \end{problem}
 
+
+\begin{problem}
+  To survive vampire Boris needs to bite 70 talented students. 
+    
+These 70 talented students have formed a secret group. They have written their emails on small pieces of paper and have randomly distributed these pieces among them. Each student has exactly one piece of paper with an email\footnote{The group is so secret that it is possible that a student has his own email on his piece of paper}. 
+
+Initially vampire Boris knows contacts of just two persons from the group. Today he will contact them, drink their blood and get the emails they have. Then vampire Boris will contact new victims and so on.
+
+\begin{enumerate}
+    \item For $t\geq 1$ consider the process $M_t$, the proportion of non bitten students after the day $t$. 
+    
+    Is this process a martingale?
+    
+    \item Using martingale stopping theorem or otherwise find the probability that vampire Boris will bite all 70 students. 
+\end{enumerate}
+  \begin{sol}
+    
+  \end{sol}
+\end{problem}
+
+
+
+
+\begin{problem}
+  \begin{sol}
+    
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+    
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+    
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  \begin{sol}
+    
+  \end{sol}
+\end{problem}
 
   
 
@@ -2236,6 +2713,147 @@ Definition A. The process $(N_t)$ is called \emph{Poisson process} with intensit
 \end{sol}
 \end{problem}
   
+\section{Wiener Process}
+
+\begin{problem}
+Consider a Wiener process $(W_t)$.
+\begin{enumerate}
+    \item {[4]} Let $Y_t = t W_{2t}$. What is the distribution of $Y_t - Y_s$ for $t\geq s$? Is $Y_t$ a Wiener process?
+    \item {[6]} Find a constant $\alpha$ such that $M_t = W_t^3 + \alpha t W_t$ is a martingale. 
+\end{enumerate}
+\begin{sol}
+
+\end{sol}
+\end{problem}
+  
+
+
+\begin{problem}
+Consider a Wiener process $(W_t)$. For $r<s<t<u$ find the following expected values 
+    \begin{enumerate}
+    \item $\E((W_u - W_t)^2(W_s - W_r)^2)$;
+    \item $\E((W_u - W_s)(W_t - W_r))$;
+    \item $\E((W_t - W_r)(W_s - W_r)^2)$;
+    \item $\E(W_r W_s W_t)$;
+    \item $\E(W_r W_s W_t \mid W_s)$;
+    \end{enumerate}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\section{Ito's integral}
+
+
+\begin{problem}
+  Consider Ito process $X_t$
+
+  \[
+  dX_t = \exp(t) W_t\, dt + \exp(2W_t) \, dW_t, \quad X_0 = 1.
+  \]
+  
+  Consider two processes, $A_t = 1 + t^2 + X_t^3$ and $B_t = 1 + t^2 + X_t^3 W_t^4$.
+  
+  \begin{enumerate}
+      \item Find $dA_t$ and $dB_t$.
+      \item Write the corresponding explicit expressions for $A_t$ and $B_t$:
+      \[
+      const + \int_0^t \ldots dW_u + \int_0^t \ldots du
+      \]
+      \item Check whether $X_t$ is a martingale.
+  \end{enumerate}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+Consider the process $X_t$
+\[
+X_t= tW_t + \int_0^t uW_u^2\, dW_u.
+\]
+\begin{enumerate}
+    \item Find $\E(X_t)$, $\Var(X_t)$.
+    \item Find $dX_t$.
+    \item Check whether $X_t$ is a martingale.
+\end{enumerate}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
 
 
 \Closesolutionfile{solution_file}
