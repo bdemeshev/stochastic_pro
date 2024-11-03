@@ -114,6 +114,7 @@
 \usetikzlibrary{trees} % tikz-прибамбас для рисовки деревьев
 \usepackage{tikz-qtree} % альтернативный tikz-прибамбас для рисовки деревьев
 \usetikzlibrary{arrows} % tikz-прибамбас для рисовки стрелочек подлиннее
+\usetikzlibrary{automata, positioning, calc}
 
 \usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
 % \todo{Здесь надо коэффициенты исправить}
@@ -202,9 +203,10 @@ keywordstyle=\fontfamily{lmtt}\bfseries
 \DeclareMathOperator{\softmax}{softmax}
 \DeclareMathOperator{\Med}{Med}
 
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
 
-\renewcommand{\P}{\mathbb{P}}
-\newcommand{\E}{\mathbb{E}}
+\DeclareMathOperator{\E}{\mathbb{E}}
 
 \newcommand{\e}{\varepsilon}
 
@@ -241,6 +243,8 @@ keywordstyle=\fontfamily{lmtt}\bfseries
 \newcommand{\dRayleigh}{\mathrm{Rayleigh}}
 \newcommand{\dPareto}{\mathrm{Pareto}}
 
+\newcommand{\score}{\mathrm{score}}
+\newcommand{\crit}{\mathrm{crit}}
 
 % вместо горизонтальной делаем косую черточку в нестрогих неравенствах
 \renewcommand{\le}{\leqslant}
@@ -507,18 +511,68 @@ What is the expected time to the ultimate crime eradication in the town?
 \end{problem}
 
 \begin{problem}
-  I throw a fair die until the sequence 626 appears. Let $N$ be the number of throws.
+  I throw a fair die until the sequence 6-2-6 appears. Let $N$ be the number of throws.
   \begin{enumerate}
       \item What is the expected value $\E(N)$?
       \item Write down the system of linear equations for the moment generating function of $N$. You don't need to solve it!
   \end{enumerate}
   \begin{sol}
-  
+    Let's draw the chain
+
+    \begin{center}
+    \begin{tikzpicture}[->, >=stealth', auto, semithick, node distance=3cm]
+    \tikzstyle{every state}=[fill=white,draw=black,thick,text=black,scale=1]
+    \node[state]    (A)                     {$S$};
+    \node[state]    (B)[right of=A]   {$6$};
+    \node[state]    (C)[right of=B]   {$62$};
+    \node[state]    (D)[right of=C]   {$626$};
+    \path
+    (A) edge[loop below]     node{}         (A)
+        edge                node{}     (B)
+    (B) edge                node{}           (C)
+        edge[loop below]    node{}           (B)
+        edge[bend right]    node{}           (A)
+    (C) edge                node{}           (D)
+        edge[bend right]                node{}           (B)
+        edge[bend right=40]         node{}           (A);
+    \end{tikzpicture}
+    \end{center}
+    
+    The system of equations for expected values:
+    \[
+    \begin{cases}
+    x_s = 1 + \frac{1}{6} x_6 + \frac{5}{6} x_s \\
+    x_6 = 1 + \frac{1}{6} x_6 + \frac{1}{6} x_{62}  + \frac{4}{6} x_s \\
+    x_{62} = 1 + \frac{1}{6} \cdot 0 + \frac{1}{6} x_{6}  + \frac{4}{6} x_s \\
+    \end{cases}    
+    \]
+    
+    
+    The system of equations for moment generating functions:
+    \[
+    \begin{cases}
+    m_s(t) = \exp(t) \left(\frac{1}{6} m_6(t) + \frac{5}{6} m_s(t)\right) \\
+    m_6(t) = \exp(t) \left( \frac{1}{6} m_6(t) + \frac{1}{6} m_{62}(t)  + \frac{4}{6} m_s(t)\right) \\
+    m_{62}(t) = \exp(t) \left( \frac{1}{6} \cdot 1 + \frac{1}{6} m_{6}(t)  + \frac{4}{6} m_s(t) \right)\\
+    \end{cases}    
+    \]
   \end{sol}
 \end{problem}
 
 
 \begin{problem}
+Consider a symmetric random walk $S_t = X_1 + X_2 +\dots + X_t$ where $(X_t)$ are
+independent identically distributed and take values $+1$ or $-1$ with equal probabilities.
+We start at zero, $S_0 = 0$.
+
+Let $N_k$ the number of visits of point $k$ before the first return of a random walk to $0$.
+
+\begin{enumerate}
+    \item What is the probability that a random walk will eventually return to $0$?
+    \item What is the probability $\P(N_k = 0)$?
+    \item What is the probability $\P(N_k = n)$ for arbitrary natural number $n$?
+    \item Compare $\E(N_2)$ and $\E(N_{\text{undecillion}})$.
+\end{enumerate}
   \begin{sol}
   
   \end{sol}
@@ -717,7 +771,27 @@ $\P(A \to C) = 0.3$, $\P(B \to C) = \P(B \to A) = 0.5$,  $\P(C \to B) = \P(C \to
   \item What proportion of time Melissa will spend in each state in the long run?
 \end{enumerate}
 \begin{sol}
-
+  \begin{enumerate}
+    \item $\P(S_3 = B) = \P(A\to B\to A\to B) + \P(A\to C\to A\to B) + \P(A\to B\to C\to B)$
+    \item 
+    \[
+    \begin{pmatrix}
+      0 & 0.7 & 0.3 \\
+      0.5 & 0 & 0.5 \\
+      0.5 & 0.5 & 0 \\
+    \end{pmatrix}  
+    \]
+    \item 
+    \[
+    \begin{cases}
+      a = 0.5 b + 0.5 c \\
+      b = 0.7 a + 0.5 c \\
+      c = 0.3 a + 0.5 b \\
+      a + b + c = 1  
+    \end{cases}
+    \]
+    The solution is $a= 15/45$, $b=17/45$, $c=13/45$.
+  \end{enumerate}
 \end{sol}
 \end{problem}
   
@@ -737,7 +811,17 @@ If the Hedgehog reaches the reflecting barrier $x=3$ then his next move will be 
 \item {[5]} What is the expected time to reach the absorbing state?
 \end{enumerate}
 \begin{sol}
-
+$\P(X_3 = 1) = 0.3\cdot 0.7\cdot 0.3 + 0.7\cdot 1\cdot 0.3 = 0.21 \cdot 1.3$
+    Let's denote $\tau_j = \min \{t \mid X_t = 0, X_0 = j\}$, $\mu_j = \E(\tau_j)$.
+    \[
+    \begin{cases}
+        \mu_0 = 0 \\
+        \mu_1 = 1 + 0.7\mu_2 \\
+        \mu_2 = 1 + 0.3\mu_1 + 0.7\mu_3 \\
+        \mu_3 = \mu_2 + 1 
+    \end{cases}    
+    \]
+    We get $\mu_2 = 200/9$.
 \end{sol}
 \end{problem}
 
@@ -774,6 +858,187 @@ For simplicity let's assume that the last three victims were not vaccinated.
 
 
 \begin{problem}
+  The Cat can be only in two states: Sleeping ($S$) and Eating ($E$). 
+  Cat's mood depends only on the previous state. 
+  The transition probabilities are given below:
+  
+  %\begin{minipage}
+  \begin{tikzpicture}[->,>= stealth', shorten >=2pt , line width=0.5pt, node distance=2cm]
+      \node [circle, draw] (one) {$E$};
+      \node [circle, draw] (two) [right of=one] {$S$};
+      \path (one) edge [bend left] node [above] {$0.1$} (two);
+      \path (two) edge [bend left] node [below]{$0.2$} (one);
+      \path (two) edge [loop right] node {} (two);
+      \path (one) edge [loop left] node {} (one);
+  \end{tikzpicture}
+  %\end{minipage}
+  
+  
+  \begin{enumerate}
+      \item Compute the missing probabilities on the graph.
+      \item Write down the transition matrix.
+      \item Compute $\P(X_3 = \text{Eating} \mid X_0 = \text{Eating})$.
+  \end{enumerate}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  Cowboy Joe enters the Epsilon Bar and orders one pint of beer. 
+  He drinks it and orders one pint more. 
+  And so on and so on and so on\dots{ }
+  The problem is that the barmaid waters down each pint with probability $0.2$ independently of other pints.
+  Joe does not like watered down beer. 
+  He will blow the Epsilon Bar to hell if two or more out of the last three pints are watered down. 
+  
+  We point out that Joe never drinks less than 3 pints in a bar. 
+  
+  \begin{enumerate}
+      \item What is the expected number of pints of beer Joe will drink?
+  \end{enumerate}
+  
+  Let $Y_t$ be the indicator that the pint number $t$ was watered down. 
+  Consider the Markov chain $S_t = (y_{t-2}, y_{t-1}, y_t)$.
+  For example, $S_t = (100)$ means that the pint number $t-2$ was watered down while pints number $t-1$ and $t$ are good. 
+  
+  \begin{enumerate}[resume]
+  \item What are the possible values of $S_3$ and their probabilities?
+  \item Write down the transition matrix of this Markov chain.
+  \end{enumerate}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  Pavel Durov starts at the point $X_0 = 3$ on the real line. 
+  Each minute he moves left with probability $0.4$ or right with probability $0.6$ independently of past moves.
+  The points $0$ and $5$ are absorbing. 
+  If Pavel reaches $0$ or $5$ he stays there forever.
+  Let $X_t$ be the coordinate of Pavel after $t$ minutes. 
+  
+  \begin{enumerate}
+      \item Write down the transition matrix of this Markov chain. 
+      \item Calculate the distribution of $X_7$ [list all values of the random variable $X_7$ and estimate the probabilities].
+  \end{enumerate}
+  
+  Hint: you are free to use python for this problem :)
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  Consider two identical hedgehogs starting at the vertices $A$ and $B$ of a polygon $ABCD$. 
+  Each minute each hedehog simulteneously and independently chooses to go clockwise to the adjacent point, to go counter-clockwise to the adjacent point or to stay at his location.
+  
+  Thus the brotherhood of two brave hedgehogs can be in three states: in one vertex, 
+  in two adjacent vertices, in two non-adjacent vertices.
+
+
+  \begin{enumerate}
+    \item Draw the graph for the brotherhood Markov chain and calculate all transition probabilities. 
+    \item Write down the transition matrix of the brotherhood Markov chain. 
+    \item What is the probability that they will be in one vertex after 3 steps?
+  \end{enumerate}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  Consider the following Markov chain:
+
+  \begin{tikzpicture}[->,>= stealth', shorten >=2pt , line width=0.5pt, node distance=2cm]
+      \node [circle, draw] (one) {$A$};
+      \node [circle, draw] (two) [right of=one] {$B$};
+      \node [circle,  draw] (three) [right of=two] {$C$};
+      \path (one) edge [bend left] node [above] {$0.3$} (two);
+      \path (two) edge [bend right] node [below] {$0.3$} (three);
+      \path (two) edge [bend left] node [below]{$0.7$} (one);
+      \path (three) edge [loop right] node {$0.2$} (three);
+      \path (three) edge [bend right] node [above] {$0.8$} (two);
+      \path (one) edge [loop left] node {$0.7$} (one);
+  \end{tikzpicture}
+
+  \begin{enumerate}
+      \item Find the stationary distribution of this Markov chain.
+  \end{enumerate}
+  
+  The Markov chains starts at the vertex $A$.
+  Let $N$ be the first moment when the state $C$ will be reached.
+
+  \begin{enumerate}[resume]
+    \item Find the expected value $\E(N)$.
+    \item Find the variance $\Var(N)$. 
+  \end{enumerate}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  Design a Markov chain with 3 states and unique stationary distribution $\pi = (0.1, 0.2, 0.7)$.
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  Consider three games:
+  \begin{enumerate}
+      \item[Game A:] You toss a biased coin with probability $0.48$ of $H$. 
+      You get $+1$ dollar for $H$ and $-1$ dollar for $T$.  
+
+      \item[Game B:] If your wellfare is divisible by three you toss a coin that
+      lands on $H$ with probability $0.09$. 
+      If your wellfare is not divisible by three you toss a coin that lands on $H$ with probability $0.74$.
+      You get $+1$ dollar for $H$ and $-1$ dollar for $T$.  
+      
+      \item[Game C:] You toss an unbiased coin.
+      If it lands on $H$ you play Game A. If it lands on $T$ you play Game B. 
+  \end{enumerate}
+  
+  Your initial capital is $10000\$$.
+
+  \begin{enumerate}
+      \item Generate and plot two random trajectories of your wellfare if you play Game A $10^6$ times.
+      \item Generate and plot two random trajectories of your wellfare if you play Game B $10^6$ times.
+      \item Generate and plot two random trajectories of your wellfare if you play Game C $10^6$ times.
+  \end{enumerate}
+
+% game_a = function(x) {
+% a = sample(c(-1, +1), size = 1, prob = c(0.52, 0.48))
+% return(x + a)
+% }
+
+% game_b = function(x) {
+% a = sample(c(-1, +1), size = 1, prob = c(0.25, 0.75))
+% b = sample(c(-1, +1), size = 1, prob = c(0.91, 0.09))
+% if ((x %% 3) == 0) {
+%     res = x + b
+% } else {
+%     res = x + a
+% }
+% return(res)
+% }
+
+% game_c = function(x) {
+% a = sample(c(-1, +1), size = 1, prob = c(0.5, 0.5))
+% if (a == 1) {
+%     res = game_a(x)
+% } else {
+%     res = game_b(x)
+% }
+% return(res)
+% }  
+  
+% w = 100
+% for (i in 1:1000000) {
+% print(w)
+% w = game_b(w)
+% }
   \begin{sol}
   \end{sol}
 \end{problem}
@@ -783,13 +1048,6 @@ For simplicity let's assume that the last three victims were not vaccinated.
   \begin{sol}
   \end{sol}
 \end{problem}
-
-
-\begin{problem}
-  \begin{sol}
-  \end{sol}
-\end{problem}
-
 
 
 \section{Classification of states}
@@ -976,6 +1234,7 @@ Consider the Markov chain with the transition matrix
 \end{problem}
 
 \begin{problem}
+
   \begin{sol}
       
   \end{sol}
@@ -1089,7 +1348,16 @@ Let $S$ be the sum of all the prizes.
   \item What is the probabilistic meaning of $M_S''(0) - (M_S'(0))^2$? 
 \end{enumerate}
 \begin{sol}
-
+  \begin{enumerate}
+    \item Consider $N$ as known fixed value, $\E(S \mid N) = N\E(X_1) = N\cdot 0.5$.
+    First, let's find moment generating funciton for $X_i$:
+    \[
+    M_X(u) = \int_0^1 \exp(xu) \cdot 1 \, dx = \frac{\exp(u) - 1}{u}; 
+    \]
+    Hence $M_{S\mid N}(u) = (M_X(u))^N$ as $S$ is the sum of $N$ independent variables.
+    \item Random variable $N$ is discrete, $M_S(u) = \P(N=1)(M_X(u))^1 + \P(N=2)(M_X(u))^2 + \ldots = \frac{0.7 M_X(u)}{ 1 -0.3M_X(u)}$.
+    \item Moment generating function is used to calculate moments, $M_S''(0) - (M_S'(0))^2 = \Var(S)$.
+  \end{enumerate}
 \end{sol}
 \end{problem}
 
@@ -1137,7 +1405,72 @@ Find the moment generating function of $N$.
   \begin{enumerate}
       \item Let $N$ be the number of tails before the first head. Find the MGF of $N$.
       \item Let $S$ be the number of tails before $k$ heads (not necessary consecutive). Find the MGF of $S$.
-      \item What is the limit of $MGF_S(t)$ when $k \to \infty$ and $k \times h \to 0.5$? What is the name of the corresponding distribution?
+      \item What is the limit of $MGF_S(t)$ when $k \to \infty$ and $k \times h \to 0.5$? 
+      \item What is the limit of $MGF_S(t)$ when $k \to \infty$ and $k \times (1 - h) \to 0.5$? 
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+      \item Moment generating function
+  \[
+  m_N(t) = \sum_{j=0} \exp(tj) (1-h)^j h = h \sum_{j=0} (\exp(t) (1-h))^j = \frac{h}{1 - \exp(t) (1 - h)}  
+  \]
+  \item As $S = N_1 + N_2 + \ldots + N_k$:
+  \[
+  m_S(t) =  \left( \frac{h}{1 - \exp(t) (1 - h)} \right)^k
+  \]
+  \item $0$;
+  
+  \item 
+  
+  \end{enumerate}
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  I have three problems in the home assignment. 
+  Time spent on each problem is modelled by independend exponentially distributed random variables with rate $\lambda$: $X_1$, $X_2$, $X_3$.
+
+  \begin{enumerate}
+      \item Find the moment generating function of $X_i$ and hence the moment generating function of $S = X_1 + X_2 + X_3$.
+      \item Find $\E(S^3)$.
+      \item Find the joint density of $R = X_1 / (X_1 + X_2 + X_3)$ and $S$.
+  \end{enumerate}
+  \begin{sol}
+    
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  Recognise the distribution family and its parameters by looking at the moment-generating function:
+    
+  \begin{enumerate}
+      \item $0.7 + 0.3\exp(t)$;
+      \item $\exp(2024\exp(t)) / \exp(2024)$;
+      \item $\frac{\exp(3t) - 1}{3t\exp(-2t)}$;
+      \item $\exp(6t + 2024t^2)$;
+      \item $1/(5t - 1)^{2024}$.
+  \end{enumerate}
+  
+  You may use the table from the article 
+  
+  \url{https://en.wikipedia.org/wiki/Moment-generating_function}.
+  \begin{sol}
+    
+  \end{sol}
+\end{problem}
+
+
+
+\begin{problem}
+  Consider the moment-generating function of a random variable $X$:
+  \[
+   g(t) = \frac{\exp(3t) - 1}{3t\exp(-2t)}.
+  \]
+  
+  \begin{enumerate}
+      \item Expand the function $g(t)$ as Taylor series up to $t^4$ included. 
+      \item Find $\E(X)$, $\E(X^2)$, $\E(X^3)$, $\E(X^4)$.
   \end{enumerate}
   \begin{sol}
     
@@ -1145,7 +1478,12 @@ Find the moment generating function of $N$.
 \end{problem}
 
 
+
 \begin{problem}
+  The moment-generating function of the pair of random variables $(X, Y)$ is given by 
+  $\exp(6t_1 + 5t_2 + t_1^2 + 20t_2^2 - 2t_1t_2)$.
+
+  Find $\E(X)$, $\Var(Y)$, $\E(XY)$.
   \begin{sol}
     
   \end{sol}
@@ -1158,7 +1496,6 @@ Find the moment generating function of $N$.
 \end{problem}
 
 
-
 \begin{problem}
   \begin{sol}
     
@@ -1167,11 +1504,44 @@ Find the moment generating function of $N$.
 
 
 
+\section{Inequalities}
+
+\begin{problem}
+  I have $100$ numbers written on small sheets of paper: $x_1$, $x_2$, \ldots, $x_{100}$. The sum of these numbers is $1$. 
+    
+    Find the possible values of the sum 
+    \[
+    \frac{x_1}{\sqrt{1-x_1}} +     \frac{x_2}{\sqrt{1-x_2}} + \ldots + \frac{x_{100}}{\sqrt{1-x_{100}}}.
+    \]
+    
+
+    Hint: consider a randomly selected number $X$ and apply the Jensen's inequality.
+  \begin{sol}
+    
+  \end{sol}
+\end{problem}
+
+
 \begin{problem}
   \begin{sol}
     
   \end{sol}
 \end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+    
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+    
+  \end{sol}
+\end{problem}
+
 
 
 
@@ -1407,6 +1777,11 @@ Find
   \plim_{n\to\infty}  \frac{(X_1 - \bar X)^3 + (X_2 - \bar X)^3 + \ldots + (X_n - \bar X)^3}{n + 2022}.
 \]
 \begin{sol}
+  \begin{align*}
+    \plim \frac{\sum (X_i - \bar X)^3}{n+2022} = \plim \frac{\sum X_i^3 - 3\bar X\sum X_i^2 +3\bar X^2 \sum X_i - \bar X^3}{n+2022} = \\
+    = \E(X_1^3) - 3\E(X_1^2) + 3\E(X_1) - 1 = 0;
+\end{align*}
+Note that $\E(X_1^2) = 4/3$, $\E(X_1^3) = 2$.
 \end{sol}
 \end{problem}
   
@@ -1419,19 +1794,110 @@ $X_n = (1 + X_{n-1}) / 2$.
   \item Find the probability limit $\plim X_n$.
 \end{enumerate}
 \begin{sol}
+  Start with $X_0$: $\E(X_0) = 1$, $\Var(X_0) = 4/12 = 1/3$.
+
+    \begin{enumerate}
+      \item Expected value is constant, $\E(X_n) = 0.5 + 0.5 \E(X_{n-1})$, hence $\E(X_n) = 1$. 
+      Variance goes to zero, $\Var(X_n) = 0.25 \Var(X_{n-1})$.
+      \item $\plim X_n = 1$
+    \end{enumerate}
 \end{sol}
 \end{problem}
   
 \begin{problem}
+  The random variables $X_i$ are independent and exponentially distributed with rate $\lambda = 1$. 
+
+  \begin{enumerate}
+      \item Find the probability limit
+      \[
+      \plim \frac{X_1 + X_2 + X_3 + \dots + X_n}{2n + 7}.
+      \]
+      \item Find the probability limit
+      \[
+      \plim \frac{X_1^2 + X_2^2 + X_3^2 + \dots + X_n^2}{2n + 7}.
+      \]
+      \item Find the probability limit
+      \[
+          \plim \min\{X_1, X_2, X_3, \dots, X_n\}.
+      \]
+      \item Find the probability limit
+      \[
+      \plim \sqrt[n]{\exp(2X_1 + 2X_2 + \dots + 2X_n)}.
+      \]
+  \end{enumerate}
 \begin{sol}
 \end{sol}
 \end{problem}
 
 
 \begin{problem}
+  Consider two Markov chains, $(X_t)$ and $(Y_t)$: 
+
+  \begin{tikzpicture}[->,>= stealth', shorten >=2pt , line width=0.5pt, node distance=3cm]
+      \node [circle, draw] (one) {$x = -1$};
+      \node [circle, draw] (two) [right of=one] {$x = 0$};
+      \node [circle,  draw] (three) [right of=two] {$x = 1$};
+      % \path (one) edge [bend left] node [above] {$1$} (two);
+      \path (two) edge node [below] {$0.3$} (three);
+      \path (two) edge node [below]{$0.7$} (one);
+      %\path (three) edge [loop right] node {$0.2$} (three);
+      %\path (three) edge [bend right] node [above] {$0.8$} (two);
+      \path (one) edge [loop left] node {$1$} (one);
+      \path (three) edge [loop right] node {$1$} (three);
+  \end{tikzpicture} with $X_0 = 0$;
+  
+  and
+  
+  \begin{tikzpicture}[->,>= stealth', shorten >=2pt , line width=0.5pt, node distance=3cm]
+      \node [circle, draw] (one) {$y = -1$};
+      \node [circle, draw] (two) [right of=one] {$y = 0$};
+      \node [circle,  draw] (three) [right of=two] {$y = 1$};
+      \node [circle,  draw] (four) [right of=three] {$y = 2$};
+      % \path (one) edge [bend left] node [above] {$1$} (two);
+      \path (two) edge node [below] {$0.3$} (three);
+      \path (two) edge node [below]{$0.7$} (one);
+      % \path (three) edge [loop right] node {$0.2$} (three);
+      \path (three) edge [bend left] node [above] {$0.5$} (four);
+      \path (four) edge [bend left] node [above] {$1$} (three);
+      \path (one) edge [loop left] node {$1$} (one);
+      \path (three) edge [loop below] node {$0.5$} (three);
+  \end{tikzpicture} with $Y_0 = 0$.
+  
+  
+  
+  \begin{enumerate}
+      \item Find $\P(\lim X_n \text{ exists})$ and $\P(\lim Y_n \text{ exists})$.
+      \item Find the limiting distribution of $(X_n)$ and the limiting distribution of $(Y_n)$.
+  
+      Hint: here you need to calculate all limits $\lim \P(X_n = k)$, $\lim \P(Y_n = k)$.
+      
+      \item Does $(X_n)$ converges almost surely? In distribution? In probability?
+      \item Does $(Y_n)$ converges almost surely? In distribution? In probability?
+  \end{enumerate}  
 \begin{sol}
 \end{sol}
 \end{problem}
+
+\begin{problem}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
 
 
 
@@ -1573,6 +2039,13 @@ Let the indicator $I$ be equal to $1$ if I choose $X_1$ and $0$ otherwise.
   \item Find $\E(Y)$ and $\Var(Y)$. 
 \end{enumerate}
 \begin{sol}
+  \begin{enumerate}
+    \item $Y = IX_1 + (1-I)X_2$
+    \item Consider $I$ as known or fixed variable, $\E(Y \mid I) = I\E(X_1) + (1 - I)\E(X_2)$.
+    Note that $I^2 = I$ and $(1-I)^2 = 1-I$, hence $\Var(Y \mid I) = I\Var(X_1) + (1-I)\Var(X_2)$.
+    \item $\E(Y) = p \mu_1 + (1-p) \mu_2$ and $\Var(Y) = p(1-p)(\mu_1 - \mu_2)^2 + p\sigma^2_1 + (1-p)\sigma^2_2$,
+    where $p = 0.3$, $\mu_1 = \sigma_1^2= 1$, $\mu_2 = \sigma_2^2 =2$.
+  \end{enumerate}
 \end{sol}
 \end{problem}
 
@@ -1590,27 +2063,110 @@ Let $X_t$ and $Y_t$ be his coordinates after $t$ minutes and $S_t = X_t + Y_t$.
 \end{problem}
 
 \begin{problem}
+  Bonnie and Clyde start at the points $(5, 0)$ and $(-5, 0)$ of the plane. 
+  Each minute each of them simulteneously and independently makes one step in one of the four possible directions (south, north, east, west).
+
+  Each of them does $n$ steps.
+  Let $X$ be the number of times they will be at the same point.
+  \begin{enumerate}
+      \item Estimate the probability $\P(X \geq 1)$ for $n=50$ using $B=10000$ simulations. 
+      \item Estimate $\E(X)$ and $\Var(X)$ for $n=50$ using $B=10000$ simulations. 
+      \item Plot the estimated value of $\E(X)$ as a function of $n$ for $n$ from $1$ to $200$ using $B=10000$ simulations. 
+  \end{enumerate}
 \begin{sol}
 \end{sol}
 \end{problem}
 
 \begin{problem}
+  Albert Nikolayevich Shiryaev randomly selects a natural number $N$ from $1$ to $7$.
+  Let $Y$ be the remainder after division of $N$ by $2$ and $X$ be the remainder after division of $N$ by $3$. 
+  
+  \begin{enumerate}
+      \item Write the joint probability table for $(X, Y)$.
+      \item Find $\E(Y \mid X)$. Is it linear in $X$?
+      \item Find $\E(X \mid Y)$. Is it linear in $Y$?
+      \item Find $\E(\E(Y \mid X))$ and $\Var(\E(Y \mid X))$.
+      \item Find $\Var(Y \mid X)$.
+      \item Find $\E(\Var(Y \mid X))$.
+      \item Find $\E(\Var(Y \mid X)) + \Var(\E(Y \mid X))$.
+  \end{enumerate}
 \begin{sol}
 \end{sol}
 \end{problem}
 
 
 \begin{problem}
+  Albert Nikolayevich selects a random point uniformly inside a quadrilateral $ABCD$ where $A = (0, 0)$, $B = (0, 2)$,
+  $C = (4, 4)$, $D = (4, 0)$.
+  
+  \begin{enumerate}
+      \item Find $\E(Y \mid X)$ and $\E(X \mid Y)$.
+      \item Find $\Var(Y \mid X)$ and $\Var(X \mid Y)$.
+  \end{enumerate}
+  
+  Hint: you may use the formula for the variance of uniform distribution :)  
 \begin{sol}
 \end{sol}
 \end{problem}
 
 
 \begin{problem}
-\begin{sol}
-\end{sol}
+  Albert Nikolayevich selects a random point $(X, Y)$ with joint probability density
+  \[
+  f(x, y) = \begin{cases}
+      (3x^2 + 4y^3) / 2, \text{ if } x \in [0;1], y \in [0;1]; \\
+      0, \text{ otherwise}. 
+  \end{cases}
+  \]
+  \begin{enumerate}
+      \item For the random variable $x$ find the marginal probability density function $f(x)$.
+      %\footnote{%
+      %Hereinafter we abuse notation. Strictly speaking we shoud write $f_X(x)$ and $f_Y(y)$ because these are different functions.} 
+      \item Find the conditional density $f(y \mid x)$.
+      \item Find the conditional expected value $\E(Y \mid X)$. Is it linear in $X$?
+      \item Find $\Var(Y \mid X)$. Is it constant?
+      \item Find $\E(X)$, $\E(Y)$, $\Cov(X, Y)$ and $\Var(X)$.
+      \item Find the best linear approximation $Y^* = \beta_0 + \beta_1 X$ of the random variable $Y$.
+      
+      Hint: Here you should minimize $\E((Y - Y^*)^2)$ with respect to the true constants $\beta_0$ and $\beta_1$.
+  \end{enumerate}
+  \begin{sol}
+  \end{sol}
 \end{problem}
       
+
+\begin{problem}
+  Consider a fair dice. 
+  In the experiment we throw the dice until the first six appears.
+  
+  \begin{enumerate}
+      \item Simulate $B = 100000$ experiments. 
+      For every experiment number $i$ record the total number of throws, $y_i$, and the number of even faces appeared, $x_i$.
+      \item For all values of $x$ where you have more than $100$ records estimate $\hat\mu(x) = \hat{\E}(y_i \mid x_i = x)$ and $\hat v(x) = \widehat{\Var}(y_i \mid x_i = x)$.
+      \item Explain intuitively why $\hat\mu(0)$ is less than $3$. 
+      \item Randomly select $100$ experiments out of all $B$ experiments.
+      Draw the scatter plot $(x_i, y_i)$ for randomly selected experiments.
+      Add the line $\hat\mu(x)$ with bands $\hat\mu(x) \pm 2\sqrt{\hat v(x)}$ to the scatter plot. 
+      \item Is it reasonable to assume that $\hat \mu(x)$ is linear?
+      \item Is it reasonable to assume that $\hat v(x)$ is constant?
+  \end{enumerate}
+  
+  No formal tests are required for the last two questions, graphical analysis is sufficient.  
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+  \end{sol}
+\end{problem}
 
 
 
@@ -1670,7 +2226,7 @@ $Y=1$ & 0.2 & 0.1 & 0.1  \\
 
 \begin{sol}
 \begin{enumerate}
-  \item
+  \item $\sigma(X^2) = \{\{X^2 = 1\}, \{X = 0\}, \emptyset, \Omega\}$, $\sigma(2X+3) = \sigma(X)$
   \item $\card \sigma(X, Y) = 2^6$, $\card \sigma(X + Y) = 2^4$, $\card \sigma(X, Y, X+Y) = 2^6$.
 \end{enumerate}
 
@@ -1976,6 +2532,12 @@ How will you describe his knowledge with sigma-algebra?
 \item {[4]} How many events are in the sigma-algebra $\sigma(X_1, X_1 + X_2, X_1 + X_2 + X_3)$?
 \end{enumerate}
 \begin{sol}
+  \begin{enumerate}
+    \item $\sigma(X_1 \cdot X_2) = \{\emptyset, \Omega, \{X_1 X_2 = 1\}, \{X_1 X_2 = -1\}\}$;
+    \item Many answers are ok, for example $\sigma(X_1 X_3)$.
+    \item Note that $\sigma(X_1, X_1 + X_2, X_1+ X_2+X_3) = \sigma(X_1, X_2, X_3)$, the number of events in sigma-algebra is
+    $\card \sigma(X_1, X_1 + X_2, X_1+ X_2+X_3) = 2^8 = 256$.
+\end{enumerate}
 \end{sol}
 \end{problem}
   
@@ -2370,7 +2932,10 @@ The random variables $X_i$ are independent and they take values $+1$ or $-1$ wit
 Is the process $Y_1$, $Y_2$, \ldots, $Y_{2022}$ a martingale?
 \end{enumerate}
 \begin{sol}
+$\E(X_3 \mid X_1, X_2) = \E(X_3) = 0$, $\E(X_3 \mid X_1 + X_3) = (X_1 + X_3) / 2$, $\Var(X_3 \mid X_1, X_3) = 0$,
+    $\Var(X_3 \mid X_1 + X_3) = 1 - (X_1 + X_3)^2/4$.
 
+Посчитаем ожидание и получим $Y_n = X_1 + X_2 + \ldots + X_n$, the process $(Y_n)$ is a martingale.
 \end{sol}
 \end{problem}
   
@@ -2400,7 +2965,13 @@ $\P(X_t = x)$ & $0.2$ & $0.2$ & $0.6$ \\
 
   Find all constants $a$ and $b$ such that $Y_t = a \exp\left(b\sum_{i=1}^t X_i\right)$ is a martingale. 
 \begin{sol}
-
+\[
+ \E(Y_{t+1} \mid Y_t) = Y_t \E(e^{b X_{t+1}})
+ \]    
+\[
+\E(e^{b X_{t+1}}) = 1 \rightarrow b = 0 or b = \ln(1/9)
+\]
+Trivial solution: $a = 0$ and any $b$.
 \end{sol}
 \end{problem}
 
@@ -2440,13 +3011,35 @@ and constant covariances $\gamma_k$ that do not depend on $t$.
 \end{problem}
 
 \begin{problem}
+  The population starts with one microbe Eve.
+  So the size of the initial generations is $G_0 = 1$. 
+  After one minute every microbe either dies with probability $0.2$, remains alive with probability $0.5$ or splits in two copies with probability $0.3$.
+  Let $G_n$ be the size of microbe population after $n$ minutes.
+  
+  \begin{enumerate}
+      \item Draw a pretty picture of Eve :)
+      \item Find the distribution of $G_2$. 
+      \item Find a constant $a$ such that $M_n = G_n /a^n$ is a martingale. 
+      \item Let $D$ be the event of eventual death of the microbe civilization. 
+      Check whether the process $K_n = \E(I_D \mid G_n, G_{n-1}, \dots, G_0)$ is martingale. 
+      Here $I_D$ is the indicator of the event $D$.
+      \item Using first step analysis find $\P(D)$.
+      
+      Hint: you may obtain a quadratic equation for $\P(D)$, the smallest root is your friend :)
+  \end{enumerate}
 \begin{sol}
 
 \end{sol}
 \end{problem}
-  
 
 \begin{problem}
+  The random variables $X_n$ are independent and take values $+1$ with probability $0.7$ or $2$ with probability $0.3$.
+Let $S_n = X_1 + X_2 + \dots + X_n$ be the cumulative sum. 
+
+\begin{enumerate}
+    \item Find the constant $a$ such that $M_n = S_n - a n$ is a martingale.
+    \item Find all constants $b$ such that $K_n = \exp(b S_n)$ is a martingale.
+\end{enumerate}
 \begin{sol}
 
 \end{sol}
@@ -2702,7 +3295,12 @@ Let $N_t$ be a Poisson process with rate $\lambda$.
     \item What is the probability of exactly 5 arrivals between 5 pm and 8 pm?
   \end{enumerate}
 \begin{sol}
-
+  Let's measure time in minutes. 
+  \begin{enumerate}
+    \item $\P(X_5 = 0) = \exp(-5 \lambda) = 0.05$, so $\lambda = \ln (0.05) / -5 = \ln(20) /5$.
+    \item $\E(X_{180}) = 180 \lambda$, $\Var(X_{180}) = 180\lambda$
+    \item $\P(X_{180} = 5) = \exp(-180 \lambda) (180\lambda)^5/5!$
+  \end{enumerate}
 \end{sol}
 \end{problem}
   
@@ -2719,7 +3317,7 @@ Sms arrival is well described by the Poisson process.
   10 minutes.
 \end{enumerate}
 \begin{sol}
-
+$\Cov(N_3, N_{10}) = \Cov(N_3, N_3 + (N_{10} - N_3)) = \Var(N_3) = 3\lambda$.
 \end{sol}
 \end{problem}
   
@@ -2759,9 +3357,18 @@ Here we may approximate Poisson distribution by normal distribution, $\cN(\lambd
 
 
 \begin{problem}
+Let $(N_t)$ be a Poisson process with intensity rate $2$. 
+Consider the vector $Y = (N_1, N_2, N_{10})$.
 
+Find $\E(Y)$ and covariance matrix $\Var(Y)$.
 \begin{sol}
-
+\[
+\E(Y) = (2, 4, 20), \quad \Var(Y) = \begin{pmatrix}
+  2 & ? & ? \\
+  ? & 4 & ? \\
+  ? & ? & 20 \\
+\end{pmatrix}
+\]
 \end{sol}
 \end{problem}
   
@@ -2851,7 +3458,9 @@ Consider a Wiener process $(W_t)$.
     \item {[6]} Find a constant $\alpha$ such that $M_t = W_t^3 + \alpha t W_t$ is a martingale. 
 \end{enumerate}
 \begin{sol}
-
+$\Var(Y_t - Y_s) = \Var(tW_{2t} - sW_{2s}) = 2t^3 + 2s^3 - 4ts^2$.
+    We get $\E(M_{t+u} \mid \cF_t ) = W_t^3 + 3W_t u  + \alpha(t + u) W_t$.
+    From $\E(M_{t+u} \mid \cF_t ) = W_t^3 + \alpha t W_t$ it follows that $\alpha = -3$.
 \end{sol}
 \end{problem}
   
@@ -2879,7 +3488,10 @@ Here $(W_t)$ is a Wiener process.
       \item Find covariance $\Cov(W_4 W_5, W_5 W_6)$.
   \end{enumerate}
   \begin{sol}
-
+    \begin{enumerate}
+      \item $\E(W_5 W_4 \mid W_4) = W_4^2$, $\Var(W_5 W_4 \mid W_4) = W_4^2$;
+      \item $\Cov(W_5 W_4, W_5 W_6) = 40$;
+  \end{enumerate}
   \end{sol}
 \end{problem}
 
@@ -2969,6 +3581,13 @@ Consider $X_t = \int_0^t W_u^3 dW_u + \int_0^t (W_u^3 + 3W_u u ) du - W_t^3 \cdo
       \item Is $X_t$ a martingale?
   \end{enumerate}
   \begin{sol}
+    \begin{enumerate}
+      \item $dX_t = (W^3_t-3W^2_t\cdot t)dW_t$ (4 points), 
+      \[ 
+      X_t = X_0 + \int_{0}^{t} W^3_u-3W^2_u\cdot u \,dWu
+      \]
+      \item A process is a martingale as in short form $A_t dt =0$.
+  \end{enumerate}
   \end{sol}
 \end{problem}
 
@@ -2981,6 +3600,11 @@ Consider $X_t = \exp(-2W_t - 2t)$.
     \item Find $\int_0^t X_u dW_u$.
 \end{enumerate}
   \begin{sol}
+    \begin{enumerate}
+      \item $dX_t=-2X_t dW_t$, this process is a martingale;
+      \item $\E(X)=1$, $\Var(X)=\exp(4t)-1$.
+      \item $\int_{0}^{t} X_u\,dWu = \frac{1-X_t}{2}$.
+  \end{enumerate}
   \end{sol}
 \end{problem}
 
@@ -3038,7 +3662,15 @@ Consider $X_t = \exp(-2W_t - 2t)$.
       \item Using $f(t)$ from the previous point find $\E(\cos (2021 W_t))$.
   \end{enumerate}
   \begin{sol}
-
+    \begin{enumerate}
+      \item Let's use Ito's lemma
+      \[
+      dX_t = f'(t) \cos (2021 W_t) dt - 2021 f(t) \sin (2021 W_t) dW_t + \frac{1}{2}2021^2 f(t) \cos(2021 W_t) dt    
+      \]
+      \item To make $X_t$ a martingale we should kill $dt$ term. 
+      \item As $X_t$ is martingale $\E(X_t) = \E(X_0) = f(0)$.
+      So $\E(\cos (2021 W_t)) = f(0) / f(t)$.
+  \end{enumerate}
   \end{sol}
 \end{problem}
 
@@ -3087,7 +3719,11 @@ Consider an option that pays you $X_2 = 100$ at $T=2$ if $S_2 > S_1$ and nothing
   \item How much shares should I have at $t=1$ in the «up» state of the world to replicate the option?
 \end{enumerate}
 \begin{sol}
-
+  \begin{enumerate}
+    \item $p^*_u = p^*_d = 1/2$;
+    \item $X_1^u = X_1^d = (0.5\cdot 100 + 0.5\cdot 0) / 1.05$, hence $X_0 = 50/1.05^2 \approx 45.35$;
+    \item $\alpha = X_2^{uu} - X_2^{ud} / (S_2^{uu} - S_2^{ud}) = 100/216 \approx 0.46$;
+\end{enumerate}
   \end{sol}
 \end{problem}
 
@@ -3122,7 +3758,15 @@ Consider Black and Scholes model with riskless rate $r$, volatility $\sigma$ and
 
 Find the current price $X_0$ of an option that pays you $X_2 = S_1^3$ at time $T=2$. 
   \begin{sol}
-
+\[
+X_0 = \exp(-2r) \E_{*}(X_2)    
+\]
+\[
+X_2 = S_1^3 = S_0^3 \exp(3r)\exp(3\sigma W_1^* - 9\sigma^2/2)    
+\]
+\[
+X_0 = S_0^3 \exp(r)\exp(3\sigma^2)
+\]
   \end{sol}
 \end{problem}
 
@@ -3289,37 +3933,214 @@ Find the current price $X_0$ of an option that pays you one dollar at time $T=2$
       \item Find the point forecast for $y_{101}$ given that $y_{100}=2$.
   \end{enumerate}
   \begin{sol}
-
+    \begin{enumerate}
+      \item Let's denote by $x$ all available information, 
+      \[
+      x = \begin{pmatrix}
+          y_{100} \\
+          y_{99} \\
+          y_{98} \\
+          u_{99}
+      \end{pmatrix}    
+      \]
+      Let's use $t=100$:
+      \[
+      y_{100} = 1 + 0.5 y_{98} + u_{100} + u_{99}    
+      \]
+  
+      Using all available information we obtain $u_{100}  = 1.5$ and hence
+      \[
+      y_{101} \mid x \sim  \cN(1 + 0.5 y_{99} + u_{100} ; 4)
+      \]
+  
+      \item Here we work with true betas:
+      \[
+      \E(y_{101} \mid y_{100}) = \mu_y + \frac{\Cov(y_{100}, y_{101})}{\Var(y_{100})}(y_{100} - \mu_y)    
+      \]
+  
+  \end{enumerate}
   \end{sol}
 \end{problem}
 
 
 \begin{problem}
+  Consider $MA(2)$ process given by 
+  \[
+  y_t = 5 + u_t + 2u_{t-1} + 4 u_{t-2},
+  \]
+  where $(u_t)$ is a white noise with $\Var(u_t) = \sigma^2$.
+  
+  \begin{enumerate}
+  \item {[1]} Find the expected value $\E(y_t)$.
+  \item {[7]} Find the autocorrelation function $\rho_k = \Corr(y_t, y_{t-k})$.
+  \item {[2]} Is the process $(y_t)$ stationary?
+  \end{enumerate}  
   \begin{sol}
-
+    \begin{enumerate}
+      \item $\E(y_t) = 5$
+      \item $\rho_3 = \rho_4 = \ldots = 0$
+      \item The process is stationary.
+  \end{enumerate}
   \end{sol}
 \end{problem}
 
 \begin{problem}
-  \begin{sol}
+  Consider $MA(2)$ process given by 
+\[
+y_t = 5 + u_t + 2u_{t-1} + 4 u_{t-2},
+\]
+where $u_t$ are normal independent random variables with $\Var(u_t) = 4$.
 
+You know that $u_{100} = 2$ and $u_{99} = -1$.
+
+\begin{enumerate}
+\item {[5]} Find the 95\% predictive interval for $y_{101}$.
+\item {[5]} Find the 95\% predictive interval for $y_{1000001}$.
+\end{enumerate}
+  \begin{sol}
+\begin{enumerate}
+  \item 
+  \item Here past information is not useful, $\E(y_t) = 5$, $\Var(y_t) = 4 \cdot (1 + 2^2 + 4^2) =84$.
+  \[
+  [5 - 1.96 \sqrt{84}; 5 + 1.96 \sqrt{84}]
+  \]
+\end{enumerate}
   \end{sol}
 \end{problem}
 
 
 \begin{problem}
+  The stationary process $(y_t)$ has autocorrelation function $\rho_k = 0.2^k$ and expected value $100$.
+\begin{enumerate}
+\item {[7]} Find the first two values of the partial autocorrelation function, $\phi_{11}$ and $\phi_{22}$.
+\item {[3]} Provide a possible linear recurrence equation for this process. 
+Your equation may include $y_t$, its lags and a white noise process $(u_t)$.
+\end{enumerate}
   \begin{sol}
-
+    \begin{enumerate}
+      \item $\phi_{11} = \rho_1 = 0.2$, $\phi_{22} = 0$
+      \item Possible equation is $y_t = 0.2 y_{t-1} + u_t$. 
+      Another possibility is $y_t = 5 y_{t-1} + u_t$. 
+      In the second case the stationary solution will be forward-looking and not $MA(\infty)$ with respect to $(u_t)$.
+  \end{enumerate}
   \end{sol}
 \end{problem}
 
 \begin{problem}
+  Consider the equation $y_t = 5 + 2.5 y_{t-1} - y_{t-2} + u_t$, where $(u_t)$ is a white noise process. 
+\begin{enumerate}
+\item {[3]} Find the roots of the corresponding characteristic equation. 
+\item {[4]} Rewrite the process as $A(L)(y_t - \mu) = u_t$. 
+You should explicitely write the lag polynomial $A(L)$ and the value of $\mu$.
+\item {[1]} How many non-stationary solutions does the equation have?
+\item {[1]} How many stationary solutions does the equation have?
+\item {[1]} How many stationary solutions of the $MA(\infty)$ form with respect to $(u_t)$ does the equation have?
+\end{enumerate}
   \begin{sol}
-
+    \begin{enumerate}
+      \item $\lambda_1 = 2$, $\lambda_2 = 0.5$, here the roots of the lag polynomial are exactly the same. 
+      \item $(1 - 2L)(1 - 0.5L) (y_t + 10) = u_t$
+      \item The equation has infinitely many non-stationary solutions.
+      \item The equation has unique stationary solution.
+      \item The equation has no stationary solutions that are $MA(\infty)$ with respect to $(u_t)$.
+  \end{enumerate}
   \end{sol}
 \end{problem}
 
 
+
+\begin{problem}
+  Consider the difference equation:
+  \[
+  y_t = 0.7y_{t-1} - 0.12 y_{t-2} + u_t,    
+  \]
+  where $(u_t)$ is a white noise. 
+  \begin{enumerate}
+      \item How many stationary and non-stationary solutions does the difference equation have?
+  \end{enumerate}
+  
+  Consider stationary $AR(2)$ process that satisfies the difference equation. 
+  
+  \begin{enumerate}[resume]
+      \item Find first two values of autocorrelation function.
+      % \item Find first two values of partial autocorrelation function.
+      \item Find $\alpha_1$ and $\alpha_2$ in $MA(\infty)$ representation 
+  \[
+  y_t = u_t + \alpha_1 u_{t-1} + \alpha_2 u_{t-2} + \alpha_3 u_{t-3} + \ldots
+  \]
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+      \item {[2 points]} $\lambda_1 = 0.3$, $\lambda_2 = 0.4$, one stationary solution, infinitely many non-stationary solutions. 
+      \item {[6 points]}: {[2 points] for the system} + {[2 points] for $\rho_1$} + {[2 points] for $\rho_2$}.
+      \[
+          \begin{cases}
+              \gamma_1 = 0.7 \gamma_0  - 0.12 \gamma_1 \\
+              \gamma_2 = 0.7 \gamma_1 - 0.12 \gamma_0. 
+          \end{cases}
+      \]
+      \[
+      \rho_1 = 70/112 = 0.625, \quad \rho_2 = 49/112 - 0.12 = 0.3175    
+      \]
+      \item {[2 points]}
+      \[
+      \alpha_1 = 0.7, \quad \alpha_2 = 0.37    
+      \]
+  \end{enumerate}  
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  Consider the process $y_t = 4 + u_t + u_{t-1} + 2 u_{t-2}$, where $(u_t)$ is a white noise with variance $16$.
+
+  \begin{enumerate}
+    \item Is this process stationary? Explain. 
+    \item Find the autocorrelation function of this process. Explain the meaning of $\rho_2$.
+    \item Consider the process $d_t = \Delta y_t$. Is it $ARIMA(p, d, q)$? If yes, then find $p$, $d$ and $q$.
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+      \item Yes, the process is stationary, that is $MA(2)$ process. 
+      \item $\rho_3 = \rho_4 = \ldots = 0$
+      \item $d_t = u_t + u_{t-1} + 2u_{t-2} - u_{t-1} - u_{t-2} - 2 u_{t-3}$, hence $d_t \sim ARIMA(0, 0, 3)$.
+  \end{enumerate}
+  
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  Consider the stationary $AR(2)$ process $y_t = 5 - 0.9y_{t-1} - 0.2y_{t-2} + u_t$, where $(u_t)$ is a white noise. 
+  \begin{enumerate}
+    \item Find the first value of autocorrelation function $\rho_1$.
+    \item Find the partial autocorrelation function of this process. Explain the meaning of $\phi_{22}$.
+    \item What is the relationship between values of autocorrelation function $\rho_{100}$, $\rho_{99}$ and $\rho_{98}$.
+  \end{enumerate}
+  
+  Hint: values $\phi_{22}$, $\phi_{33}$ etc may be calculated almost effortlessly :)
+  \begin{sol}
+    \begin{enumerate}
+      \item 
+      \item $\phi_{11} = \rho_1$, $\phi_{22} = -0.2$, $\phi_{33} = \phi_{44} = \ldots = 0$. 
+      The partial correlation $\phi_{22}$ measures how will $y_t$ on average react to the unit change of $y_{t-2}$ given fixed $y_{t-1}$.
+      \item $\rho_{100} = -0.9 \rho_{99} - 0.2 \rho_{98}$
+  \end{enumerate}  
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  Random variables $x_t$ are iid with $\P(x_t = 0) = \P(x_t = 1) = 0.5$. 
+  Consider the process $r_t = x_t \cdot x_{t-1} - 0.25$.
+  \begin{enumerate}
+  	\item Is $(r_t)$ stationary?
+  	\item Elon Musk states that this is $MA(1)$ that can be rewritten as $r_t = u_t + \alpha u_{t-1}$.
+    
+  	Is Elon Musk right? 
+    If yes, then express $u_t$ using $x_t$ and its lagged values. 
+  \end{enumerate}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
 
 \begin{problem}
   \begin{sol}
@@ -3390,6 +4211,101 @@ Calculate 95\% predictive interval for $y_{101}$.
 
 
 \begin{problem}
+  The semi-annual $(y_t)$ is modelled by $ETS(ANA)$ process:
+
+  \[
+  \begin{cases}
+      u_t \sim \cN(0; 4) \\
+      s_t = s_{t-2} + 0.1 u_t \\
+      \ell_t = \ell_{t-1} + 0.3 u_t \\
+      y_t = \ell_{t-1} + s_{t-2} + u_t \\
+  \end{cases}    
+  \]
+  
+  Given that $s_{100} = 3$, $s_{99} = -2$, $\ell_{100} = 100$ find 95\% predictive interval for $y_{102}$.   
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  The semi-annual $(y_t)$ is modelled by $ETS(ANA)$ process:
+
+  \[
+  \begin{cases}
+      u_t \sim \cN(0; 4) \\
+      s_t = s_{t-2} + 0.1 u_t \\
+      \ell_t = \ell_{t-1} + 0.3 u_t \\
+      y_t = \ell_{t-1} + s_{t-2} + u_t \\
+      \ell_0 = 100, s_0 = -3, s_{-1} = 3 \\
+  \end{cases}    
+  \]
+  
+Check whether the process $(y_t)$ is stationary.   
+  \begin{sol}
+    The process is not stationary as $\E(y_1) = 3$ and $\E(y_2) = -3$.
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  Consider $ETS(AAdN)$ model 
+  \[
+  \begin{cases}
+  u_t  \sim \cN(0;20) \\
+  b_t = 0.9 b_{t-1} + 0.2 u_t \\
+  \ell_t = \ell_{t-1} + 0.9 b_{t-1} + 0.3 u_t \\
+  y_t = \ell_{t-1} + 0.9 b_{t-1} + u_t \\
+  \end{cases}
+  \]
+  with $\ell_{100} = 20$ and $b_{100} = 1$.
+  \begin{enumerate}
+      \item Find 95\% prediction interval for $y_{102}$.
+      \item Approximately find the best point forecast for $y_{10000}$.
+  \end{enumerate}
+  
+  \begin{sol}
+    \begin{enumerate}
+      \item
+      \[
+          y_{102}= \ell_{100} + (0.9 + 0.9^2) b_{100} + (0.3 + 0.18)u_{101} + u_{102}    
+          \]
+          \[
+          (y_{102} \mid y_1, \ldots, y_{100}) \sim \cN(21.71, 24.608)    
+          \]
+          The interval
+          \[
+          [21.71 - 1.96 \cdot 4.96;21.71 + 1.96 \cdot 4.96]    
+          \]
+      \item 
+      \[
+      \lim_{h\to\infty} \E(y_{100+h} \mid y_1, \ldots, y_{100}) = \ell_{100} + (0.9 + 0.9^2 +\ldots) b_{100} = 20 + 9\cdot 1    
+      \]    
+  \end{enumerate}  
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  Consider $ETS(AAN)$ model,
+	$
+	\begin{cases}
+	y_t = \ell_{t-1} + b_{t-1} + u_t \\
+	\ell_t = \ell_{t-1} + b_{t-1} + \alpha u_t \\
+	b_t = b_{t-1} + \beta u_t \\
+	u_t \sim \cN(0;\sigma^2). \\
+	% s_t = s_{t-12} + \gamma \varepsilon_t \\
+	\end{cases}
+	$
+		
+Let $\ell_{100} = 50$, $b_{100} = 2$, $\alpha=0.4$, $\beta=0.5$, $\sigma^2 = 16$.
+
+Calculate one step and two steps ahead 95\% predictive intervals. 
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+\begin{problem}
   \begin{sol}
 
   \end{sol}
@@ -3401,6 +4317,22 @@ Calculate 95\% predictive interval for $y_{101}$.
 
   \end{sol}
 \end{problem}
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+
 
 
 \section{GARCH}
@@ -3427,24 +4359,84 @@ Calculate 95\% predictive interval for $y_{101}$.
 
 
 \begin{problem}
+  The strictly stationary white noise $(u_t)$ follows $ARCH(1)$ model $\sigma^2_t = 3 + 0.5 u_{t-1}^2$ where 
+  $u_t = \sigma_t \nu_t$ and $\nu_t \sim \mathcal{N}(0;1)$.
+  \begin{enumerate}
+      \item Find 95\% prediction interval for $u_{101}$ given that $u_{100} = -1$.
+      \item Find $\E(u_t)$, $\Var(u_t)$.
+      \item Find $\Corr(u_t, u_{t-1})$, $\Corr(u_t^2, u_{t-1}^2)$.
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+      \item {[4 points]}
+      \[
+      \sigma^2_{101} = 3 + 0.5 (-1)^2= 3.5    
+      \]
+      \[
+      (u_{101}\mid \sigma_{101}) \sim \cN(0; \sigma^2_{101})    
+      \]
+      \[
+      [-1.96 \sqrt{3.5}; +1.96 \sqrt{3.5}]    
+      \]
+      \item {[3 points]} {[1 point]} for $\E(u_t)$ and {[2 points]} for $\Var(u_t)$ 
+      The process $(u_t)$ is a white noise, hence
+      \[
+      \E(u_t) = 0.    
+      \]
+      \[
+      \sigma^2_u = 3 + 0.5 \cdot \sigma^2_u    
+      \]
+      \item {[3 points]}: {[1 point]} for $\Corr(u_t, u_{t-1})$ and {[2 points]} for $\Corr(u_t^2, u_{t-1}^2)$ 
+      The process $(u_t)$ is a white noise, hence
+      \[
+      \Corr(u_t, u_{t-1}) = 0.    
+      \]
+      \[
+      u_t^2 = 3 + 0.5 u_{t-1}^2 + (u_t^2 - \sigma_t^2)    
+      \]
+      We notice that $r_t = u_t^2 - \sigma_t^2$ is a white noise, hence $u_t^2$ is an $AR(1)$ process.
+      Hence, $\Corr(u_t^2, u_{t-1}^2) = 0.5$.
+  \end{enumerate}  
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  Consider the $ARCH(1)$ model, $u_t = \sigma_t \nu_t$, where $\nu_t$ are iid $\cN(0;1)$ and 
+  $\sigma^2_t = 1 + 0.3 u_{t-1}^2$. 
+  \begin{enumerate}
+    \item Find 95\% predictive interval for $u_{101}$ if $u_{100} = -2$.
+    \item Find the autocorrelation function of $r_t = u_t^2$. 
+  \end{enumerate}
   \begin{sol}
 
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
   \end{sol}
 \end{problem}
 
 \begin{problem}
   \begin{sol}
-
   \end{sol}
 \end{problem}
-
 
 \begin{problem}
   \begin{sol}
-
   \end{sol}
 \end{problem}
 
+\begin{problem}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  \begin{sol}
+  \end{sol}
+\end{problem}
 
 
 \section{Method of Moments and maximum likelihood}
@@ -3462,7 +4454,31 @@ Calculate 95\% predictive interval for $y_{101}$.
     \item {[5]} Find the method of moments estimator of $\lambda$ for unknown value $\theta$ using the first two moments. 
   \end{enumerate}  
   \begin{sol}
-
+    Let's observe that we may decompose $X_i$ as a sum $X_i = Y_i + \theta$,
+    where $Y_i \sim \dExpo(\lambda)$. 
+    
+    Hence, $\E(X_i) = 1/\lambda + \theta$, $\Var(X_i) = \Var(Y_i) = 1/\lambda^2$
+    and $\E(X_i^2) = 1/\lambda^2 + (1/\lambda + \theta)^2$.
+    
+    There is an alternative solution with direct integration:
+    \[
+    \E(X_i) = \int_{\theta}^{+\infty} x f(x) \; dx, \quad \E(X_i^2) = \int_{\theta}^{+\infty} x^2 f(x) \; dx.
+    \]
+    
+    \begin{enumerate}
+        \item Solving $1/\hat\lambda + 1 = \bar X$ we obtain $\hat\lambda = 1/ (\bar X - 1)$.
+        \item Solving for $\hat\lambda$ and $\hat\theta$ the system
+    \[
+    \begin{cases}
+        1/\hat\lambda + \hat \theta = \bar X \\
+        1/\hat\lambda^2 + (1/\hat\lambda + \hat\theta)^2 = M_2 \text{ with } M_2 = \sum X_i^2/n
+    \end{cases}    
+    \]
+    we obtain 
+    \[
+    \hat \lambda = \frac{1}{\sqrt{M_2 - \bar X^2}} , \quad \hat \theta =  \bar X - \sqrt{M_2 - \bar X^2}   
+    \]
+    \end{enumerate}
   \end{sol}
 \end{problem}
 
@@ -3473,7 +4489,32 @@ Calculate 95\% predictive interval for $y_{101}$.
 
   Hint: $f(x) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp(-(x-\mu)^2/2\sigma^2)$.  
   \begin{sol}
-
+    The log-likelihood function is equal to
+    \[
+    \ell(a) = \sum_{i=1}^n \left( (-0.5)\ln(4\pi) - 0.5 \ln a - (x_i - a)^2 / 4a \right).
+    \]
+    The equation $\ell'(a) = 0$ may be simplified to
+    \[
+        n\hat a^2 + 2n\hat a - \sum X_i^2  = 0    
+    \]
+    Hence, 
+    \[
+    \hat a = \frac{-2n \pm \sqrt{4 n^2 + 4n \sum X_i^2}}{2n}
+    \]
+    We choose the root $\hat a > 0$ as $\Var(X_i) = 2a > 0$.
+    \[
+    \hat a = \sqrt{ 1  + \sum X_i^2/n} - 1
+    \]
+    
+    Just for fun. 
+    In the case $X_i \sim \cN(a, ka)$ the equation would be
+    \[
+        n\hat a^2 + k n\hat a - \sum X_i^2  = 0    
+    \]
+    And 
+    \[
+    \hat a = \frac{-nk + \sqrt{k^2 n^2  + 4n \sum X_i^2}}{2n}.    
+    \]    
   \end{sol}
 \end{problem}
 
@@ -3502,11 +4543,101 @@ Calculate 95\% predictive interval for $y_{101}$.
 
 
 \begin{problem}
+  The weight of a fish $Y_i$ is a discrete random variables with 
+  distribution and observed frequencies given in the table 
+  
+  \begin{tabular}{cccc}
+      \toprule
+      Weight [kg] & 1 & 2 & 4 \\
+      Probability & $0.2 + a$ & $0.3 - a$ & $0.5$ \\
+      Observed frequency & $N_1$ & $N_2$ & $N_4$ \\
+      \bottomrule
+  \end{tabular}
+  
+  Fish weights $Y_i$ are independent. 
+  
+  \begin{enumerate}
+      \item {[5]} Find the maximum likelihood estimator of the parameter $a$. 
+      \item {[5]} Find the method of moments estimator of the parameter $a$. 
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+      \item 
+      \[
+      L = const (0.2 + a)^{N_1} (0.3 - a)^{N_2} 0.5^{N_3}    
+      \]
+      \[
+      \ell = const + N_1 \ln (0.2 +a) + N_2\ln(0.3 - a) + N_3 \ln 0.5    
+      \]
+      \[
+      \frac{\partial \ell}{\partial a} = \frac{N_1}{0.2 + a} - \frac{N_2}{0.3 - a} 
+      \]
+      \[
+      \hat{a}_{ML} = \frac{0.3 N_1 - 0.2 N_2}{N_1 + N_2}    
+      \]
+      We see that $\partial \ell /\partial a$ decreases as $a$ increases, so 
+      $\hat{a}_{ML}$ is indeed the point of maximum. 
+      \item 
+      \[
+      \E(Y_i) = (0.2 + a) + 2(0.3 - a) + 4\cdot 0.5 = 2.8 -a    
+      \]
+      \[
+      \bar Y = \frac{N_1 + 2N_2  + 4N_4}{N_1 + N_2  + N_4}    
+      \]
+      \[
+      \hat a_{MM} = 2.8 - \frac{N_1 + 2N_2  + 4N_4}{N_1 + N_2  + N_4}
+      \]
+  \end{enumerate}
+  
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+To go to the mountain top I use a gondola lift in the morning. 
+I go back from the top using the same gondola lift in the evening. 
+Cabins are numbered from $1$ to $a$. 
+
+I have noticed that the absolute difference of cabin numbers of my two trips was $10$. 
+
+\begin{enumerate}
+    \item Estimate $a$ using maximum likelihood. 
+    \item Estimate $a$ using method of moments. 
+\end{enumerate}
   \begin{sol}
 
   \end{sol}
 \end{problem}
 
+
+\begin{problem}
+Random variables $X_1$, $X_2$, \ldots,  $X_n$ are independent identically distributed with density 
+\[
+f(x_i \mid \lambda, a) = \frac{\lambda}{2} \exp(-\lambda \abs{x_i - a}).    
+\]
+
+Observed values for $n=3$ are $-3$, $1$, $11$.
+
+\begin{enumerate}
+    \item Estimate $\lambda$ using method of moments for fixed $a = 1$. 
+    \item Estimate $\lambda$ and $a$ using maximum likelihood.
+\end{enumerate}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
 
 \begin{problem}
   \begin{sol}
@@ -3515,34 +4646,9 @@ Calculate 95\% predictive interval for $y_{101}$.
 \end{problem}
 
 
-\begin{problem}
-  \begin{sol}
-
-  \end{sol}
-\end{problem}
-
-\begin{problem}
-  \begin{sol}
-
-  \end{sol}
-\end{problem}
-
-\begin{problem}
-  \begin{sol}
-
-  \end{sol}
-\end{problem}
-
-\begin{problem}
-  \begin{sol}
-
-  \end{sol}
-\end{problem}
 
 
-
-
-\section{LR test}
+\section{LR, LM and Wald tests}
 
 \begin{problem}
   We have two independent random samples $X_1$, $X_2$, \ldots, $X_{n_x}$ and $Y_1$, $Y_2$, \ldots, $Y_{n_y}$.
@@ -3559,7 +4665,42 @@ Calculate 95\% predictive interval for $y_{101}$.
     significance level $5\%$?
   \end{enumerate}
   \begin{sol}
-
+    \begin{enumerate}
+      \item Under $H_0$ we have $X_i \sim \dPois(\lambda)$, $Y_i \sim \dPois(\lambda)$.
+      \[
+          \ell(\lambda) = \sum_{i=1}^{n_x} \left( -\lambda + X_i \ln \lambda - \ln (X_i!)\right) + 
+          \sum_{i=1}^{n_y} \left( -\lambda + Y_i \ln \lambda - \ln (Y_i!)\right)       
+      \]
+      The score function is 
+      \[
+      \score(\lambda) = \ell'(\lambda) = \sum_{i=1}^{n_x} \left( -1 + X_i / \lambda\right) + \sum_{i=1}^{n_y} \left( -1 + Y_i / \lambda\right).
+      \]
+      The estimator is $\hat \lambda = (\sum X_i + \sum Y_i) / (n_x + n_y)$.
+      \[
+      \max \ell_R = - \hat \lambda (n_x + n_y) + \left(\sum X_i + \sum Y_i \right)\ln \hat\lambda - \sum \ln X_i! - \sum \ln Y_i!    
+      \]
+      
+      \item In unrestricted model we have two independent estimators, 
+      \[
+      \hat \lambda_x = \bar X, \quad \hat \lambda_y = \bar Y    
+      \]
+      \[
+      \max \ell_{UR} = - \hat \lambda_x n_x + \sum X_i \ln \hat\lambda_x + \sum Y_i \ln \hat\lambda_y - \sum \ln X_i! - \sum \ln Y_i!    
+      \]
+  
+      \item 
+      \[
+      LR = 2(\max \ell_{UR} - \max \ell_R) = 2 \sum X_i (\ln \hat \lambda_x - \ln \hat\lambda) + 2 \sum Y_i (\ln \hat \lambda_y - \ln \hat\lambda)
+      \]
+      \item Unrestricted model has two parameters, restricted model has one parameter, 
+      hence we use chi-squared disribution with $2 - 1 = 1$ degree of freedom, $LR_{\crit} = 3.84$.
+      We calculate estimates, $\hat \lambda_x = 5$, $\hat\lambda_y = 4.5$, $\hat\lambda = 14/3$.
+      
+      \[
+      LR = 1000 (\ln 5 - \ln (14/3)) + 1800 (\ln 4.5 - \ln (14/3)) \approx 3.5
+      \]
+      We do not reject $H_0$.  
+  \end{enumerate}
   \end{sol}
 \end{problem}
 
@@ -3581,6 +4722,18 @@ Calculate 95\% predictive interval for $y_{101}$.
 \end{problem}
 
 \begin{problem}
+  Random variables $X_1$, $X_2$, \ldots,  $X_n$ are independent identically distributed with density 
+  \[
+  f(x_i \mid \lambda) = \frac{\lambda}{2} \exp(-\lambda \abs{x_i}).    
+  \]
+
+  For $n=100$ I have 40 negative values with sum equal to $-300$ and 60 positive values with sum equal to $500$. 
+
+  \begin{enumerate}
+      \item Test the hypothesis $\lambda = 1$ using LR approach at significance level $\alpha=0.01$.
+      \item Test the hypothesis $\lambda = 1$ using LM approach at significance level $\alpha=0.01$.
+  \end{enumerate}
+
   \begin{sol}
 
   \end{sol}
@@ -3623,14 +4776,54 @@ Calculate 95\% predictive interval for $y_{101}$.
     \item {[5]} Is $\hat a$ unbiased for $n=2$?
   \end{enumerate}
   \begin{sol}
-
+$\E(Y_i) = \P(X_i > 1) = (a-1) / a = p$.
+\begin{enumerate}
+    \item The estimator is consistent as
+\[
+\plim \hat a = \frac {1}{1- \plim \bar Y } = \frac{1}{1 - \frac{a-1}{a}} = a
+\]
+\item 
+For $n=2$ we have the positive probability $p^2$ that $\bar Y = 1$.
+Hence with positive probability $\hat a$ is not defined.
+The value $\E(\hat a)$ does not exist for $n=2$.
+\end{enumerate}
   \end{sol}
 \end{problem}
 
 
 \begin{problem}
+  You observe time between taxi arrivals on a stop, $Y_1$, $Y_2$, \ldots, $Y_n$.
+  Assume that $Y_i$ are independent and exponentially distributed with $\E(Y_i) = \theta$, 
+  that means the density of each $Y_i$ is $f(y) = \exp(-y/\theta)/\theta$ for $y\geq 0$. 
+  Consider the following estimator of expected value
+  \[
+  \hat \theta = n \cdot \min\{Y_1, Y_2, \dots, Y_n \}    
+  \]
+  \begin{enumerate}
+      \item {[6]} Find the probability density function of $\hat \theta$. 
+      \item {[2]} Is $\hat \theta$ unbiased?
+      \item {[2]} Is $\hat \theta$ consistent?
+  \end{enumerate}
   \begin{sol}
-
+    \begin{enumerate}
+      \item 
+      \[
+      \P(\hat \theta > y) = \P(Y_1 > y/n)^n = \left( \exp(-y/n\theta) \right)^n = \exp(-y/\theta)
+      \]
+      Hence $\hat\theta$ has exponential distribution with rate $1/\theta$ and 
+      probability density function
+      \[
+      f(t) = \begin{cases}
+          \exp(-t/\theta)/\theta, \text{ if } t\geq 0, \\
+          0, \text{ otherwise}.
+      \end{cases}
+      \]
+      \item The estimator is unbiased as
+      \[
+      \E(\hat\theta) = 1/(1/\theta) = \theta.    
+      \]
+      \item The estimator is non consistent as its distribution does not depend on $n$.
+  \end{enumerate}  
   \end{sol}
 \end{problem}
 
@@ -3665,7 +4858,47 @@ Calculate 95\% predictive interval for $y_{101}$.
     \item {[3]} Does the maximum likelihood estimator attain the Cramer-Rao lower bound for variance? 
   \end{enumerate}
   \begin{sol}
-
+    \begin{enumerate}
+      \item The log-likelihood function is equal to
+      \[
+      \ell(\lambda) = \sum_{i=1}^n \left( -\lambda + X_i \ln \lambda - \ln (X_i!)\right)    
+      \]
+      The score function is 
+      \[
+      \score(\lambda) = \ell'(\lambda) = \sum_{i=1}^n \left( -1 + X_i / \lambda\right).
+      \]
+      And
+      \[
+      \ell''(\lambda) = \sum_{i=1}^n \left(- X_i / \lambda^2 \right).
+      \]
+      Fisher information is 
+      \[
+      I_F = -\E(\ell''(\lambda)) = \sum \E(X_i) / \lambda^2 = n\lambda / \lambda^2 = n/\lambda.    
+      \]
+      
+      \item Solving $\ell' = 0$ we obtain 
+      \[
+      \hat \lambda = \bar X    
+      \] 
+      
+      \item Rewrite $\ell'(\lambda)$ using $\hat\lambda$. 
+      Be careful! Do not confound $\lambda$ and $\hat\lambda$. 
+      \[
+      \score(\lambda) = \ell'(\lambda) = -n + n \hat \lambda / \lambda.
+      \]
+      Hence the score function is linear function of $\hat\lambda$, $\Corr(\score(\lambda), \hat\lambda) = 1$
+      and the Cramer-Rao bound is attained. 
+      
+      One may also  find $\E \hat \lambda = \lambda$, $\Var(\hat \lambda) = \lambda / n$ and
+      explicitly check that the general bound
+      \[
+      \Var(\hat \lambda) \geq 1/ I_F 
+      \]
+      is attained as equality in our case
+      \[
+          \lambda / n = 1/(n/\lambda). 
+      \]
+      \end{enumerate}      
   \end{sol}
 \end{problem}
 
@@ -3682,6 +4915,69 @@ Calculate 95\% predictive interval for $y_{101}$.
 \end{problem}
 
 \begin{problem}
+  Consider iid sample from bivariate normal distribution, 
+  $
+  \begin{pmatrix}
+    X_i \\
+    Y_i \\
+  \end{pmatrix}	 \sim \cN \left(     
+  \begin{pmatrix}
+    \theta \\
+    2\theta \\
+  \end{pmatrix}; 
+  \begin{pmatrix}
+    4 & 1 \\
+    1 & 9 \\
+  \end{pmatrix}
+  \right).
+  $
+  
+  Calculate Fischer information for the following cases: 
+  \begin{enumerate}
+    \item You observe $X_1$ only. 
+    \item You observe $X_1$, \ldots, $X_n$.
+    \item You observe $X_1$, \ldots, $X_n$, $Y_1$, \ldots, $Y_n$.
+  \end{enumerate}
+  
+  Hint: the multivariate normal density is 
+  $
+  f(u) = \frac{1}{\sqrt{\det(2\pi \Sigma)}} \exp( -\frac{1}{2}(u-\mu)^T \Sigma^{-1}(u-\mu)).
+  $
+  
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  Random variables $X_1$, \ldots, $X_n$ are independent with density 
+  $
+  f(x) = \begin{cases}
+    -\ln(a) \cdot a^x, \text{ if } x\geq 0, \\
+    0, \text{ otherwise.}
+  \end{cases}	
+  $
+  \begin{enumerate}
+    \item Estimate $a$ using maximum likelihood. 
+    \item Check whether the estimator is unbiased and consistent. 
+    \item Check whether the corresponding Cramer-Rao lower bound is attained. 
+  \end{enumerate}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  Random variables $X_1$, \ldots, $X_n$ are independent and normally distributed $\cN(1, 1/b)$. 
+    
+  \begin{enumerate}
+      \item Estimate $b$ using maximum likelihood.
+      \item Does the estimator achive the Cramer-Rao lower bound?
+      \item Is the estimator consistent?
+      \item Is the estimator unbiased?
+  \end{enumerate}
   \begin{sol}
 
   \end{sol}
@@ -3694,6 +4990,11 @@ Calculate 95\% predictive interval for $y_{101}$.
   \end{sol}
 \end{problem}
 
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
 
 \begin{problem}
   \begin{sol}
@@ -3701,12 +5002,6 @@ Calculate 95\% predictive interval for $y_{101}$.
   \end{sol}
 \end{problem}
 
-
-\begin{problem}
-  \begin{sol}
-
-  \end{sol}
-\end{problem}
 
 
 \section{Sufficiency}
@@ -3724,7 +5019,25 @@ Calculate 95\% predictive interval for $y_{101}$.
     \item {[5]} Find a two dimensional sufficient statistic for unknown $\alpha$ and $\lambda$. 
   \end{enumerate}
   \begin{sol}
-
+    We do not need the formula for $\Gamma(\alpha)$ here. 
+    \begin{enumerate}
+        \item For known $\lambda = 1$ the likelihood is 
+        \[
+        L = \left(\prod X_i \right)^{\alpha - 1} \frac{1}{\Gamma(\alpha)} \cdot \exp( - \sum X_i).
+        \]
+        If we optimize this function for $\alpha$ the optimal $\hat\alpha$ will depend only on $\prod X_i$.
+        Hence $\prod X_i$ is a sufficient statistic for $\alpha$. 
+        There are many other sufficient statistics, $\sum \ln X_i$ is another example. 
+        \item Now the likelihood is 
+        \[
+        L = \left(\prod X_i \right)^{\alpha - 1} \frac{1}{\Gamma(\alpha)} \lambda^{\alpha }\exp( - \lambda \sum X_i).
+        \]
+        If we optimize this function for $\alpha$ and $\lambda$ the optimal point will depend only on $\prod X_i$ and $\sum X_i$.
+        Hence $\begin{pmatrix}
+            \prod X_i & \sum X_i 
+        \end{pmatrix}$ is a two dimensional sufficient statistic for $(\alpha, \lambda)$.
+        
+    \end{enumerate}
   \end{sol}
 \end{problem}
 
