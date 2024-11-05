@@ -131,7 +131,12 @@
 % 4. Не сокращайте .1 вместо 0.1
 % 5. Повторяющееся значение повторяйте, а не говорите "то же"
 
-\usepackage{physics}
+% \usepackage{physics} % avoid garbage
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\scalp}{\langle}{\rangle}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
 % \usepackage{minted} % moved to listings to simplify development
 \usepackage{listings}
 \lstset{%
@@ -562,6 +567,78 @@ What is the expected time to the ultimate crime eradication in the town?
 
 
 \begin{problem}
+Consider a symmetric random walk $S_t = S_0 + X_1 + X_2 +\dots + X_t$ where $(X_t)$ are
+independent identically distributed and take values $+1$ or $-1$ with equal probabilities.
+
+
+Random time $T$ is the first moment when we reach the value $-3$ or $7$.
+Let's denote by $p_k$ the conditional probability to reach $7$ before $3$ given that we start at $S_0 = k$.
+
+\begin{enumerate}
+  \item Find $p_{-3}$ and $p_7$.
+  \item Find equation on $p_k$, $p_{k-1}$ and $p_{k+1}$ using first step analysis.
+  \item Guess the unique solution of this recurrence equation and hence find $p_0$.
+\end{enumerate}
+
+Now let's denote by $e_k$ the conditional expected value of $T$ given that we start at $S_0 = k$.
+\begin{enumerate}[resume]
+  \item Find $e_{-3}$ and $e_7$.
+  \item Find equation on $e_k$, $e_{k-1}$ and $e_{k+1}$ using first step analysis.
+  \item Guess the unique solution of this recurrence equation and hence find $e_0$.
+  \item Generalize the formulas for $p_0$ and $e_0$ by replacing $-3$ and $7$ by arbitrary $-a < 0$ and $b > 0$. 
+\end{enumerate}
+
+  \begin{sol}
+  Recurrence equation for $p_k$:
+  \[
+  p_k  = 0.5 p_{k+1} + 0.5 p_{k-1}, \text{ with } p_{-a} = 0, p_b = 1;
+  \]
+  Recurrence equation for $e_k$:
+  \[
+  e_k  = 0.5 e_{k+1} + 0.5 e_{k-1} + 1, \text{ with } e_{-a} = 0, e_b = 0;
+  \]
+  In general: $p_0 = a / (a + b)$, $e_0 = ab$.
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  Consider a non-symmetric random walk $S_t = S_0 + X_1 + X_2 +\dots + X_t$ where $(X_t)$ are
+  independent identically distributed and take values $+1$ or $-1$ with $\P(X_t = +1) = r$
+  
+  
+  Random time $T$ is the first moment when we reach the value $-3$ or $7$.
+  Let's denote by $p_k$ the conditional probability to reach $7$ before $3$ given that we start at $S_0 = k$.
+  
+  \begin{enumerate}
+    \item Find $p_{-3}$ and $p_7$.
+    \item Find equation on $p_k$, $p_{k-1}$ and $p_{k+1}$ using first step analysis.
+    \item Guess the unique solution of this recurrence equation and hence find $p_0$.
+  \end{enumerate}
+  
+  Now let's denote by $e_k$ the conditional expected value of $T$ given that we start at $S_0 = k$.
+  \begin{enumerate}[resume]
+    \item Find $e_{-3}$ and $e_7$.
+    \item Find equation on $e_k$, $e_{k-1}$ and $e_{k+1}$ using first step analysis.
+    \item Guess the unique solution of this recurrence equation and hence find $e_0$.
+    \item Generalize the formulas for $p_0$ and $e_0$ by replacing $-3$ and $7$ by arbitrary $-a < 0$ and $b > 0$. 
+  \end{enumerate}
+  
+    \begin{sol}
+      Recurrence equation for $p_k$:
+  \[
+  p_k  = r p_{k+1} + (1 - r) p_{k-1}, \text{ with } p_{-a} = 0, p_b = 1;
+  \]
+  Recurrence equation for $e_k$:
+  \[
+  e_k  = r e_{k+1} + (1 - r) e_{k-1} + 1, \text{ with } e_{-a} = 0, e_b = 0;
+  \]
+  In general:
+    \end{sol}
+  \end{problem}
+  
+
+\begin{problem}
 Consider a symmetric random walk $S_t = X_1 + X_2 +\dots + X_t$ where $(X_t)$ are
 independent identically distributed and take values $+1$ or $-1$ with equal probabilities.
 We start at zero, $S_0 = 0$.
@@ -612,6 +689,11 @@ Let $N_k$ the number of visits of point $k$ before the first return of a random 
 \end{problem}
 
 
+\begin{problem}
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
 
 
 
