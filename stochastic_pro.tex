@@ -1606,9 +1606,34 @@ Find the moment generating function of $N$.
 
 
 \begin{problem}
-  \begin{sol}
-    
-  \end{sol}
+Ordinary non-random sequences also have alternative limit consept!
+The real number $c$ is a Cesaro limit of a sequence $(a_n)$ if 
+this number is a limit of a sequence of cumulative averages, $c = \lim \bar{a}_n$.
+
+\begin{enumerate}
+  \item Consider a sequence $(a_n) = (1, 0, 1, 0, 1, 0, \dots)$. 
+  Does it have ordinary limit? Does it have Cesaro limit?
+  \item Construct an aperiodic sequence that does not have ordinary limit but has Cesaro limit. 
+  \item Is it true that any ordinary convergent sequence in also Cesaro-converges?  
+\end{enumerate}
+You now that $(a_n)$ Cesaro-converges to $a$ and $(b_n)$ Cesaro-converges to $b$.
+
+\begin{enumerate}[resume]
+  \item Is it true that $(a_n + b_n)$ is Cesaro-convergent?
+  \item Is it true that $(a_n \cdot  b_n)$ is Cesaro-convergent?
+\end{enumerate}
+
+\begin{sol}
+\begin{enumerate}
+  \item Cesaro-limit is $1/2$. It's like an average long-term salary. 
+  \item Split the sequence into groups of two numbers. 
+  In each group put one $0$ and one $1$ in an aperiodic way. 
+  \item Yes, ordinary convergences implies Cesaro-convergence. 
+  \item Yes, Cesaro-limit of a sum is a sum of Cesaro-limits. 
+  \item No. 
+  One sequence has $1$ at even places, the other sequence has $1$ at odd places.
+\end{enumerate}    
+\end{sol}
 \end{problem}
 
 
@@ -3297,7 +3322,7 @@ Initially vampire Boris knows contacts of just two persons from the group. Today
     N_b - N_a \sim \dPois(\lambda (b-a));
     \]
   \end{itemize}
-  The process $(N_t)$ is called \emph{Poisson process} with intensity $\lambda$ if 
+  Alternative definition. The process $(N_t)$ is called \emph{Poisson process} with intensity $\lambda$ if 
   \begin{itemize}
     \item $N_0 = 0$;
     \item Increments are independent;
@@ -3308,6 +3333,10 @@ Initially vampire Boris knows contacts of just two persons from the group. Today
     \[
     \P(N_{t + \Delta} - N_t > 1) = o(\Delta).
     \]
+    \item Probability of observing one point is approximately proportional to the length of time interval:
+    \[
+      \P(N_{t + \Delta} - N_t = 1) = \lambda + \Delta o(\Delta).
+    \]  
   \end{itemize}
 \end{leftbar}
 
@@ -3501,6 +3530,7 @@ The solution is $a(t)=(1+\exp(-2t))/2$.
   
 
 
+
 \begin{problem}
 Prove that two definitions of Poisson process are equivalent.
 
@@ -3526,11 +3556,68 @@ Definition A. The process $(N_t)$ is called \emph{Poisson process} with intensit
     \[
     \P(N_{t + \Delta} - N_t > 1) = o(\Delta).
     \]
+    \item Probability of observing one point is approximately proportional to the length of time interval:
+    \[
+      \P(N_{t + \Delta} - N_t = 1) = \lambda \Delta  + o(\Delta).
+    \]  
   \end{itemize}
 \begin{sol}
 
 \end{sol}
 \end{problem}
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+
+\subsection{Poisson approximation}
+
+\begin{leftbar}
+If $X \sim \dBin(n, p)$, $Y \sim \dPois(\lambda)$ with $\lambda = np$ then 
+\[
+\abs{\P(X = k) - \P(Y = k)} \leq \min\{p, np^2 \}
+\]
+\end{leftbar}
+
+\begin{problem}
+Random variable $X$ has binomial distribution $\dBin(n, p=\lambda /n)$.
+
+\begin{enumerate}
+  \item Find $\E(X)$.
+  \item Find $\lim_{n\to\infty} \Var(X)$.
+  \item Find $\lim_{n\to\infty} \P(X = 0)$, $\lim_{n\to\infty} \P(X = 1)$.
+  \item Find $\lim_{n\to\infty} \P(X = k)$.
+\end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+      \item $\E(X) = \lambda$;
+      \item $\lim_{n\to\infty} \Var(X) = \lambda$;
+      \item $\lim_{n\to\infty} \P(X = 0) = \exp(-\lambda)$, $\lim_{n\to\infty} \P(X = 1) = \lambda \exp(-\lambda)$;
+      \item $\lim_{n\to\infty} \P(X = k) = \exp(-\lambda) \lambda^k / k!$.
+    \end{enumerate}
+    
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
   
 \section{Wiener Process}
 
