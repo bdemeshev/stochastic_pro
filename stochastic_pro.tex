@@ -3529,6 +3529,31 @@ The solution is $a(t)=(1+\exp(-2t))/2$.
 \end{problem}
   
 
+\begin{problem}
+  Arrivals of buses at a stop follow Poisson point process with rate $\lambda = 2$ buses per hour.
+ 
+  \begin{enumerate}
+      \item Find the probability that you will wait for the bus more than $30$ minutes.
+    \item Find the probability to wait for the bus more than $30$ minutes, 
+    if you have already waited $10$ minutes.
+  \end{enumerate}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+
+
+\begin{problem}
+  When light bulb burns out it's immediately replaced by a new similar one. 
+  The number or burn-outs during any interval of $t$ hours has Poisson distribution with parameter $\lambda t$. 
+  
+  Find the distribution of the first burn-out time $Y_1$. Prove your result.
+    \begin{sol}
+      $Y_1 \sim \dExpo(\lambda)$
+    \end{sol}
+  \end{problem}
 
 
 \begin{problem}
@@ -3562,13 +3587,26 @@ Definition A. The process $(N_t)$ is called \emph{Poisson process} with intensit
     \]  
   \end{itemize}
 \begin{sol}
-
+\url{https://math.stackexchange.com/questions/3919517/inter-arrival-time-distribution-of-a-poisson-process}
 \end{sol}
 \end{problem}
 
-\begin{problem}
-  \begin{sol}
 
+\begin{problem}
+Class teacher solves three exercises per class on average.
+Exercise solution times are independent exponentially distributed with the same rate. 
+Class duration is two academic hours. 
+ 
+    \begin{enumerate}
+      \item Find the probability that only one exercise will be solved during the first academic hour.
+      \item Find the probability that one exercise will be completed during the first first academic hour and the second exercise will be completed during the second hour. 
+    \end{enumerate}
+  \begin{sol}
+    The rate is $\lambda = 3/2$ exercises per academic hour. 
+    \begin{enumerate}
+      \item $\P(X_1 = 1) = \exp(-3/2) (3/2)^1 / 1!$;
+      \item $\P(X_1 = 1, \, X_2 = 2) = \P(X_1 = 1) \cdot \P(X_2 - X_1 = 1 \mid X_1 = 1) = \exp(-3) (9/4)$;
+    \end{enumerate}
   \end{sol}
 \end{problem}
 
@@ -3584,9 +3622,9 @@ Definition A. The process $(N_t)$ is called \emph{Poisson process} with intensit
 \subsection{Poisson approximation}
 
 \begin{leftbar}
-If $X \sim \dBin(n, p)$, $Y \sim \dPois(\lambda)$ with $\lambda = np$ then 
+If $X \sim \dBin(n, p)$, $Y \sim \dPois(\lambda)$ with $\lambda = np$ and $A \subset \RR$ then 
 \[
-\abs{\P(X = k) - \P(Y = k)} \leq \min\{p, np^2 \}
+\abs{\P(X \in A) - \P(Y \in A)} \leq \min\{p, np^2 \}
 \]
 \end{leftbar}
 
@@ -3612,10 +3650,58 @@ Random variable $X$ has binomial distribution $\dBin(n, p=\lambda /n)$.
 
 
 \begin{problem}
+A manufacturer produces light-bulbs that are packed into boxes of $100$. 
+Quality control studies indicate that $0.5\%$ of the light-bulbs produced are defective.
+
+
+  \begin{enumerate}
+    \item Estimate the probability of no defective light-bulbs in a box using Poisson distribution.
+    \item Estimate the probability of two or more defective light-bulbs in a box using Poisson distribution.
+    \item Provide bounds for the estimation error in points (a) and (b). 
+  \end{enumerate}
   \begin{sol}
 
   \end{sol}
 \end{problem}
+
+
+\begin{problem}
+The home assignment has three exercises.  
+Alice makes no errors in an exercise with probability $0.9$ and one arithmetic error with probability $0.1$.
+The errors in different exercises are independent.
+
+\begin{enumerate}
+  \item What is the probability that Alice will make exactly two errors in the home assignment?
+  \item What is the expected number of errors in Alice home assignment?
+\end{enumerate}
+The number of errors Bob will make in the home assignment follows Poisson distribution.
+The expected number of errors per home assignment for Bob and Alice are equal. 
+\begin{enumerate}[resume]
+  \item What is the rate of Bob's Poisson distribution?
+  \item What is the probability that Bob will make exactly two errors?
+  \item Solve points (a)-(d) if Alice and Bob write an online test that consists of $40$ questions with Alice error probability $0.01$ for each question. 
+\end{enumerate}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+
 
 
   
