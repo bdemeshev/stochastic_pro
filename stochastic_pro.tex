@@ -2266,6 +2266,75 @@ Let $X_t$ and $Y_t$ be his coordinates after $t$ minutes and $S_t = X_t + Y_t$.
 
 
 \begin{problem}
+The joint distribution of vector $(X,Y)$ is given by $\P(X=i,Y=j)=0.1$  for $1\leq i\leq j\leq 4$. 
+
+Find $\E(Y\mid X)$.
+  \begin{sol}
+Joint distribution table of $X$ and $Y$ is:
+
+\begin{tabular}{lllll}
+\toprule
+$X/Y$ & $1$ & $2$ & $3$ & $4$\\
+\midrule
+1& 0.1 & 0.1 & 0.1 & 0.1 \\
+2& 0 & 0.1 & 0.1 & 0.1 \\
+3& 0 & 0 & 0.1 & 0.1 \\
+4& 0 & 0 & 0 & 0.1 \\
+\bottomrule
+\end{tabular}
+
+Fixing a certain value of $X$ we find the conditional expectation of $Y$:
+\[
+\E(Y \mid X) =
+\begin{cases}
+  \frac{1+2+3+4}{4} = 2.5, \text{ if }  x=1\\
+  \frac{2+3+4}{3} = 3, \text{ if } x=2\\
+  \frac{3+4}{2} = 3.5, \text{ if } x=3\\
+  \frac{4}{1} = 4, \text{ if }  x=4\\
+\end{cases}
+\]
+
+Or, simply, $\E(Y \mid X) = 2 + X/2$.
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+The random variable $X$ is exponentially distributed with parameter $\lambda$. 
+The random variable $Y$ is exponentially distributed with parameter $1/X$. 
+
+Find $\E(Y \mid X)$, $\E(Y)$  and $\Var(Y)$.
+  \begin{sol}
+    Variable $X$ has exponential distribution, so
+\[
+f_X(x)=\lambda e^{-\lambda x}
+\]
+And we know conditional distribution of $Y$:
+\[
+f_{Y \mid X}(x,y)=\frac{1}{x} e^{-\frac{1}{x}y}
+\]
+So,
+\[
+\E(Y \mid X) = \int_{-\infty}^{+\infty}  y { f_{Y \mid X}(X,y)} dy=  \int _0^{+\infty} y  \frac{1}{X} e^{-\frac{1}{X}y} dy =  (1/X)^{-1} = X.
+\]
+Expected value:
+\[
+\E(Y) =\E(\E(Y \mid X)) =\E(X) =  \int _{-\infty}^{+\infty}x f_X(x) \, dx=  \int _0^{+\infty} x \lambda e^{-\lambda x} \, dx =\lambda^{-1}
+\]
+Variance:
+\[
+\Var(Y) =\Var(\E(Y \mid X))+ \E( \Var(Y \mid X)) = \Var(X)+ \E ((1/X)^{-2})= \lambda^{-2} + \E(X^2)
+\]
+We know that $\E(X^2) = \Var(X) + (\E(X))^2$, so:
+\[
+\Var(Y) = \lambda^{-2}+\lambda^{-2} + \lambda^{-2} = 3\lambda^{-2}
+\]
+  \end{sol}
+\end{problem}
+
+
+  
+\begin{problem}
   \begin{sol}
   \end{sol}
 \end{problem}
@@ -2275,6 +2344,18 @@ Let $X_t$ and $Y_t$ be his coordinates after $t$ minutes and $S_t = X_t + Y_t$.
   \begin{sol}
   \end{sol}
 \end{problem}
+
+\begin{problem}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  \begin{sol}
+  \end{sol}
+\end{problem}
+
+
 
 
 
@@ -2681,24 +2762,24 @@ with mean $1$ and variance $2$. Each $X_i$ has only three possible values: 0, 1,
 \end{problem}
   
 \begin{problem}
-\begin{sol}
-\end{sol}
+  \begin{sol}
+  \end{sol}
 \end{problem}
 
 
 \begin{problem}
-\begin{sol}
-\end{sol}
+  \begin{sol}
+  \end{sol}
 \end{problem}
 
 \begin{problem}
-\begin{sol}
-\end{sol}
+  \begin{sol}
+  \end{sol}
 \end{problem}
 
 \begin{problem}
-\begin{sol}
-\end{sol}
+  \begin{sol}
+  \end{sol}
 \end{problem}
       
 
@@ -3931,6 +4012,27 @@ Consider $X_t = \exp(-2W_t - 2t)$.
 \end{problem}
 
 
+\begin{problem}
+Let $Y_t=W_t^3-3tW_t$.
+\begin{enumerate}
+\item Using Ito's lemma find $dY_t$.
+\item Using your previous result find $\E(Y_t)$ and $\Var(Y_t)$.
+\end{enumerate}  
+  \begin{sol}
+Using Ito's lemma $dY_t = (3W_t^2 - 3t) \, dW_t + (-3W_t + \frac{1}{2}6W_t) \, dt= (3W_t^2 - 3t) \, dW_t$. 
+Hence, $Y_t$ is a martingale. $Y_0 = W_0^3 - 3\cdot 0 W_0 = 0$.
+
+Now $\E(Y_t) = \E(Y_0) = 0$ and using Ito's isometry:
+\[
+\Var(Y_t)=
+\int_0^t \E((3W_s^2-3s)^2) \, ds = \int_0^t 27s^2 +9s^2-18s^2 \, ds = \int_0^t 18s^2 \, ds = 6t^3
+\]
+%
+Here we have used the facts that $\E(W_s^2) = s$ and $\E(W_s^4) = 3s^2$.
+  \end{sol}
+\end{problem}
+  
+
 
 \begin{problem}
   \begin{sol}
@@ -3946,6 +4048,78 @@ Consider $X_t = \exp(-2W_t - 2t)$.
   \end{sol}
 \end{problem}
 
+
+
+\section{Stochastic Differential Equations}
+
+\begin{problem}
+Let's consider the following system of stochastic differential equations
+\[
+\begin{cases}
+    dX_t=aX_t dt-Y_t dW_t \\
+    dY_t=aY_t dt+X_t dW_t
+\end{cases}
+\]
+with initial conditions $X_0=x_0$ and $Y_0=0$.
+\begin{enumerate}
+\item Find the solution of the form $X_t=f(t)\cos W_t$ and $Y_t=g(t)\sin W_t$.
+\item Prove that for any solution $D_t=X_t^2+Y_t^2$ is nonstochastic.
+\end{enumerate}
+  \begin{sol}
+    Using Ito's lemma  we find $dX_t$ and $dY_t$
+\label{spiral_wiener}
+\begin{multline*}
+dX_t=f_t'(t) \cos W_t dt -f(t)\sin W_t \, dW_t-0.5f(t)\cos W_t\, dt=\\
+= (f_t'(t)-0.5f(t))\cos W_tdt -f(t)\sin W_t \,dWt
+\end{multline*}
+\begin{multline*}
+dY_t=g_t'(t) \sin W_t \, dt +g(t)\cos W_t \, dW_t-0.5g(t)\sin W_t\,dt=\\
+= (g_t'(t)-0.5g(t))\sin W_t\,dt +g(t)\cos W_t \,dWt
+\end{multline*}
+%
+Comparing these expressions with the system we receive:
+\[
+\begin{cases}
+f_t'(t)-0.5f(t) = af(t)\\
+f(t) = g(t)\\
+  g_t'(t)-0.5g(t) = ag(t)\\
+g(t) = f(t)
+\end{cases}
+\]
+%
+The general solution has the form
+\[
+f(t)=g(t)=A e^{(a+0.5)t}, \quad A\in  \RR
+\]
+%
+From initial condition we get $A=x_0$ and
+\[
+f(t)=g(t)=x_0 e^{(a+0.5)t}
+\]
+%
+Answer:
+\[
+\begin{array}{l}
+X_t=x_0+x_0\int_0^{t} a e^{(a+0.5)u} \cos W_u du - x_0\int_0^{t} e^{(a+0.5)t}\sin W_u \,dWu\\
+Y_t=x_0\int_0^{t} a e^{(a+0.5)u} \sin W_u du +x_0\int_0^{t} e^{(a+0.5)t}\cos W_u \, dWu
+\end{array}
+\]
+%
+Now we use Ito's lemma once again:
+\begin{multline*}
+dD_t=2X_t \, dX_t+2Y_t \, dY_t=2X_t((f_t'(t)-0.5f(t))\cos W_t \, dt -f(t)\sin W_t \,dWt)+\\
++ 2Y_t((g_t'(t)-0.5g(t))\sin W_t ], dt +g(t)\cos W_t\,dWt)=\\
+=2f(t)(f_t'(t)-0.5f(t))\cos^2 W_t \, dt-f^2(t)\cos W_t\sin W_t\,dWt+\\
++2f(t)(f_t'(t)-0.5f(t))\sin^2 W_t \, dt+f^2(t)\cos W_t\sin W_t\,dWt=\\
+=2f(t)(f_t'(t)-0.5f(t) \, dt=2af^2(t)\,dt
+\end{multline*}
+%
+\[
+D_t=D_0+\int_0^{t} 2a x_0 e^{(2a+1)u }du= x_0^2+\frac{2ax_0}{2a+1}(e^{(2a+1)t}-1)
+\]
+  \end{sol}
+\end{problem}
+  
 
 \begin{problem}
   \begin{sol}
