@@ -2333,6 +2333,54 @@ We know that $\E(X^2) = \Var(X) + (\E(X))^2$, so:
 \end{problem}
 
 
+
+\begin{problem}
+  In the first bag there balls numbered from $0$ to $9$, in the second bag there are balls numbered from $1$ to $10$. 
+  One ball was selected from the first bag and one ball from the second one. 
+  You will select at random one ball from these two and you will know only its number. 
+  Let's denote its number by $X$ and the number of the other of the two balls by $Y$.
+  
+  Find $\E(Y\mid X)$.
+  \begin{sol}
+      If $X=0$ we know that that the chosen ball was in the first basket, consequently $Y$ was in the second one.
+      \[
+      \E(Y \mid X=0) = \E(Y \mid Y \text{ from second basket } )=\frac{1+2+\dots+10}{10}=5.5
+      \]
+      Similarly
+      \[
+      \E(Y \mid X=10) = \E(Y \mid Y \text{ from first basket } )=\frac{0+1+\dots+9}{10}=4.5
+      \]
+      Finaly,
+      \[
+      \E(Y \mid 0<X<10) = \frac{1}{2}\E(Y \mid Y \text{ from first basket }) +\frac{1}{2}\E(Y \mid Y \text{ from second basket }) = 0.5 (5.5 + 4.5) = 5
+      \]
+      Answer:
+      \[
+      \E(Y \mid X) =
+       \begin{cases}
+          5.5, \text{ if } X=0\\
+          5, \text{ if } 0<X<10\\
+          4.5, \text{ if }  X=10\\
+        \end{cases}
+      \]        
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  The random variable $X$ is uniformly distributed on $[0;a]$. 
+  Conditionally of $X$ the random variable $Y$ is uniformly distributed on $[0;X]$.
+  
+  Find $\E(Y\mid X)$, $\E(Y)$  and $\Var(Y)$.
+  \begin{sol}
+$\E(Y \mid X)=X/2$, $\E(Y)=\E(X/2)=a/4$,
+\[
+\Var(Y)=\E(\Var(Y \mid X))+\Var(\E(Y \mid X))=\E(X^2/12)+\Var(X/2)=\frac{7a^2}{12^2}
+\]
+  \end{sol}
+\end{problem}
+
+
   
 \begin{problem}
   \begin{sol}
@@ -4032,7 +4080,16 @@ Here we have used the facts that $\E(W_s^2) = s$ and $\E(W_s^4) = 3s^2$.
   \end{sol}
 \end{problem}
   
-
+\begin{problem}
+  Let $Y_t=\exp(-aW_t-{a^2 t}/{2}$.
+  \begin{enumerate}
+  \item Using Ito's lemma find $dY_t$.
+  \item Using your previous result find $\E(Y_t)$ and $\Var(Y_t)$.
+  \end{enumerate}
+  \begin{sol}
+      $dY_t=-a Y_t \, dW_t$, so $Y_t$ is a martingale, and $\E(Y_t)=Y_0=1$. To find variance one may use Ito's isometry.
+  \end{sol}
+\end{problem}
 
 \begin{problem}
   \begin{sol}
@@ -4222,6 +4279,30 @@ Find the current price $X_0$ of an option that pays you one dollar at time $T=2$
 
   \end{sol}
 \end{problem}
+
+
+\begin{problem}
+  In the framework of the Black and Scholes model find the price at $t=0$  of an asset that pays $\min\{M,\ln S_t\}$  at time $T$.
+  Here  $S_T$ denotes the price of one share at time $T$, $M$ — arbitrary constant, specified at the moment of the issue.
+  \begin{sol}
+\[
+X_0 = \E_{\tilde{p}}( \exp( - rT )X_{T} \mid \cF_0)
+\]
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  The price of a share in euros is driven by the equation $dS=\sigma S dW+\alpha S dt$, 
+  the dollar/euro exchange rate is driven by the equation $dU=b U dW+c U dt$. 
+  
+  Find the current price in dollars of a European call option with maturity date $T$, strike price $K$.
+  \begin{sol}
+      We need to find a price of the classic European option in dollars, while
+stock prices are in euros.
+  \end{sol}
+\end{problem}
+
 
 
 \begin{problem}
