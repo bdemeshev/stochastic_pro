@@ -3838,6 +3838,56 @@ The expected number of errors per home assignment for Bob and Alice are equal.
 
 \begin{problem}
 Consider a Wiener process $(W_t)$.
+
+\begin{enumerate}
+  \item Find $\E(W_5)$ and $\Var(W_5)$.
+  \item Find $\E(W_t)$ and $\Var(W_t)$.
+  \item Find $\E(W_5 \mid W_3)$ and $\Var(W_5 \mid W_3)$.
+  \item Find $\E(W_t \mid W_s)$ and $\Var(W_t \mid W_s)$ for $s\leq t$.
+  \item Find $\Cov(W_5, W_3)$ and $\Cov(W_s, W_t)$.
+  \item Find $\Cov(W_5, W_3 \mid W_2)$ and $\Cov(W_s, W_t \mid W_r)$ for $r\leq s \leq t$.
+  \item Find $\E(W_5 - 2W_3)$ and $\Var(W_5 - 2W_3)$.
+  \item Find $\P(W_5 - 2W_3 > 0 )$ and $\P(W_5 - 2W_3 > 1)$ in terms of standard normal cumulative distribution function. 
+  \item Find $\E(W_5 - 2W_3 \mid W_2 = 1)$ and $\Var(W_5 - 2W_3 \mid W_2 = 1)$.
+  \item Find $\P(W_5 - 2W_3 > 1 \mid W_2 = 1)$ in terms of standard normal cumulative distribution function. 
+  \item What is the distribution of random vector $R = (W_1, W_3, W_5)$?
+  \item Find the value of $a$ such that $W_3 = a W_5 + U$ where $U$ and $W_5$ are independent. 
+  \item Find $\E(W_3 \mid W_5)$ and $\Var(W_3 \mid W_5)$.
+\end{enumerate}
+
+  \begin{sol}
+    \begin{enumerate}
+      \item $\E(W_5) = 0$ and $\Var(W_5) = 5$.
+      \item $\E(W_t) = 0$ and $\Var(W_t) = t$.
+      \item $\E(W_5 \mid W_3) = W_3$ and $\Var(W_5 \mid W_3) = 2$.
+      \item $\E(W_t \mid W_s) = W_s$ and $\Var(W_t \mid W_s) = t - s$.
+      \item $\Cov(W_5, W_3) = 3$ and $\Cov(W_s, W_t) = \min\{s, t\}$.
+      \item $\Cov(W_5, W_3 \mid W_2) = 1$ and $\Cov(W_s, W_t \mid W_r) = \min\{s, t\} - r$.
+      \item $\E(W_5 - 2W_3) = 0$ and $\Var(W_5 - 2W_3)$.
+      \item $\P(W_5 - 2W_3 > 0) = 1/2$ and $\P(W_5 - 2W_3 > 1)$ . 
+      \item $\E(W_5 - 2W_3 \mid W_2 = 1)$ and $\Var(W_5 - 2W_3 \mid W_2 = 1)$.
+      \item $\P(W_5 - 2W_3 > 1 \mid W_2 = 1)$. 
+      \item 
+      \[
+        R \sim \cN \left(\begin{pmatrix}
+          0 \\ 0 \\ 0 \\
+        \end{pmatrix};
+        \begin{pmatrix}
+          1 & 1 & 1  \\
+          1 & 3 & 3 \\
+          1 & 3 & 5 \\
+        \end{pmatrix}
+        \right)
+      \]
+      \item $W_3 = 3/5  \cdot W_5 + U$ 
+      \item $\E(W_3 \mid W_5) = 3/5 \cdot W_5$ and $\Var(W_3 \mid W_5) = \Var(U) = \Var(W_3 - 3/5 W_5)$.
+    \end{enumerate}    
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  Consider a Wiener process $(W_t)$.
 \begin{enumerate}
     \item {[4]} Let $Y_t = t W_{2t}$. What is the distribution of $Y_t - Y_s$ for $t\geq s$? Is $Y_t$ a Wiener process?
     \item {[6]} Find a constant $\alpha$ such that $M_t = W_t^3 + \alpha t W_t$ is a martingale. 
@@ -3890,8 +3940,17 @@ For Wiener process $(W_t)$ find $\E(W_1 W_2 W_3)$ and $\E(W_2 W_3 \mid W_1)$.
 
 
 \begin{problem}
-  \begin{sol}
+Let $(W_t)$ be the Wiener process. 
 
+\begin{enumerate}
+  \item Is $(W_t)$ a martingale?
+  \item Is $Q_t = W_t^2 - t$ a martingale?
+\end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+      \item $(W_t)$ is a martingale;
+      \item $Q_t = W_t^2 - t$ is a martingale.
+    \end{enumerate}    
   \end{sol}
 \end{problem}
 
