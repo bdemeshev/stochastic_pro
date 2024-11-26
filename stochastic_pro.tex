@@ -4070,18 +4070,22 @@ Let $(W_t)$ be the Wiener process.
   \end{cases}
   \]
 
-  Let $R = \int_0^9 X_t dW_t$.
+  Let $J = \int_0^9 X_t dW_t$.
   \begin{enumerate}
-    \item Express $R$ without integrals. 
-    \item Find $\E(R)$ and $\Var(R)$.
+    \item Express $J$ without integrals. 
+    \item Find $\E(J)$ and $\Var(J)$.
   \end{enumerate}
   %
-  Let $(Y_t) = \int_0^t X_u dW_u$.
-  \begin{enumerate}
-    \item Express $(Y_t)$ without integrals. 
-    \item Find $\E(Y_t)$ and $\Var(Y_t)$.
-    \item Find $\Cov(Y_3, Y_9)$ and $\Cov(Y_s, Y_t)$.
-    \item Is $(Y_t)$ a martingale?
+  Let $I_t = \int_0^t X_u dW_u$.
+  \begin{enumerate}[resume]
+    \item Express $(I_t)$ without integrals. 
+    \item Find $\E(I_t)$.
+    \item Find $\Var(I_t)$.
+    \item Find $\int_0^t \E(X_u^2) du$.
+    \item Find $\Cov(I_3, I_9)$ and $\Cov(I_s, I_t)$.
+    \item Is $(I_t)$ a martingale?
+    \item Find $R_t = \int_0^t X_u du$.
+    \item Find $\E(R_t)$ and $\Var(R_t)$.
   \end{enumerate}
   \begin{sol}
 
@@ -4098,24 +4102,52 @@ Let $(W_t)$ be the Wiener process.
   \end{cases}
   \]
 
-  Let $R = \int_0^5 X_t dW_t$.
+  Let $J = \int_0^5 X_t dW_t$.
   \begin{enumerate}
-    \item Express $R$ without integrals. 
-    \item Find $\E(R)$ and $\Var(R)$.
+    \item Express $J$ without integrals. 
+    \item Find $\E(J)$ and $\Var(J)$.
   \end{enumerate}
   %
-  Let $(Y_t) = \int_0^t X_u dW_u$.
-  \begin{enumerate}
-    \item Express $(Y_t)$ without integrals. 
-    \item Find $\E(Y_t)$ and $\Var(Y_t)$.
-    \item Find $\Cov(Y_2, Y_8)$ and $\Cov(Y_s, Y_t)$.
-    \item Is $(Y_t)$ a martingale?
+  Let $I_t = \int_0^t X_u dW_u$.
+  \begin{enumerate}[resume]
+    \item Express $(I_t)$ without integrals. 
+    \item Find $\E(I_t)$.
+    \item Find $\Var(I_t)$.
+    \item Find $\int_0^t \E(X_u^2) du$.
+    \item Find $\Cov(I_2, I_8)$ and $\Cov(I_s, I_t)$.
+    \item Is $(I_t)$ a martingale?
+    \item Find $R_t = \int_0^t X_u du$.
+    \item Find $\E(R_t)$ and $\Var(R_t)$.
   \end{enumerate}
   \begin{sol}
 
   \end{sol}
 \end{problem}
 
+
+\begin{problem}
+  Let $(W_t)$ be a Wiener process, 
+  \[
+  X_t = \begin{cases}
+    1, \text{ if } t \in [0;3) \\
+    4W_2, \text{ if } t \geq 3.
+  \end{cases}, \quad
+  Y_t = \begin{cases}
+    5, \text{ if } t \in [0;6) \\
+    7, \text{ if } t \geq 6.
+  \end{cases}
+  \]
+  
+  \begin{enumerate}
+    \item Find $\Cov(\int_0^5 X_u dW_u, \int_0^5 Y_u dW_u)$.
+    \item Find $\Cov(\int_0^5 X_u dW_u, \int_0^5 Y_u du)$.
+    \item Find $\Cov(\int_0^5 X_u du, \int_0^5 Y_u du)$.
+  \end{enumerate}
+
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
 
 
 
