@@ -3817,8 +3817,23 @@ The expected number of errors per home assignment for Bob and Alice are equal.
 
 
 \begin{problem}
+  Clients enter the Café according to Poisson process $(X_t)$ with intensity $\lambda = 10$ clients per hour. 
+  Let $(Y_i)$ be the inter-arrival times. 
+  \begin{enumerate}
+    \item What is the distribution of $Y_1$?
+    \item What is the distribution of $Y_1$ given that $X_1 = 1$?
+    \item What is the distribution of $Y_1$ given that $X_t = 1$?
+    \item What is the distribution of $Y_5$ given that $X_1 = 12$?
+    \item What is the density function of $Y_5$ given that $X_t = 12$?
+  \end{enumerate}
   \begin{sol}
-
+    \begin{enumerate}
+      \item $Y_1 \sim \dExpo(\lambda)$;
+      \item $(Y_1 \mid X_1 = 1) \sim \dUnif[0;1]$;
+      \item $(Y_1 \mid X_t = 1) \sim \dUnif[0;t]$;
+      \item $(Y_5 \mid X_1 = 12) \sim \dBeta(5;8)$;
+      \item $(Y_5/t \mid X_t = 12) \sim \dBeta(5;8)$.
+    \end{enumerate}
   \end{sol}
 \end{problem}
 
@@ -3829,7 +3844,17 @@ The expected number of errors per home assignment for Bob and Alice are equal.
   \end{sol}
 \end{problem}
 
+\begin{problem}
+  \begin{sol}
 
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
 
 
 
@@ -3956,10 +3981,66 @@ Let $(W_t)$ be the Wiener process.
 
 
 \begin{problem}
+  Let $(W_t)$ be a Wiener process and $Y_t = W_{4t} / 2$.
+  \begin{enumerate}
+    \item Find $Y_0$.
+    \item What is the distibution of $Y_t - Y_s$ for $s \leq t$?
+    \item Doest $Y_t$ has independent increments?
+    \item Is the trajectory of $(Y_t)$ almost surely continous?
+    \item Is $(Y_t)$ a Wiener process?
+    \item Complete the statement of the theorem: 
+    «If $(W_t)$ is a Wiener process, then $Y_t = W_{a^2 t} / \dots$ is \dots».
+  \end{enumerate}
   \begin{sol}
-
+    \begin{enumerate}
+      \item $Y_0 = 0$;
+      \item $Y_t - Y_s \sim \cN(0; t - s)$;
+      \item yes;
+      \item yes;
+      \item yes;
+      \item If $(W_t)$ is a Wiener process, then $Y_t = W_{a^2 t} / a$ is a Wiener process.
+    \end{enumerate}
   \end{sol}
 \end{problem}
+
+
+\begin{problem}
+  Let $(W_t)$ be a Wiener process and 
+  \[
+    Y_t = \begin{cases}
+      0, \text{ if } t = 0;
+      t \cdot W_{1/t}, \text{ if } t > 0.
+    \end{cases}
+  \]
+  \begin{enumerate}
+    \item Find $Y_0$.
+    \item What is the distibution of $Y_t - Y_s$ for $s \leq t$?
+    \item Doest $Y_t$ has independent increments?
+    \item Is the trajectory of $(Y_t)$ almost surely continous for $t > 0$?
+    \item Is the trajectory of $(Y_t)$ almost surely continous at $t = 0$?
+    \item Is $(Y_t)$ a Wiener process?
+    \item Complete the statement of the theorem: 
+    «If $(W_t)$ is a Wiener process, then $Y_t = \begin{cases}
+      0, \text{ if } t = 0;
+      t \cdot W_{1/t}, \text{ if } t > 0.
+    \end{cases}$ is \dots».
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+      \item $Y_0 = 0$;
+      \item $Y_t - Y_s \sim \cN(0; t - s)$;
+      \item yes;
+      \item yes;
+      \item yes;
+      \item If $(W_t)$ is a Wiener process, then $Y_t = \begin{cases}
+        0, \text{ if } t = 0;
+        t \cdot W_{1/t}, \text{ if } t > 0.
+      \end{cases}$ is a Wiener process.
+    \end{enumerate}
+  \end{sol}
+\end{problem}
+
+
 
 
 \begin{problem}
@@ -3977,6 +4058,66 @@ Let $(W_t)$ be the Wiener process.
 
 
 \section{Ito's integral}
+
+
+
+\begin{problem}
+  Let $(W_t)$ be a Wiener process and 
+  \[
+  X_t = \begin{cases}
+    5, \text{ if } t \in [0;6) \\
+    7, \text{ if } t \geq 6.
+  \end{cases}
+  \]
+
+  Let $R = \int_0^9 X_t dW_t$.
+  \begin{enumerate}
+    \item Express $R$ without integrals. 
+    \item Find $\E(R)$ and $\Var(R)$.
+  \end{enumerate}
+  %
+  Let $(Y_t) = \int_0^t X_u dW_u$.
+  \begin{enumerate}
+    \item Express $(Y_t)$ without integrals. 
+    \item Find $\E(Y_t)$ and $\Var(Y_t)$.
+    \item Find $\Cov(Y_3, Y_9)$ and $\Cov(Y_s, Y_t)$.
+    \item Is $(Y_t)$ a martingale?
+  \end{enumerate}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  Let $(W_t)$ be a Wiener process and 
+  \[
+  X_t = \begin{cases}
+    1, \text{ if } t \in [0;3) \\
+    4W_2, \text{ if } t \geq 3.
+  \end{cases}
+  \]
+
+  Let $R = \int_0^5 X_t dW_t$.
+  \begin{enumerate}
+    \item Express $R$ without integrals. 
+    \item Find $\E(R)$ and $\Var(R)$.
+  \end{enumerate}
+  %
+  Let $(Y_t) = \int_0^t X_u dW_u$.
+  \begin{enumerate}
+    \item Express $(Y_t)$ without integrals. 
+    \item Find $\E(Y_t)$ and $\Var(Y_t)$.
+    \item Find $\Cov(Y_2, Y_8)$ and $\Cov(Y_s, Y_t)$.
+    \item Is $(Y_t)$ a martingale?
+  \end{enumerate}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+
 
 
 \begin{problem}
@@ -4157,6 +4298,11 @@ Here we have used the facts that $\E(W_s^2) = s$ and $\E(W_s^4) = 3s^2$.
 \end{problem}
 
 
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
 
 \begin{problem}
   \begin{sol}
