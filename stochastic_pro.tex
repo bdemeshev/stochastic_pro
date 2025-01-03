@@ -658,8 +658,24 @@ Let $N_k$ the number of visits of point $k$ before the first return of a random 
 
 
 \begin{problem}
-  \begin{sol}
+  You roll a pair of fair dice infinitely many times. 
+
+  \begin{enumerate}
+    \item What is the probability that you will obtain the sum equal to $10$ before the sum equal to $8$?
+    \item What is the probability that you will obtain the sum equal to $10$ before the sum equal to $8$ but after the sum equal to $11$?
+  \end{enumerate}
   
+  \begin{sol}
+    \begin{enumerate}
+      \item One may use first step analysis or probability scaling. 
+      There $3$ options for the sum of $10$ and $5$ options for the sum of $8$. 
+      Hence, we scale the answer, $3/(3 + 5)$.
+    
+      \item First, $11$ should be before $10$ or $8$, $2/ (2 + 3 + 8)$.
+      Second, $10$ should be before $8$, $3/ (3 + 5)$.
+
+      The answer, $2/ (2 + 3 + 8) \cdot 3/ (3 + 5)$.
+    \end{enumerate}
   \end{sol}
 \end{problem}
 
@@ -667,7 +683,20 @@ Let $N_k$ the number of visits of point $k$ before the first return of a random 
 
 
 \begin{problem}
+  How many coin tosses on average you need to obtain $n$ heads?
   \begin{sol}
+    Let's denote this number by $e_n$. 
+    
+    One may consider all the variants from starting point that lead to starting the game anew: $T$, $HT$, $HHT$, \dots{ }
+    The final term describes the lucky situation of a win without tails.
+    \[
+    e_n = 1/2 (1 + e_n) + 1/4 (2 + e_n) + \dots + 1/2^n (n + e_n) + 1/2^n \cdot n.
+    \]
+
+    Or one may say, that first one should obtain $(n-1)$ heads and then either just one head or restart anew,
+    \[
+    e_n = e_{n-1} + 0.5 \cdot 1 + 0.5 \cdot (1 + e_n).
+    \]
   
   \end{sol}
 \end{problem}
@@ -4324,8 +4353,28 @@ Here we have used the facts that $\E(W_s^2) = s$ and $\E(W_s^4) = 3s^2$.
 \end{problem}
 
 \begin{problem}
-  \begin{sol}
+Once I've proposed the following problem to my students: 
+«Let $S_n$ be a symmetric random walk with $S_0 = 0$. 
+Check whether $S_n^2 - n$ is a martingale».
 
+One student wrongly confused symmetric random walk in discrete time $(S_n)$ with Wiener process in continuous time $(W_t)$.
+He proposed the wrong solution: 
+«Let's find $dS_n$ by Ito's lemma: $dS_n = 2S_n dS_n - dn + 0.5 \cdot 2 (dS_n)^2 = 2S_n dS_n$.
+The $dn$ coefficient is zero, hence $S_n$ is a martingale».
+
+
+\begin{enumerate}
+  \item Provide another example of a function $h(x, t)$ such that $h(W_t, t)$ is a martingale in continuous time and $h(S_n, n)$ is a martingale in discrete time. 
+  \item Why this coincidence is possible?
+  \item Provide an example of a function $h(x, t)$ such that $h(W_t, t)$ is a martingale in continuous time but $h(S_n, n)$ is not a martingale in discrete time. 
+\end{enumerate}
+
+  \begin{sol}
+\begin{enumerate}
+  \item $h(x, t) = x$;
+  \item The coincidence is possible because the first, second and third moments of $W_t$ and $S_t$ are the same.
+  \item $h(x, t) = x^4 - 6 t x^2$;
+\end{enumerate}
   \end{sol}
 \end{problem}
 
