@@ -725,6 +725,113 @@ Let $N_k$ the number of visits of point $k$ before the first return of a random 
 \end{problem}
 
 
+\subsection*{First step into fractal}
+
+
+\begin{problem}
+  The Cantor set fractal $C$ is constructed in the following way. 
+  We start with unit segment $I_0 = [0; 1]$.
+  At first stage we remove the middle third from the segment.
+  Hence after the first stage we obtain $I_1 = [0; 1/3] \cup [2/3; 1]$.
+  At second stage we remove the middle third from every segment.
+  Hence after the second stage we obtain $I_2 = [0; 1/9] \cup [2/9; 3/9] \cup [6/9; 7/9] \cup [8/9; 9/9]$.
+  We continue this process infinitely many times and in the limit we obtain the Cantor set $C$,
+  see \url{https://en.wikipedia.org/wiki/Cantor_set}.
+
+  \begin{enumerate}
+    \item Find the length of the Cantor set $C$.
+  \end{enumerate}
+  Now let's choose a point $X$ in the Cantor set randomly uniformly. 
+  \begin{enumerate}[resume]
+    \item Find $\E(X)$ and $\Var(X)$.
+    \item How one may randomly choose a point in the Cantor set using a fair coin?
+  \end{enumerate}
+
+  \begin{sol}
+    \begin{enumerate}
+      \item $1 - 1/3 - 2/9 - 4/27 - \dots = 1 - \frac{1/3}{1 - 2/3} = 0$;
+      \item $\E(X) = 1/2$ by symmetry;
+      For the $\E(X^2)$ we may build an equation using the first step approach
+      \[
+      \E(X^2) = 0.5 \E( (X/3)^2) + 0.5 \E((2/3 + X/3)^2).
+      \]
+      From this equation one obtains $\E(X^2) = 3/8$ and hence $\Var(X) = 1/8$.
+      
+      Or one may also use the formula for the variance 
+      \[
+      \Var(X) = \E(\Var(X \mid Y)) + \Var(\E(X \mid Y)).
+      \]
+      Here $Y = I(X > 1/2)$ indicates whether $X$ belongs to the left or right side of the fractal. 
+      \[
+      \Var(X \mid Y) = \Var(X) / 9
+      \]
+      Observe that $\E(X \mid Y)$ takes only two values, $1/6$ or $5/6$. 
+      And hence $\Var(\E(X \mid Y)) = 1/9$.
+      \[
+      \Var(X) = \Var(X) / 9 + 1/9
+      \]
+      And, finally $\Var(X) = 1/8$.
+
+      \item Let's toss the coin infinitely many times. 
+If we observe $H$ then we choose the left part and if we observe $T$ then we choose the right part during the stage. 
+    \end{enumerate}
+  
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  The Sierpiński triangle $S$ is constructed in the following way. 
+  We start with an equilateral triangle $T_0$ with unit sides. 
+  At first stage we subdivide the triangle into four smaller congruent equilateral triangles and remove the central triangle.
+  Hence after the first stage the set $T_1$ that consists of three triangles.
+  At second stage we we subdivide every triangle into four smaller congruent equilateral triangles and remove the central triangle.
+  Hence after the second stage we obtain the set $T_2$ that consists of nine triangles.
+  We continue this process infinitely many times and in the limit we obtain the Sierpiński triangle $S$,
+  see \url{https://en.wikipedia.org/wiki/Sierpiński_triangle}.
+
+  \begin{enumerate}
+    \item Find the are of the Sierpiński triangle $S$.
+  \end{enumerate}
+  Now let's choose a point $(X, Y)$ in the Sierpiński triangle with vertices $(0,0)$, $(1,0)$ and $(1/2, \sqrt{3}/2)$ randomly uniformly. 
+  \begin{enumerate}[resume]
+    \item Find $\E(X)$ and $\Var(X)$.
+    \item Find $\E(Y)$ and $\Var(Y)$.
+    \item Find $\Cov(X, Y)$.
+    \item How one may randomly choose a point in the Sierpiński triangle using a fair coin?
+  \end{enumerate}
+
+  \begin{sol}
+  \begin{enumerate}
+    \item $1 - 1/4 - 3/4^2 - 3^2/4^3 - \dots = 1 - \frac{1/4}{1 - 3/4} = 0$;
+    \item $\E(X) = 1/2$ by symmetry;
+    For the $\E(X^2)$ we may build an equation using the first step approach
+    \[
+    \E(X^2) = 1/3 \E( (X/2)^2) + 1/3 \E((1/2 + X/2)^2) + 1/3\E((1/4 + X/2)^2).
+    \]
+    \item 
+    \item $\Cov(X, Y) = 0$.
+    \item Toss a fair coin infinitely many times. 
+    Divide the tosses into pairs. 
+    If we observe the pair $HH$ we choose the left smaller triangle, $TH$ — the right one, $HT$ — the upper one, $TT$ — discard the pair of tosses.
+  \end{enumerate}
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
 
 
 \section{Markov chains}
