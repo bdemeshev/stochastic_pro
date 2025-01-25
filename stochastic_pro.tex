@@ -196,6 +196,7 @@ keywordstyle=\fontfamily{lmtt}\bfseries
 
 \DeclareMathOperator{\Corr}{Corr}
 \DeclareMathOperator{\sCorr}{sCorr}
+\DeclareMathOperator{\pCorr}{pCorr}
 \DeclareMathOperator{\sCov}{sCov}
 \DeclareMathOperator{\sVar}{sVar}
 \DeclareMathOperator{\hVar}{\widehat{\Var}}
@@ -731,9 +732,9 @@ Let $N_k$ the number of visits of point $k$ before the first return of a random 
 \begin{problem}
   The Cantor set fractal $C$ is constructed in the following way. 
   We start with unit segment $I_0 = [0; 1]$.
-  At first stage we remove the middle third from the segment.
+  At the first stage we remove the middle third from the segment.
   Hence after the first stage we obtain $I_1 = [0; 1/3] \cup [2/3; 1]$.
-  At second stage we remove the middle third from every segment.
+  At the second stage we remove the middle third from every segment.
   Hence after the second stage we obtain $I_2 = [0; 1/9] \cup [2/9; 3/9] \cup [6/9; 7/9] \cup [8/9; 9/9]$.
   We continue this process infinitely many times and in the limit we obtain the Cantor set $C$,
   see \url{https://en.wikipedia.org/wiki/Cantor_set}.
@@ -787,9 +788,9 @@ If we observe $H$ then we choose the left part and if we observe $T$ then we cho
 \begin{problem}
   The Sierpiński triangle $S$ is constructed in the following way. 
   We start with an equilateral triangle $T_0$ with unit sides. 
-  At first stage we subdivide the triangle into four smaller congruent equilateral triangles and remove the central triangle.
-  Hence after the first stage the set $T_1$ that consists of three triangles.
-  At second stage we we subdivide every triangle into four smaller congruent equilateral triangles and remove the central triangle.
+  At the first stage we subdivide the triangle into four smaller congruent equilateral triangles and remove the central triangle.
+  Hence after the first stage the set $T_1$ consists of three triangles.
+  At the second stage we we subdivide every triangle into four smaller congruent equilateral triangles and remove the central triangle.
   Hence after the second stage we obtain the set $T_2$ that consists of nine triangles.
   We continue this process infinitely many times and in the limit we obtain the Sierpiński triangle $S$,
   see \url{https://en.wikipedia.org/wiki/Sierpiński_triangle}.
@@ -2766,8 +2767,8 @@ Let $Y$ be the indicator of a even score and $Z$ be the indicator of score bigge
 
 \begin{problem}
 We throw a coin infinitely many times. 
-Let $X_{n}$ be the indicator that the coin landed on Head at toss number $n$.
-Consider a pack of $ \sigma$-algebras: $\cF_{n}:=\sigma(X_1, X_2, \ldots, X_n)$, $\cH_{n}:=\sigma(X_{n}, X_{n+1}, X_{n+2}, \ldots)$.
+Let $X_n$ be the indicator that the coin landed on Head at toss number $n$.
+Consider a pack of $ \sigma$-algebras: $\cF_n:=\sigma(X_1, X_2, \ldots, X_n)$, $\cH_n:=\sigma(X_n, X_{n+1}, X_{n+2}, \ldots)$.
 
 \begin{enumerate}
 \item For each case provide two examples of $\sigma$-algebras that contain the corresponding event
@@ -2784,7 +2785,7 @@ Consider a pack of $ \sigma$-algebras: $\cF_{n}:=\sigma(X_1, X_2, \ldots, X_n)$,
 \begin{enumerate}
 \item $A\in \cF_{2024}$;
 \item $A\notin \cF_{2025}$;
-\item $A \in \cH_{n}$ for all possible $n$;
+\item $A \in \cH_n$ for all possible $n$;
 \end{enumerate}
 
 
@@ -3015,7 +3016,7 @@ Y_{T - k} = \begin{cases}
   \begin{enumerate}
     \item $\cF_J$, $\cF_{11}$, $\cF_{12}$, \dots
     \item $\{T \text{ is divisible by } 2\}$, $\{T \geq 3, X_{T-2} = 1\}$.
-    \item $\E(T \mid \cF_J) = T$, $\E(X_{T} \mid \cF_J) = 1$, $\E(X_{T+1} \mid \cF_J) = -1$.
+    \item $\E(T \mid \cF_J) = T$, $\E(X_T \mid \cF_J) = 1$, $\E(X_{T+1} \mid \cF_J) = -1$.
     \item $\E(S_T \mid \cF_J) = S_T$, $\E(S_{T+1} \mid \cF_J) = S_T - 1$, $\E(S_{T+2} \mid \cF_J) = S_T - 1$.
     \item $\E(Y_{T - k} \mid \cF_J) = Y_{T- k }$.
     \item $\E(X_T \mid \cF_{10}) = 1$, $\E(X_{T+1} \mid \cF_{10}) = -1$.
@@ -3066,9 +3067,9 @@ Find the $\sigma$-algebras that model the following situations:
 \begin{leftbar}
 \begin{itemize}
   \item \emph{Natural filtration} of a process $(X_n)$ is given by $\cF_n = \sigma(X_1, X_2, \dots, X_n)$.
-  \item A process $(X_n)$ is a \emph{martingale} if $\E(X_{n + k} \mid X_n, X_{n-1}, \dots, X_1) = X_{n}$ for all $k \geq 1$.
+  \item A process $(X_n)$ is a \emph{martingale} if $\E(X_{n + k} \mid X_n, X_{n-1}, \dots, X_1) = X_n$ for all $k \geq 1$.
   \item A process $(X_n)$ is \emph{adapted} to filtration $(\cF_n)$ if every random variable $X_n$ is measurable wrt to sigma-algebra $\cF_n$.
-  \item A process $(X_n)$ is a \emph{martingale wrt to filtration} $(\cF_n)$ if $\E(X_{n + k} \mid \cF_n) = X_{n}$.
+  \item A process $(X_n)$ is a \emph{martingale wrt to filtration} $(\cF_n)$ if $\E(X_{n + k} \mid \cF_n) = X_n$.
 \end{itemize}
 \end{leftbar}
 
@@ -4683,7 +4684,7 @@ Find the current price $X_0$ of an option that pays you one dollar at time $T=2$
   Here  $S_T$ denotes the price of one share at time $T$, $M$ — arbitrary constant, specified at the moment of the issue.
   \begin{sol}
 \[
-X_0 = \E_{\tilde{p}}( \exp( - rT )X_{T} \mid \cF_0)
+X_0 = \E_{\tilde{p}}( \exp( - rT )X_T \mid \cF_0)
 \]
   \end{sol}
 \end{problem}
@@ -4709,7 +4710,82 @@ stock prices are in euros.
 \end{problem}
 
 
+
+
+\subsection*{Lag notation}
+
+\begin{problem}
+  Rewrite the equation $y_t = 4 + 0.4y_{t-1} + 0.3u_{t-1} + u_t$ using lag operator.
+  \begin{sol}
+  \[
+  (1 - 0.4L)y_t = 4 + (1 + 0.3L)u_t
+  \]
+  \end{sol}
+  \end{problem}
+  
+  
+  \begin{problem}
+  Consider the process $(x_t)$ with $t\geq 0$ and $y_t = (1 + L)^t x_t$.
+  Write $x_t$ in terms of $y_t$ using lag operator $L$.
+  \begin{sol}
+  $x_t=(1-L)^{t}y_t$
+  \end{sol}
+  \end{problem}
+  
+  \begin{problem}
+  Let $(F_n)$ be the sequence of Fibonacci numbers. 
+  \begin{enumerate}
+  \item Write the recurrence relation of Fibonacci numbers using lag operator. 
+  \item Simplify the expression $L^3 (1 + L)^3 F_n$.
+  \item Simplify the expression $L^{13} (1 + L)^{10} F_n$.
+  \item Simplify the fraction
+  \[
+  \frac{F_{101}+C^{1}_{5}F_{102}+C^{2}_{5}F_{103}+C^{3}_{5}F_{104}+C^{4}_{5}F_{105}+C^{5}_{5}F_{106}}
+  {F_{111}}
+  \]
+  \item Simplify the value of $a$.
+  \end{enumerate}
+  
+  \begin{sol}
+  Recall that $F_n=L(1+L)F_n$, hence $F_n=L^k (1+L)^k F_n$ or $F_{n+k}=(1+L)^k F_n$ and $a = 1$.
+  \end{sol}
+  \end{problem}
+  
+  
+  
+  \begin{problem}
+  Consider the process $(x_t)$ with integer time $t$ and $y_t=x_{-t}$. 
+  
+  Which reasoning is good and why?
+  \begin{enumerate}
+  \item $L y_t = L x_{-t} = x_{-t-1}$;
+  \item $L y_t = y_{t-1} = x_{-t+1}$;
+  \item $x_t L y_t = x_t y_{t-1}$;
+  \item $x_t L y_t = x_{t-1} y_t$.
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+      \item false;
+      \item true;
+      \item true;
+      \item false.
+    \end{enumerate}
+  \end{sol}
+  \end{problem}
+  
 \section{Stationarity}
+% before any arima related theorem
+
+
+\begin{leftbar}
+The process $(u_t)$ is called a white noise if $\E(u_t) = 0$, $\Var(u_t) = \sigma^2$ and $\Cov(u_t, u_s) = 0$ for $t\neq s$.
+
+The process $(y_t)$ is called weakly stationary if $\E(y_t) = \mu$ and $\Cov(u_t, u_s) = \gamma_{t-s}$.
+
+The process $(y_t)$ is called strictly stationary if the distribution law of $(y_t, y_{t+1}, \dots, y_{t+k})$ does not depend on $t$ for all $k$.
+\end{leftbar}
+  
+
 
 \begin{problem}
   The variables $x_t$ take values $0$ or $1$ with equal probabilities.
@@ -4728,10 +4804,251 @@ stock prices are in euros.
 
 
 \begin{problem}
+  Recall the definition of a martingale, Markov chain and stationary process. 
+
+  Provide an explicit example for all 8 possible combination of these properties. 
   \begin{sol}
 
   \end{sol}
 \end{problem}
+
+\begin{problem}
+  Each process can be weakly stationary or not, strictly stationary or not. 
+
+  Provide an explicit example for all four possible combination of these properties. 
+  \begin{sol}
+    \begin{enumerate}
+      \item $u_t \sim \cN(0;1)$ and independent;
+      \item $u_t \sim \cN(0;1)$ for $t>1$, $u_1$ takes values $-1$ or $1$ with probability $1/2$.
+      All $(u_t)$ are independent.
+      \item Variables $u_t$ are independent and identically distributed with infinite $\E(u_t)$.
+      \item $u_t \sim \cN(t; 1)$ and independent.
+    \end{enumerate}
+  
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  Let $y_t$ be a stationary process. 
+  Check whether the following processes are stationary. 
+  For stationary $(z_t)$ express its autocovariance function in terms of an autocovariance function of $(y_t)$.
+  \begin{enumerate}
+  \item $z_t = 2y_t$;
+  \item $z_t = y_t + 1$;
+  \item $z_t = \Delta y_t$;
+  \item $z_t = 2y_t + 3y_{t-1}$.
+  \end{enumerate}
+  \begin{sol}
+  \begin{enumerate}
+    \item stationary, $\gamma^z_k = 4\gamma^y_k$.
+    \item stationary, $\gamma^z_k = \gamma^y_k$.
+    \item stationary;
+    \item stationary;
+  \end{enumerate}
+  \end{sol}
+  \end{problem}
+  
+  
+    
+  
+  
+  \begin{problem}
+  Let $u_t$ be a white noise. 
+  Consider the equation $y_t = 2 + 0.5 y_{t-1} + u_t$ where $t \geq 0$ and each $y_t$ may depend only on $u_t$, $u_{t-1}$, \dots, $u_0$.
+  
+  \begin{enumerate}
+  \item Find $\E(y_t)$ and $\Var(y_t)$ and check the stationarity of the process in the following cases:
+  \begin{enumerate}
+  \item $y_0 = 0$
+  \item $y_0 = 4$
+  \item $y_0 = 4 + u_0$
+  \end{enumerate}
+  \item Find initial condition $y_0$ such that the resulting process is stationary.
+  \item In some books and internet sources it is written something like «the process $y_t = 2 + 0.5 y_{t-1} + u_t$ is stationary as $\abs{0.5} < 1$».
+What is the problem with this statement?  
+\end{enumerate}
+  
+  
+  
+  
+  \begin{sol}
+  \begin{enumerate}
+    \item
+    \item Process $(y_t)$ is stationary for $y_0 = 4 +\frac{2}{\sqrt{3}}u_0$. 
+    \item Expression $y_t = 2 + 0.5 y_{t-1} + u_t$ is only an equation. 
+    There are infinitely many stochastic processes that satisfy this equation. 
+    Most of them are non-stationary, but it has a stationary solution. 
+  \end{enumerate}
+  \end{sol}
+  \end{problem}
+  
+  
+  
+  
+  \begin{problem}
+  I remove odd numbered observations from a stationary process $(x_t)$ and obtain a new process $(y_t)$.
+  
+  \begin{enumerate}
+    \item Express the process $(y_t)$ in terms of the process $(x_t)$.
+    \item Is the resulting process $(y_t)$ stationary?
+    \item Find the autocovariance function of $(y_t)$ in terms of the autocovariance function of $(x_t)$.
+  \end{enumerate}
+  
+  \begin{sol}
+  \begin{enumerate}
+    \item $y_t = x_{2t}$;
+    \item Yes, $(y_t)$ is stationary.
+    \item 
+  \end{enumerate}
+  \end{sol}
+  \end{problem}
+  
+  
+  
+  \begin{problem}
+  Elon Musk observes a stationary process $(x_t)$ and is very bored. 
+  He throws an fair coin every time he observes a next value. 
+  If the coin lands on head then he keeps the observed value as the next value of $(y_s)$, otherwise he discards the value and does not record it.
+  
+  \begin{enumerate}
+    \item Is the resulting process $(y_t)$ stationary?
+    \item Find the autocovariance function of $(y_t)$ in terms of the autocovariance function of $(x_t)$.
+  \end{enumerate}
+  
+  \begin{sol}
+    \begin{enumerate}
+      \item The process $(y_t)$ is stationary.
+      \item 
+    \end{enumerate}
+  \end{sol}
+  \end{problem}
+  
+  
+  \begin{problem}
+  Consider the process $(u_t)$ for $t\geq 0$ where all $u_t$ are independent and uniformly distributed on $[-1;1]$.
+  \begin{enumerate}
+  \item Is the process $(u_t)$ a white noise?
+  \end{enumerate}
+
+  Let's draw the process $(u_t)$ and consider a new process $x_t$ for $t \geq 1$.
+  Define $x_t = 1$ if the segment joining $u_t$ and $u_{t-1}$ intersects the abscissa and $x_t = 0$ otherwise.  
+  
+  \begin{enumerate}
+    \item Find $\P(x_t = 1)$, $\E(x_t)$.
+    \item Find $\Cov(x_t, x_{t+1})$ and $\Cov(x_t, x_{t+2})$.
+    \item Is $(x_t)$ stationary? Is it a white noise?
+  \end{enumerate}
+
+  Now let's count the cumulative number of abscissa intersetions, $s_t = x_1 + x_2 + \dots + x_t$.
+  
+  \begin{enumerate}[resume]
+  \item Find $\E(s_t)$.
+  \item What is the distribution of $s_t$?
+  \item Find approximately $\P(s_{100} > 55)$.
+  \end{enumerate}
+  
+  \begin{sol}
+  \begin{enumerate}
+    \item $\P(x_t = 1) = \E(x_t) = 1/2$;
+    \item $\Cov(x_t, x_s) = 0$ for $t\neq s$;
+    \item The process $(x_t)$ is stationary but not a white noise as $\E(x_t) \neq 0$.
+    \item $\E(s_t) = t/2$;
+    \item $s_t \sim \dBin(t, 1/2)$;
+    \item Use the central limit theorem.
+  \end{enumerate}
+  \end{sol}
+  \end{problem}
+  
+  
+  \begin{problem}
+  The variables $x_t$ are independent and take values $0$ or $1$ with equal probabilities.
+  The variables $y_t$ are independent and normal $\cN(0;24)$.
+  The processes $(x_t)$ and $(y_t)$ are independent.
+  
+  Consider two processes:
+  \[
+  a_t = x_t (1-x_{t-1}) y_t \quad \text{and} \quad b_t = y_{t-1} y_t.
+  \]
+    \begin{enumerate}
+    \item Are $(a_t)$ identically distributed? And $(b_t)$?
+    \item Are $(a_t)$ independent? And $(b_t)$?
+    \item Is $(a_t)$ a white noise? And $(b_t)$?
+  \end{enumerate}
+  \begin{sol}
+  
+  \begin{enumerate}
+    \item $(a_t)$ are identically distributed; $(b_t)$ are identically distributed.
+    \item $(a_t)$ are dependent, ie if $a_t \neq 0$ then $a_{t-1} = a_{t+1} = 0$; $(b_t)$ are dependent.
+    \item $(a_t)$ is a white noise; $(b_t)$ is a white noise.
+  \end{enumerate}
+
+  \end{sol}
+  \end{problem}
+  
+  
+  
+  
+    
+  
+  
+  \begin{problem}
+  The variables $(u_t)$ are independent and identically continuously distributed.
+  
+  Let's call the time moment $t$ a turning point («поворотная точка») if it is the local extremum, ie it is higher than both of his neighbors or is lower than both of his neighbors. 
+  
+  Consider the process $(z_t)$ where $z_t = 1$ if $t$ is a turning point and $z_t = 0$ if not. 
+  
+  
+  \begin{enumerate}
+    \item Find $\P(z_t = 1)$ and $\E(z_t)$.
+    \item Find $\Cov(z_1, z_2)$, $\Cov(z_1, z_3)$, $\Cov(z_1, z_4)$.
+    \item Is $(z_t)$ a stationary process?
+    \item Represent $z_t$ in a form $z_t = \mu + v_t + \alpha_1 v_{t-1} + \alpha_2 v_{t-2}$, where $v_t$ is a white noise. 
+    \item Are $(v_t)$ in point (d) independent?
+  \end{enumerate}    
+  Now let's also count the number of observed turning points by $s_t = z_2 + \ldots + z_{t-1}$.
+  The values $z_1$ and $z_t$ do not enter the sum, as we do not count boundary points as turning points. 
+\begin{enumerate}
+  \item Find $\E(s_t)$ and $\Var(s_t)$.
+  \item Is $(s_t)$ stationary?
+  \end{enumerate}
+
+  \begin{sol}
+    \begin{enumerate}
+    \item $\P(z_t = 1) = \E(z_t) = 2/3$;
+    \item $\Cov(z_1, z_2) = $, $\Cov(z_1, z_3) = $, $\Cov(z_1, z_4) = 0$;
+    \item $(z_t)$ is stationary;
+    \item 
+    \item 
+    \item $\E(s_t) = (t-2) \cdot 2/3$, $\Var(s_t) = (16t - 29)/90$;
+    \item $(s_t)$ is not stationary;
+    \end{enumerate}
+  
+  \end{sol}
+  \end{problem}
+    
+  
+  
+  \begin{problem}
+    The processes $(a_t)$ and $(b_t)$ are stationary. 
+    The correlation $\Corr(a_t, b_t) = 0$ for all $t$. 
+    
+    Consider the product $y_t = a_t b_t$ and the sum $x_t = a_t + b_t$.
+
+  
+    \begin{enumerate}
+      \item Is the process $(x_t)$ stationary? Provide a proof or a counter-example.
+      \item Is the process $(y_t)$ stationary? Provide a proof or a counter-example.
+      \item How the answers to (a) and (b) will change if  $\Corr(a_t, b_s) = 0$ arbitrary $t$ and $s$.
+    \end{enumerate}
+  \begin{sol}
+  \begin{enumerate}
+  \item The process $(x_t)$ may not be stationary;
+  \item The process $(y_t)$ may not be stationary;
+  \item The process $(x_t)$ is stationary, but $(y_t)$ may not. 
+  \end{enumerate}
+  \end{sol}
+  \end{problem}
 
 \begin{problem}
   \begin{sol}
@@ -4746,18 +5063,113 @@ stock prices are in euros.
   \end{sol}
 \end{problem}
 
-\begin{problem}
-  \begin{sol}
 
+\subsection*{Partial correlation}
+% the concept of partial correlation outside ARMA process
+
+\begin{problem}
+  We throw a fair dice three time, let's denote the results by $X_1$, $X_2$ and $X_3$. 
+  Consider the sums $L=X_1+X_2$, $R=X_2+X_3$ and $S=X_1+X_2+X_3$.
+\begin{enumerate}
+\item Intuitively without calculations find the sign of ordinary and partial correlations $\Corr(L, R)$, $\Corr(L, S)$, $\pCorr(L, R; S)$,
+  $\pCorr(L, S; R)$, $\Corr(X_1, R)$, $\pCorr(X_1, R; S)$, $\pCorr(X_1, R; L)$, $\pCorr(L, R; X_2)$, $\pCorr(L, R; X_1)$;
+\item Try to find the exact value of all ordinary and partial calculations intuitively without calculations.
+\item Calculate all the values honestly.
+\end{enumerate}
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+
+
+
+\begin{problem}
+  The random variable $Z$ takes values $0$ and $1$ with equal probabilities.
+  We know the conditional distribution of the vector $X = (X_1, X_2)$ given $Z$:
+  \[
+    \begin{pmatrix}
+      X_1 \\
+      X_2 \\
+    \end{pmatrix} \mid Z=0 \sim \cN\left(
+      \begin{pmatrix}
+        0 \\
+        0 \\
+      \end{pmatrix};
+      \begin{pmatrix}
+        1 & 0 \\
+        0 & 1 \\
+      \end{pmatrix}
+      \right)
+  \]
+  \[
+    \begin{pmatrix}
+      X_1 \\
+      X_2 \\
+    \end{pmatrix} \mid Z=1 \sim \cN\left(
+      \begin{pmatrix}
+        1 \\
+        1 \\
+      \end{pmatrix};
+      \begin{pmatrix}
+        4 & -1 \\
+        -1 & 9 \\
+      \end{pmatrix}
+      \right)
+  \]
+  
+  \begin{enumerate}
+    \item Find the partial correlation $\pCorr(X_1, X_2; Z)$.
+    \item Find the conditional correlation $\Corr(X_1, X_2 \mid Z)$.
+  \end{enumerate}
+  
+    \begin{sol}
+  Projections: $\tilde X_1 = X_1 + Z$; $\tilde X_2 = X_2 + Z$; $\E(X_i|Z)=1-Z$; $\Cov(X_i, Z)=-1/4$;
+  
+  Variable $Z$ has Bernoulli distribution, hence  $\E(Z)=1/2$ и $\Var(Z)=1/4$;
+  
+  \[
+    \pCorr(X_1, X_2; Z) = \frac{-1/2}{12.5} = -\frac{1}{\sqrt{50}}
+  \]
+  \[
+    \Corr(X_1, X_2|Z)=-Z/6
+  \]
+    \end{sol}
+  \end{problem}
+  
+
+
+\begin{problem}
+The random vector $X = (X_1, X_2, X_3)$ has multivariate normal distribution:
+\[
+  \begin{pmatrix}
+    X_1 \\
+    X_2 \\
+    X_3
+  \end{pmatrix} \sim \cN\left(
+    \begin{pmatrix}
+      0 \\
+      0 \\
+      0
+    \end{pmatrix};
+    \begin{pmatrix}
+      10 & 1 & -1 \\
+      1 & 10  & 2 \\
+      -1 & 2 & 10
+    \end{pmatrix}
+    \right).
+\]
+\begin{enumerate}
+  \item Find the partial correlation $\pCorr(X_1, X_2; X_3)$.
+  \item Find the conditional correlation $\Corr(X_1, X_2 \mid X_3)$.
+\end{enumerate}
+
+  \begin{sol}
   \end{sol}
 \end{problem}
 
 
-\begin{problem}
-  \begin{sol}
-
-  \end{sol}
-\end{problem}
+  
 
 
 
@@ -4792,7 +5204,11 @@ stock prices are in euros.
       \item Can Snёgurochka find two starting constants $y_0 = c_0$ and $y_1=c_1$ in such a way to make a solution stationary?
   \end{enumerate}
   \begin{sol}
-
+    \begin{enumerate}
+      \item Infinitely many non-stationary solutions.
+      \item $\lambda^2 - \lambda - 1 = 0$, $\lambda = (1 \pm \sqrt{5}) / 2$; there is exactly one stationary solution, this solution can not be represented as $MA(\infty)$ with respect to $(u_t)$.
+      \item No; 
+    \end{enumerate}
   \end{sol}
 \end{problem}
 
@@ -5050,6 +5466,50 @@ You should explicitely write the lag polynomial $A(L)$ and the value of $\mu$.
   \end{sol}
 \end{problem}
 
+
+\begin{problem}
+The process $(u_t)$ is a white noise, $t \in \ZZ$.
+Which of the following equations admit at least one stationary solution?
+\begin{enumerate}
+\item $y_t=1+u_t+0.5u_{t-1}+0.25u_{t-2}$;
+\item $y_t=-2y_{t-1}-3y_{t-2}+u_t+u_{t-1}$;
+\item $y_t=-0.5y_{t-1} + u_t$;
+\item $y_t=1-1.5 y_{t-1} - 0.5 y_{t-2} + u_t - 1.5u_{t-1} - 0.5u_{t-2}$;
+\item $y_t=1+0.64y_{t-2}+u_t+0.64u_{t-1}$;
+\item $y_t=1+t+u_t$;
+\item $y_t=1+y_{t-1}+u_t$.
+\end{enumerate}
+\begin{sol}
+
+\begin{enumerate}
+\item $y_t = 1+u_t+0.5u_{t-1}+0.25u_{t-2}$ admits a stationary solution.
+\item $y_t = -2y_{t-1}-3y_{t-2}+u_t+u_{t-1}$
+\item $y_t = -0.5y_{t-1} + u_t$ admits a stationary solution.
+\item $y_t = 1-1.5 y_{t-1} - 0.5 y_{t-2} + u_t - 1.5u_{t-1} - 0.5u_{t-2}$
+\item $y_t = 1+0.64y_{t-2}+u_t+0.64u_{t-1}$ admits a stationary solution.
+\item $y_t = 1 + t + u_t$ does not admit a stationary solution.
+\item $y_t = 1 + y_{t-1} + u_t$ does not admit a stationary solution.
+\end{enumerate}
+\end{sol}
+\end{problem}
+
+\begin{problem}
+  The process $y_t$ is stationary and is generated by equation $y_t = 1 + 0.5 y_{t-1} + u_t$ where $(u_t)$ is a white noise. 
+  
+  We have $10000$ observations.
+  
+  \begin{enumerate}
+    \item What will be the approximate OLS estimates in the regression $\hat y_t = \hat\beta_1 + \hat\beta_2 y_{t-1}$?
+    \item What will be the approximate OLS estimates in the regression $\hat y_t = \hat\gamma_1 + \hat\gamma_2 y_{t+1}$?
+  \end{enumerate}
+  
+  \begin{sol}
+  $\hat\beta_1 \approx \hat\gamma_1 \approx 1$ and $\hat\beta_2 \approx \hat\gamma_2 \approx 0.5$ as 
+  estimates can be recovered from sample autocovariance function and sample mean. 
+  \end{sol}
+  \end{problem}
+
+
 \begin{problem}
   \begin{sol}
 
@@ -5084,7 +5544,7 @@ You should explicitely write the lag polynomial $A(L)$ and the value of $\mu$.
   The $ETS(AAdN)$ model is given by the system
   \[
   \begin{cases}
-  u_t  \sim \mathcal{N}(0;20) \\
+  u_t  \sim \cN(0;20) \\
   b_t = 0.9 b_{t-1} + 0.2 u_t \\
   \ell_t = \ell_{t-1} + 0.9 b_{t-1} + 0.3 u_t \\
   y_t = \ell_{t-1} + 0.9 b_{t-1} + u_t \\
@@ -5250,7 +5710,7 @@ Calculate one step and two steps ahead 95\% predictive intervals.
   \[ 
       \begin{cases}
           y_t = \sigma_t \nu_t \\
-          \sigma_{t}^{2}= 1 + 0.2 y_{t-1}^{2}+ 0.3 \sigma_{t-1}^{2}    \\
+          \sigma_t^{2}= 1 + 0.2 y_{t-1}^{2}+ 0.3 \sigma_{t-1}^{2}    \\
           \nu_t \sim \cN(0;1)
       \end{cases}     
   \]
