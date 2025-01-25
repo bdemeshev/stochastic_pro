@@ -217,6 +217,9 @@ keywordstyle=\fontfamily{lmtt}\bfseries
 
 \DeclareMathOperator{\E}{\mathbb{E}}
 
+
+\DeclareMathOperator{\mgf}{mgf}
+
 \newcommand{\e}{\varepsilon}
 
 
@@ -705,7 +708,24 @@ Let $N_k$ the number of visits of point $k$ before the first return of a random 
 
 
 \begin{problem}
+  Consider a symmetric random walk $S_n$ with $S_0 = 0$. 
+  One may write $S_n = X_1 + X_2 + \dots + X_n$ where the steps $X_n$ are independent and take values $+1$ or $-1$ with equal probabilities.
+
+  Consider the first moment of time $\tau$ when $S_n$ will hit or intersect the line $n - 100$.
+
+  \begin{enumerate}
+    \item Find $\E(\tau)$ and $\Var(\tau)$.
+    \item Find the probability $\P(\tau = k)$.
+    \item Find the moment generating function $\mgf(u)$ of $\tau$.
+    \item Solve the point (a), (b) and (c) for the line $2n - 100$.
+    \item Solve the point (a) for the line $1/2 n - 100$.
+  \end{enumerate}
+
+
   \begin{sol}
+    \begin{enumerate}
+      \item Consider the distance between the point and the line, $d_t$, and observe that $\Delta d_t$ is equal to $0$ or $1$ with equal probabilities.
+    \end{enumerate}
   
   \end{sol}
 \end{problem}
@@ -3441,7 +3461,7 @@ If $(M_t)$ is a martingale and $\tau$ is a stopping time then $\E(M_\tau) = \E(M
 \begin{itemize}
   \item $\P(\tau < \infty) = 1$, the stopped process $X_t = M_{t\wedge \tau}$ is bounded by some constant.
   \item $\E(\tau) < \infty$, the process $D_t = \E(M_{(t+1) \wedge \tau} - M_{t\wedge\tau} \mid \cF_t)$ is bounded by some constant.
-  \item $\P(\tau < \infty) = 1$, the process $M_t$ is uniformly integrable, ie 
+  \item $\P(\tau < \infty) = 1$, the process $M_t$ is uniformly integrable,
   \[
   \lim_{a \to \infty }\sup_t \E(M_t \cdot I(M_t > a)) = 0.
   \]
@@ -4978,7 +4998,7 @@ What is the problem with this statement?
   
   \begin{enumerate}
     \item $(a_t)$ are identically distributed; $(b_t)$ are identically distributed.
-    \item $(a_t)$ are dependent, ie if $a_t \neq 0$ then $a_{t-1} = a_{t+1} = 0$; $(b_t)$ are dependent.
+    \item $(a_t)$ are dependent, for example if $a_t \neq 0$ then $a_{t-1} = a_{t+1} = 0$; $(b_t)$ are dependent.
     \item $(a_t)$ is a white noise; $(b_t)$ is a white noise.
   \end{enumerate}
 
@@ -4994,7 +5014,7 @@ What is the problem with this statement?
   \begin{problem}
   The variables $(u_t)$ are independent and identically continuously distributed.
   
-  Let's call the time moment $t$ a turning point («поворотная точка») if it is the local extremum, ie it is higher than both of his neighbors or is lower than both of his neighbors. 
+  Let's call the time moment $t$ a turning point («поворотная точка») if it is the local extremum, i.e. it is higher than both of his neighbors or is lower than both of his neighbors. 
   
   Consider the process $(z_t)$ where $z_t = 1$ if $t$ is a turning point and $z_t = 0$ if not. 
   
