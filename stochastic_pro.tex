@@ -2544,7 +2544,23 @@ $\E(Y \mid X)=X/2$, $\E(Y)=\E(X/2)=a/4$,
 
   
 \begin{problem}
+  Random variables $X$ and $Y$ are independent with finite expected values and finite variances. 
+
+  Elon Musk knows that $\E(X \mid X + Y) = X + Y$.
+  \begin{enumerate}
+    \item Find $\E(Y \mid X + Y)$ and $\E(Y)$.
+    \item Find $\Var(Y)$ and $\Var(X \mid X + Y)$.
+    \item What is the distribution of the random variable $Y$?
+  \end{enumerate}
   \begin{sol}
+    \begin{enumerate}
+      \item $\E(Y \mid X + Y) = 0$ and $\E(Y) = 0$.
+      \item Using the formula $\Var(X) = \Var(\E(X \mid X + Y)) + \E(\Var(X \mid X + Y))$,
+      we obtain that $\Var(Y) + \E(\Var(X \mid X + Y)) = 0$.
+
+      Hence, $\Var(Y) = 0$ and $\Var(X \mid X + Y) = 0$.
+      \item The random variable $Y$ is almost surely zero.
+    \end{enumerate}
   \end{sol}
 \end{problem}
 
@@ -5528,6 +5544,39 @@ Which of the following equations admit at least one stationary solution?
   estimates can be recovered from sample autocovariance function and sample mean. 
   \end{sol}
   \end{problem}
+
+
+\begin{problem}
+  
+  Consider the recurrence equation $y_t = 2 + 0.5 y_{t-1} + u_t$ for $t \in \{0, 1, 2, \dots \}$ and independent $u_t \sim \cN(0;\sigma^2)$.
+
+  \begin{enumerate}
+    \item Find three different stationary processes $(y_t)_{t=0}^{\infty}$ that satisfy this equation. 
+    \item Will the forecasts for these three solutions from (a) be different?
+    \item How the answer to (a) will change if $t \in \ZZ$ and we need to find $(y_t)_{t=-\infty}^{\infty}$?
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+      \item $y_0 = 4 + 2u_0/\sqrt{3}$, $y_0 = 4 - 2u_0/\sqrt{3}$,  \dots
+      \item The forecasts are the same as the distribution of the vector $y = (y_1, y_2, \dots, y_n)$ is the same.
+      \item There will be almost surely unique stationary solution. 
+    \end{enumerate}
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
 
 
 \begin{problem}
