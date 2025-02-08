@@ -212,6 +212,11 @@ keywordstyle=\fontfamily{lmtt}\bfseries
 \DeclareMathOperator{\softmax}{softmax}
 \DeclareMathOperator{\Med}{Med}
 
+\let\Im\relax
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\DeclareMathOperator{\Im}{Im}
+
 \let\P\relax
 \DeclareMathOperator{\P}{\mathbb{P}}
 
@@ -2566,6 +2571,15 @@ $\E(Y \mid X)=X/2$, $\E(Y)=\E(X/2)=a/4$,
 
 
 \begin{problem}
+Let's sum up independent identically distributed random variables $X_t \sim \dUnif[0;1]$.
+Denote the cumulative sum by $S_t = X_1 + X_2 + \dots + X_t$.
+
+\begin{enumerate}
+  \item Find $\E(S_9 \mid S_8)$, $\E(S_9 \mid S_{10})$, $\E(S_9 \mid S_8, S_{10})$, $\E(S_9 \mid S_5, S_{10}, S_{20})$.
+  \item Find $\Var(S_9 \mid S_8)$.
+\end{enumerate}
+% TODO: is it possible to find $\Var(S_1 \mid S_{10})$?
+
   \begin{sol}
   \end{sol}
 \end{problem}
@@ -4528,8 +4542,33 @@ The $dn$ coefficient is zero, hence $S_n$ is a martingale».
 
 
 \begin{problem}
-  \begin{sol}
+Consider a complex-valued stochastic process, $C_t = \exp(i W_t)$.
+\begin{enumerate}
+  \item Simulate three trajectories of this process and draw them on a complex plane.
+\end{enumerate}
+Hint: one may consider a fixed $T = 10$ and split time interval $[0; T]$ into $n = 10000$ small segments.
+The Wiener process increments on these segments will be independent normal distributed random variables.
 
+\begin{enumerate}[resume]
+  \item According to you plot is $C_t$ a martingale or it has a systematic drift?
+\end{enumerate}
+
+Consider the process $M_t = h(t) \exp(i W_t)$ where $h(t)$ is a non-random function. 
+
+\begin{enumerate}[resume]
+  \item Find $dM_t$ using Ito's lemma. 
+  \item Find a function $h(t)$ such that $(M_t)$ is a martingale and $M_0 = 1$.
+  \item Is $\Re M_t$ a martingale?
+  \item Is $\Im M_t$ a martingale?
+\end{enumerate}
+
+  \begin{sol}
+    \[
+    dM_t  = h(t) \exp(iW_t) i dW_t + 0.5 h(t) \exp(iW_t)i^2 (dW_t)^2 + h'(t)\exp(iW_t)dt.
+    \]
+    For $M_t$ to be a martingale we need $h' = 0.5 h$, $h(t) = \exp(t/2)$ and $M_t = \exp(iW_t + t/2)$.
+
+    Both $\Re M_t = \cos(W_t) \exp(t/2)$ and $\Im M_t = \sin (W_t) \exp(t/2)$ are martingales.
   \end{sol}
 \end{problem}
 
@@ -5565,7 +5604,56 @@ Which of the following equations admit at least one stationary solution?
 \end{problem}
 
 \begin{problem}
-  \begin{sol}
+This exercise provides an elementary proof that a unit root corresponds to the absence of stationary solutions.  
+
+Let $(y_t)$ be a stationary process with autocovariance function $\gamma_k$ and $(u_t)$ — a white noise with variance $\sigma^2$.
+\begin{enumerate}
+  \item Using trivial bounds for correlation deduce the possible range for $\Cov(y_{t-k}, u_{t} + u_{t-1} + \dots + u_{t + 1 - k})$.
+  \item Prove that $(y_t)$ can't satisfy an equation $y_t = y_{t - 1} + u_t$.
+  \item Prove that $(y_t)$ can't satisfy an equation $(1 - L) (1 - 0.5L) y_t = u_t$.
+\end{enumerate}
+Let $(m_t)$ be an $MA(2)$ process with the autocovariance function $c_k$.
+\begin{enumerate}[resume]
+  \item Find $\lim_{k \to \infty} \Var(m_t + m_{t-1} + \dots + m_{t+1 - k}) / k$.
+  \item Prove that $(y_t)$ can't satisfy an equation $(1 - L) (1 - 0.5L) y_t = m_t$ if $c_0 + c_1 + c_2 \neq 0$.
+  \item Provide an example of $MA(2)$ process with autocovariance function $c_k$ that satisfies the equation $c_0 + c_1 + c_2 = 0$.
+  \item Prove the general theorem: 
+  the recurrence equation $a(L) y_t = b(L) u_t$ where $(u_t)$ is a white noise, $a(1) = 0$ and $b(1) \neq 0$ can't have a stationary solution $(y_t)$.
+\end{enumerate}
+
+
+\begin{sol}
+\begin{enumerate}
+  \item $\abs{\Cov(y_{t-k}, u_{t} + u_{t-1} + \dots + u_{t + 1 - k})} \leq \sqrt{k \gamma_0 \sigma^2}$.
+  \item From the recurrence equation it follows that 
+  \[
+  \Var(y_t) = \Var(u_t + u_{t-1} + \dots  + u_{t+1 - k} + y_{t - k}).
+  \]
+  Hence, 
+  \[
+  0 = k \sigma^2 + 2 \Cov(y_{t-k}, u_{t} + u_{t-1} + \dots + u_{t + 1 - k}).
+  \]
+  That is not possible as the covariance is bounded by something proportional to $\sqrt{k}$.
+  \item Let's denote $(1 - 0.5L)y_t$ by $x_t$. 
+  The process $(x_t)$ is also stationary and can't satisfy equation $x_t = x_{t- 1} + u_t$.
+  \item 
+  \[
+    \Var(m_t + m_{t-1} + \dots + m_{t+1 - k}) = k c_0 + (k - 1) c_1 + (k - 2) c_2
+  \]
+  Hence the limit is equal to the sum of covariances $c_0 + c_1 + c_2$.
+  \item Now the process $x_t = (1 - 0.5L) y_t$ should satisfy $x_t = x_{t- 1} + m_t$.
+  By the same reasoning
+  \[
+  0 = k c_0 + (k - 1) c_1 + (k - 2) c_2 + 2 \Cov(x_{t-k}, u_t + u_{t-1} + \dots  + u_{t+1 - k})
+  \]
+  If $c_0 + c_1 + c_2 \neq 0$ then covariance can't compensate the linear growth of the first three terms. 
+  \item Any process with unit root in $MA$-polynomial will do. 
+  For example, $m_t = (1 - L) (1 - 0.5L) u_t = u_t - 1.5 u_{t-1} + 0.5 u_{t-2}$.
+
+  \item The same logic applies :)
+
+\end{enumerate}
+
 
   \end{sol}
 \end{problem}
