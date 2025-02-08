@@ -5608,13 +5608,13 @@ This exercise provides an elementary proof that a unit root corresponds to the a
 
 Let $(y_t)$ be a stationary process with autocovariance function $\gamma_k$ and $(u_t)$ — a white noise with variance $\sigma^2$.
 \begin{enumerate}
-  \item Using trivial bounds for correlation deduce the possible range for $\Cov(y_{t-k}, u_{t} + u_{t-1} + \dots + u_{t + 1 - k})$.
+  \item Using trivial bounds for correlation deduce the possible range for $\Cov(y_{0}, u_{1} + u_{2} + \dots + u_{k})$.
   \item Prove that $(y_t)$ can't satisfy an equation $y_t = y_{t - 1} + u_t$.
   \item Prove that $(y_t)$ can't satisfy an equation $(1 - L) (1 - 0.5L) y_t = u_t$.
 \end{enumerate}
 Let $(m_t)$ be an $MA(2)$ process with the autocovariance function $c_k$.
 \begin{enumerate}[resume]
-  \item Find $\lim_{k \to \infty} \Var(m_t + m_{t-1} + \dots + m_{t+1 - k}) / k$.
+  \item Find $\lim_{k \to \infty} \Var(m_1 + m_{2} + \dots + m_{k}) / k$.
   \item Prove that $(y_t)$ can't satisfy an equation $(1 - L) (1 - 0.5L) y_t = m_t$ if $c_0 + c_1 + c_2 \neq 0$.
   \item Provide an example of $MA(2)$ process with autocovariance function $c_k$ that satisfies the equation $c_0 + c_1 + c_2 = 0$.
   \item Prove the general theorem: 
@@ -5624,27 +5624,27 @@ Let $(m_t)$ be an $MA(2)$ process with the autocovariance function $c_k$.
 
 \begin{sol}
 \begin{enumerate}
-  \item $\abs{\Cov(y_{t-k}, u_{t} + u_{t-1} + \dots + u_{t + 1 - k})} \leq \sqrt{k \gamma_0 \sigma^2}$.
+  \item $\abs{\Cov(y_0, u_1 + u_2 + \dots + u_k)} \leq \sqrt{k \gamma_0 \sigma^2}$.
   \item From the recurrence equation it follows that 
   \[
-  \Var(y_t) = \Var(u_t + u_{t-1} + \dots  + u_{t+1 - k} + y_{t - k}).
+  \Var(y_{t + k}) = \Var(u_1 + u_2 + \dots  + u_k + y_0).
   \]
   Hence, 
   \[
-  0 = k \sigma^2 + 2 \Cov(y_{t-k}, u_{t} + u_{t-1} + \dots + u_{t + 1 - k}).
+  0 = k \sigma^2 + 2 \Cov(y_0, u_1 + u_2 + \dots + u_k).
   \]
   That is not possible as the covariance is bounded by something proportional to $\sqrt{k}$.
   \item Let's denote $(1 - 0.5L)y_t$ by $x_t$. 
   The process $(x_t)$ is also stationary and can't satisfy equation $x_t = x_{t- 1} + u_t$.
   \item 
   \[
-    \Var(m_t + m_{t-1} + \dots + m_{t+1 - k}) = k c_0 + (k - 1) c_1 + (k - 2) c_2
+    \Var(m_1 + m_2 + \dots + m_k) = k c_0 + (k - 1) c_1 + (k - 2) c_2
   \]
   Hence the limit is equal to the sum of covariances $c_0 + c_1 + c_2$.
   \item Now the process $x_t = (1 - 0.5L) y_t$ should satisfy $x_t = x_{t- 1} + m_t$.
   By the same reasoning
   \[
-  0 = k c_0 + (k - 1) c_1 + (k - 2) c_2 + 2 \Cov(x_{t-k}, u_t + u_{t-1} + \dots  + u_{t+1 - k})
+  0 = k c_0 + (k - 1) c_1 + (k - 2) c_2 + 2 \Cov(x_0, u_1 + u_2 + \dots  + u_k)
   \]
   If $c_0 + c_1 + c_2 \neq 0$ then covariance can't compensate the linear growth of the first three terms. 
   \item Any process with unit root in $MA$-polynomial will do. 
