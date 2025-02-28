@@ -3156,35 +3156,41 @@ For each of the following cases write down the $\sigma$-algebra $\cF$ that model
     \bottomrule
   \end{tabular}
     
-  The sigma-algebra $\cF$ is defined by $\cF = \sigma(A)$ where $A = \{Y \neq 4 \}$.
+  The sigma-algebra $\cF$ is defined by $\cF = \sigma(A)$ where $A = \{Y \neq 4 \}$, and $\cH = \sigma(Y)$.
 
-  Find $\E(Y \mid \cF)$, $\Var(Y \mid \cF)$, $\P(Y = 3 \mid \cF)$.
+  \begin{enumerate}
+    \item Find $\E(Y \mid \cF)$, $\Var(Y \mid \cF)$, $\P(Y = 3 \mid \cF)$.
+    \item Find $\E(Y \mid \cH)$, $\Var(Y \mid \cH)$, $\P(Y = 3 \mid \cH)$.
+  \end{enumerate}
+  
   \begin{sol}
+    \begin{enumerate}
+      \item Find $\E(Y \mid \cF)$, $\Var(Y \mid \cF)$, $\P(Y = 3 \mid \cF)$.
+      \item $\E(Y \mid \cH) = Y$, $\Var(Y \mid \cH) = 0$, $\P(Y = 3 \mid \cH) = I_{Y=3}$.
+    \end{enumerate}  
   \end{sol}
 \end{problem}
 
 \begin{problem}
-  \begin{problem}
-    Masha picked up $100$ mushrooms. 
-    There are three types of mushrooms, l-mushrooms, m-mushrooms and r-mushrooms. 
-    The types are independent and may by encountered with probabilities $0.2$, $0.3$ and $0.5$ correspondingly. 
-    Let's denote the total number of picked up mushrooms of each type by $L$, $M$ and $R$.
-    \begin{enumerate}
-    \item Find $\E(R+L \mid M)$, $\E(M \mid R+L)$.
-    \item Find $\E(R \mid L)$ and $\Var(R \mid L)$.
-    \item Find $\E(R+L \mid L+M)$.
-    \item Find $\P(\E(R \mid L)=0)$ and  $\P(R=0 \mid L)$.
-    \item Find $\E \left( \left( \frac{0.3}{0.8} \right)^{100-L} \right)$.
-    \end{enumerate}
-    
-    \begin{sol}
-    $\E(R+L \mid M)=n-M$, $\E(M \mid R+L)=n-R-L$, $\E(R \mid L)=(n-L)\frac{r}{1-l}$, $\Var(R \mid L)=(n-L)\frac{r}{1-l}\frac{1-r-l}{1-l}$, $\P(\E(R \mid L)=0)=l^{n}$, $\P(R=0 \mid  L)=\left(\frac{r}{r+m}\right)^{n-L}$
-    \end{sol}
-    \end{problem}
-    
-  \begin{sol}
-  \end{sol}
+Masha picked up $100$ mushrooms. 
+There are three types of mushrooms, l-mushrooms, m-mushrooms and r-mushrooms. 
+The types are independent and may by encountered with probabilities $0.2$, $0.3$ and $0.5$ correspondingly. 
+Let's denote the total number of picked up mushrooms of each type by $L$, $M$ and $R$.
+\begin{enumerate}
+\item Find $\E(R+L \mid M)$, $\E(M \mid R+L)$, $\Var(R + L \mid M)$.
+\item Find $\E(R \mid L)$ and $\Var(R \mid L)$.
+\item Find $\E(R+L \mid L+M)$.
+\item Find $\P(\E(R \mid L)=0)$ and  $\P(R=0 \mid L)$.
+\item Find $\E \left( \left( \frac{0.3}{0.8} \right)^{100-L} \right)$.
+\end{enumerate}
+
+\begin{sol}
+$\E(R+L \mid M)=n-M$, $\E(M \mid R+L)=n-R-L$, $\Var(R + L \mid M) = 0$, $\E(R \mid L)=(n-L)\frac{r}{1-l}$, $\Var(R \mid L)=(n-L)\frac{r}{1-l}\frac{1-r-l}{1-l}$, $\P(\E(R \mid L)=0)=l^{n}$, $\P(R=0 \mid  L)=\left(\frac{r}{r+m}\right)^{n-L}$
+\end{sol}
 \end{problem}
+
+\begin{sol}
+\end{sol}
 
 
 
@@ -3200,7 +3206,7 @@ For each of the following cases write down the $\sigma$-algebra $\cF$ that model
   \begin{sol}
     \begin{enumerate}
       \item $\E(Y \mid X)  = 1/X$, $\Var(Y \mid X) = 1/X^2$.
-      \item 
+      \item $\E(Y) = \ln 2$, $\Var(Y) = 0.5 - (\ln 2)^2$.
       \item 
     \end{enumerate}  
   \end{sol}
