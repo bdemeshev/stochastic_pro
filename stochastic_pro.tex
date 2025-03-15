@@ -5826,24 +5826,45 @@ Let $(m_t)$ be an $MA(2)$ process with the autocovariance function $c_k$.
   \item The same logic applies :)
 
 \end{enumerate}
-
-
   \end{sol}
 \end{problem}
 
 
 \begin{problem}
+  Is it possible that a stationary $(y_t)$ satisfies the equation $y_t = 5 + 2y_{t-1} - y_{t-2} + u_t + u_{t-2}$ and $(u_t)$ is a white noise process?
+  Provide a proof or a counter-example.
   \begin{sol}
-
+If $\E(y_t) = \mu$ then $\mu = 5 + 2\mu - \mu + 0$ and we arrive to a contradiction.
   \end{sol}
 \end{problem}
 
 
 
 \begin{problem}
+  Is it possible that $\Cov(y_t, u_s) = 0$ for all $t < s$, $(y_t)$ satisfies the equation $y_t = 5 + 2y_{t-1} + u_t$ and $(u_t)$ is a white noise process?
+  Provide a proof or a counter-example.
   \begin{sol}
-
+Observe that $\Var(y_t) = 4 \Var(y_{t-1}) + \sigma^2$ and we arrive to a contradiction.
   \end{sol}
+\end{problem}
+
+
+
+\begin{problem}
+Solve the puzzle!
+\[
+AR(p) + MA(?) = ARMA(p, p)
+\]
+\begin{sol}
+The right answer is $MA(0)$ process or white noise. 
+Explanation: if one adds $AR(p)$ process to an independent white noise then one obtains $ARMA(p, p)$ process. 
+Let's denote the processes by $a_t$, $b_t$ and $a_t + b_t = c_t$.
+We know that $A(L)a_t = u_t$, where $A(L)$ is some polynomial of order $p$.
+Hence $A(L)a_t + A(L)b_t = A(L)c_t$.
+All autocorrelations of $A(L)a_t$ are zeros. 
+The process $b_t$ is a white noise, hence all autocorrelations of $A(L)b_t$ are zeros for order $p + 1$, $p + 2$, etc.
+One may deduce that $A(L)c_t$ can be written as $MA(p)$ process and $c_t \sim ARMA(p, p)$.
+\end{sol}
 \end{problem}
 
 \section{ETS}
@@ -5882,8 +5903,10 @@ Let $(m_t)$ be an $MA(2)$ process with the autocovariance function $c_k$.
   \]
   with $\ell_{100} = 20$ and $b_{100} = 2$.
 \begin{enumerate}
+  \item Find the 95\% predictive interval for $y_{101}$.
   \item Find conditional probability $\P(y_{102} > 30 \mid \ell_{100}, b_{100})$.
   \item Approximately find the best point forecast for $y_{10000}$.
+  \item Find the 95\% predictive interval for $b_{10000}$.
 \end{enumerate}
   \begin{sol}
 
@@ -5919,10 +5942,18 @@ Calculate 95\% predictive interval for $y_{101}$.
       y_t = \ell_{t-1} + s_{t-2} + u_t \\
   \end{cases}    
   \]
+  Let $s_{100} = 3$, $s_{99} = -2$, $\ell_{100} = 100$.
+  \begin{enumerate}
+    \item Find 95\% predictive interval for $y_{102}$.
+    \item Find 95\% predictive interval for $s_{121}$.
+    \item Write this model in the form $A(L) y_t = B(L) u_t$, where $A(L)$ and $B(L)$ are lag polynomials.
+    \item Classify this model as $SARIMA(p, d, q)(p^s, d^s, q^s)$: explicitely state $p$, $d$, $q$, $p^s$, $d^s$, $q^s$.
+  \end{enumerate}
   
-  Given that $s_{100} = 3$, $s_{99} = -2$, $\ell_{100} = 100$ find 95\% predictive interval for $y_{102}$.   
   \begin{sol}
 
+    Observe that $(1 - L) \ell_t = 0.3 u_t$ and $(1 - L^2) s_t = 0.1 u_t$. 
+    Hence it is sufficient to multiply $y_t$ by $(1 - L^2)$ to get rid of $\ell_t$ and $s_{t_2}$ in the right hand side. 
   \end{sol}
 \end{problem}
 
