@@ -1739,10 +1739,57 @@ Find the moment generating function of $N$.
 \end{problem}
 
 \begin{problem}
-  \begin{sol}
+A monkey is randomly typing letters. 
+She types $a$ with probability $0.01$, $b$ — with probability $0.02$ and $c$ — with probability $0.03$.
+Other probabilities are unknown and not relevant. 
+She stops if starting exactly from the beginning she types one of the words: $abc$, $bacab$ or $abba$. 
+Let $A$ be the event that she is stops. 
+
+Consider the generating function $f(a, b, c) = abc + bacab + abba$.
+What is the combinatorial or probabilistic meaning of the following quantities:
+\begin{enumerate}
+  \item $f(1, 1, 1)$;
+  \item $f(0.01, 0.02, 0.03)$;
+  \item $g'(1)$ if $g(t) = f(0.01t, 0.02t, 0.03t)$;
+  \item $g'(1)$ if $g(t) = f(0.01, 0.03, 0.03t)$;
+  \item $g'(1)/g(1)$ if $g(t) = f(0.01t, 0.02t, 0.03t)$;
+  \item $g'(1)/g(1)$ if $g(t) = f(0.01, 0.03, 0.03t)$;
+  \item $g'(0)$ if $g(t) = f(0.01\exp(t), 0.02\exp(t), 0.03\exp(t))$.
+  \item $g'(0) / g(0)$ if $g(t) = f(0.01, 0.02, 0.03\exp(t))$.
+\end{enumerate}
+\begin{sol}
     
   \end{sol}
 \end{problem}
+
+
+\begin{problem}
+A monkey is randomly typing letters. 
+She types $a$ with probability $0.01$, $b$ — with probability $0.02$ and $c$ — with probability $0.03$.
+Other probabilities are unknown and not relevant. 
+She stops if starting exactly from the beginning she types one of the words: $abc$, $bacab$, $abba$, \dots{ } 
+Let $A$ be the event that she is stops. 
+
+You don't know the exact list of words but you can do any calculations with the generating function  function $f(a, b, c) = abc + bacab + abba + \dots$.
+
+How can you extract the following information:
+\begin{enumerate}
+  \item the number of words;
+  \item the probability that monkey stops;
+  \item the expected payoff when she gets one dollar for every letter typed in the case of finite game;
+  \item the expected payoff when  she gets one dollar for every letter $c$ typed in the case of finite game;  
+  \item the conditional expected payoff when she gets one dollar for every letter typed if it is known that the game ended in a finite number of steps;
+  \item the conditional expected payoff when she gets one dollar for every letter $c$ typed if it is known that the game ended in a finite number of steps;
+  \item $\E(N_a N_b I(A))$ where $N_a$ is the number of $a$ letters, $N_b$ — the number of $b$ letters and $I(A)$ — the indicator of a finite game.
+  \item $\E(N_a (N_a - 1) N_b (N_b - 1) (N_b - 2) I(A))$ where $N_a$ is the number of $a$ letters, $N_b$ — the number of $b$ letters and $I(A)$ — the indicator of a finite game.
+  \item $\E(N_a^2 N_b^3 I(A))$ where $N_a$ is the number of $a$ letters, $N_b$ — the number of $b$ letters and $I(A)$ — the indicator of a finite game.
+\end{enumerate}
+Hint: in points (c) and (d) try to write the expression with and without exponent.
+\begin{sol}
+    
+  \end{sol}
+\end{problem}
+
 
 
 \begin{problem}
@@ -1751,6 +1798,11 @@ Find the moment generating function of $N$.
   \end{sol}
 \end{problem}
 
+\begin{problem}
+  \begin{sol}
+    
+  \end{sol}
+\end{problem}
 
 
 \section{Inequalities}
