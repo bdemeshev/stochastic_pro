@@ -1249,7 +1249,7 @@ For simplicity let's assume that the last three victims were not vaccinated.
       If it lands on $H$ you play Game A. If it lands on $T$ you play Game B. 
   \end{enumerate}
   
-  Your initial capital is $10000\$$.
+  Your initial capital is $10000$ dollars.
 
   \begin{enumerate}
       \item Generate and plot two random trajectories of your wellfare if you play Game A $10^6$ times.
@@ -1524,7 +1524,10 @@ Find the MGF of the random variable $Y$.
 \begin{problem}
 The MGF of the random variable $W$ has a Taylor expansion that starts with $M(t) = 1 + 2t + 7t^2 + 20t^3 + \ldots$.
 
-Find $\E(W)$, $\Var(W)$, $\E(W^3)$.
+\begin{enumerate}
+    \item Find $\E(W)$, $\Var(W)$, $\E(W^3)$.
+    \item Find the starting terms of the Taylor expansion of the moment generating function for the sum $S = W + W^*$, where $W$ and $W^*$ are independent and identically distributed. 
+\end{enumerate}
 
   \begin{sol}
   $\E(W) = 2$, $\Var(W) = 7\cdot 2 - 2^2$, $\E(W^3) = 20 \cdot 3!$.
@@ -4769,6 +4772,65 @@ Consider the process $M_t = h(t) \exp(i W_t)$ where $h(t)$ is a non-random funct
   \end{sol}
 \end{problem}
 
+
+
+\begin{problem}
+Consider the process $Q_t = \cos W_t$.
+\begin{enumerate}
+\item {[6]} Find $dQ_t$ and represent $Q_t$ as a sum of a constant, an Ito integral and a Riemann integral.
+\item {[2]} Is $(Q_t)$ a martingale?
+\item {[2]} Find an ordinary differential equation for $h(t) = \E(Q_t)$. You don't neet to solve this equation. 
+\end{enumerate}
+Source: designed for Stochastic Processes December 2025 exam, but no used.
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+\item Consider three processes, $A_t = \int_0^t u \, dW_u, \quad B_t = \int_0^t u W_u^4 \, dW_u, \quad C_t = \int_0^t u W_u^2 \, du$.
+\begin{enumerate}
+    \item {[2 + 2]} Find $\E(A_t)$, $\E(C_t)$.
+    \item {[2 + 4]} Find $\Var(B_t)$, $\Cov(A_t, C_t)$.
+\end{enumerate}
+Source: Stochastic Processes December 2025 exam.
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+Consider the process $X_t = A_t B_t$ where $A_t = \int_0^t u \, dW_u$ and $B_t = \int_0^t W_u^2 \, dW_u$.
+\begin{enumerate}
+\item {[6]} Find $dX_t$ and hence represent $X_t$ as a sum of a constant, an Ito integreal and a Riemann integral.
+\item {[2]} Is $(X_t)$ a martingale?
+\item {[2]} Find $\E(X_t)$.
+\end{enumerate}
+Source: designed for Stochastic Processes December 2025 exam, but no used.
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  Consider the stochastic process $X_t = g(t) (\exp (2026 W_t) + \exp(-2026W_t))$ where $g(t)$ is some non-random function.
+  \begin{enumerate}
+      \item {[6]} Find $dX_t$ and hence represent $X_t$ as a sum of a constant, an Ito integreal and a Riemann integral. 
+      \item {[4]} If possible find any $g(t) \neq 0$ such that $X_t$ is a martingale.
+  \end{enumerate}
+Source: Stochastic Processes December 2025 exam.
+  \begin{sol}
+
+  \end{sol}
+\end{problem}
+
+
+
+
+
 \begin{problem}
   \begin{sol}
 
@@ -4998,6 +5060,21 @@ X_0 = \E_{\tilde{p}}( \exp( - rT )X_T \mid \cF_0)
   \begin{sol}
       We need to find a price of the classic European option in dollars, while
 stock prices are in euros.
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+Consider the Black and Scholes model. 
+The risk-free interest rate is equal to $r$. 
+The volatility of the share is equal to $\sigma$. 
+You have an option that pays you $X_T = \min\{1, \max\{\ln S_T, 0\}\}$ at fixed time moment $T$.
+
+Find an arbitrage free price $X_0$ of the option.
+
+Hint: you may use standard normal cdf $F()$ in your answer.
+  \begin{sol}
+
   \end{sol}
 \end{problem}
 
